@@ -39,6 +39,7 @@ def check():
     assert files
     for p in files:
         rel = p.relative_to(ROOT)
+        assert not p.is_symlink(), f'Symlink not allowed in release: {rel}'
         assert p.name not in FORBIDDEN and not p.name.startswith('.env.'), f'Host-only file: {rel}'
         if p.suffix in {'.md', '.json', '.py', '.js', '.mjs', '.yml', '.html'}:
             assert not re.search('/'+'Users'+r'/[A-Za-z0-9_.-]+/', p.read_text()), f'Personal absolute path: {rel}'

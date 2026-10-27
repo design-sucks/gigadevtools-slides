@@ -11,3 +11,13 @@
 The initial tag is v0.1.0-pilot.1; Maker 0.17.4 and Export 0.8.3 are packaging/documentation updates over the accepted implementation. GitHub's source archive is not a replacement for the convenient standalone skill ZIPs.
 
 Use patch for a compatible fix, minor for a new feature, major for an incompatible contract. A release workflow collects validated packages as an artifact; it does not silently publish a new Release or change access.
+
+## Server-side publishing
+
+The Publish pilot release workflow avoids browser file-upload dependencies. It runs on main when releases.json or its workflow changes, or via Run workflow. It builds/checks packages and uses the runner's scoped GITHUB_TOKEN through gh; no personal token is stored.
+
+Set releaseState in releases.json to draft while preparing a new tag, then prerelease when the approved pilot should be published. Changing that manifest on main is an explicit publication step. The workflow does not overwrite an existing published release; draft assets can be resumed. Run only from main. A released tag is kept immutable by this script; use a new version for corrections.
+
+For a local non-publishing review: python3 scripts/package_release.py followed by python3 scripts/publish_release.py --dry-run.
+
+Archive entry timestamps and modes are normalized so host checkout dates do not change the package. Downloaded assets are checked against the release manifest and their extracted source contents.

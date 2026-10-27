@@ -16,5 +16,6 @@
     "rightsBasis": "user reports company rights; no general third-party font license grant",
     "mitIncludesFonts": false
   },
-  "newCaseStudy": "awaiting separate user material and test"
+  "newCaseStudy": "awaiting separate user material and test",
+  "releaseState": "prerelease"
 }

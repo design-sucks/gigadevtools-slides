@@ -1,0 +1,38 @@
+name: Publish pilot release
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - releases.json
+      - .github/workflows/publish.yml
+permissions:
+  contents: write
+concurrency:
+  group: publish-pilot
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: python3 scripts/check_release.py
+      - run: python3 skills/gigadev-html-maker/scripts/self_test.py
+      - run: python3 scripts/build_demo.py --check
+      - run: python3 scripts/package_release.py
+      - run: python3 scripts/publish_release.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+      - uses: actions/upload-artifact@v7
+        with:
+          name: published-skill-packages
+          path: dist/
+          if-no-files-found: error
