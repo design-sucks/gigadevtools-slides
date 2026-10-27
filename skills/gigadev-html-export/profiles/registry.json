@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "id": "ai-pdlc",
+      "label": "AI PDLC Status",
+      "groups": "ai-pdlc-status-sample.json",
+      "fingerprint": {
+        "runtime": "qbr",
+        "size": [
+          1920,
+          1080
+        ],
+        "orderedSlideIds": [
+          "qbr-s-1",
+          "ai-pdlc-kib-dashboard",
+          "qbr-s-40",
+          "qbr-s-44",
+          "qbr-s-45",
+          "ai-pdlc-kib-segmentation",
+          "qbr-s-47",
+          "qbr-s-42",
+          "qbr-s-53",
+          "qbr-s-59",
+          "ai-pdlc-harness-chat"
+        ],
+        "structures": [
+          "7861a82955e2e5ed16d14c0708288fe30569072264e4ccb2db70e7cf2f116493",
+          "bbb7aa55dc64c242ae58346dddc4800014c8f3aad466e7a49a8b4c748c9bc919",
+          "e55235a7a58c5e03467eb344661313eaf3d0e8c75d874ef68657b625493bc6cb",
+          "e8ab92c1dbe5a4e59b6913353693ae12f29301b440e6b63892a18b33b97b76f1",
+          "1d6cadefb3dbb9390108afbc099bec7dc06fe70229d239b352adcfd7677d7cd5",
+          "29b62378591a60a2f77c2eaaa0381ab6719cae1d67046b27dcf2988a2b815458",
+          "fdef8ec500d0d26fffc5ab0b8f6f83c455479b256274429cc4751793e45a71e2",
+          "649b4f038f9a4b5e125388510d890db438c76c5a136f94c58ae301c9acb9882d",
+          "d4ad9577ec42999038a6679986e2b9be8dfe8f5e1db36313b77ffdaac3cd36f6",
+          "d1216f9129e55de8fd2e386194640aa07ef116cddf53c6d331d48a67ea9cb87a",
+          "22752d4ca513b715c8b9801b5db154e592309a6f88fe01866b14b855aacd6128"
+        ]
+      }
+    },
+    {
+      "id": "editable",
+      "label": "GigaDev Editable",
+      "groups": "gigadev-editable-sample.json",
+      "fingerprint": {
+        "runtime": "gigadev-preview",
+        "size": [
+          1920,
+          1080
+        ],
+        "orderedSlideIds": [
+          "slide-1",
+          "slide-2",
+          "slide-3",
+          "slide-4",
+          "slide-5",
+          "slide-6",
+          "slide-7",
+          "slide-8",
+          "slide-9",
+          "slide-10",
+          "slide-11",
+          "slide-12",
+          "slide-13",
+          "slide-14",
+          "slide-15",
+          "slide-16",
+          "slide-17",
+          "slide-18"
+        ],
+        "structures": [
+          "198267e538d3af65b808378f2b077557ab7d058d450eca31c0cfce4c838cc390",
+          "120e522ef1dc2f4231e6217c88a3f6cc51551657c38ca18c55a297d8e72d80db",
+          "ed4aeb4ab3fd0afc4ee859d47d8719c70b300df09da43aaf54b0807f72f8a1b5",
+          "63e4f101fd8f4cd0e02138f2a99c3fcf6293eef35cc6b39906cc605f43a650e1",
+          "8ef00a4eb000fe793142dfcd56c74ae492ad7cc02c31abae70bd7bceff7a915b",
+          "181741723fbfcd42787a4c577ba1c6dc843a96bcea7af54c2aa90489d58aa840",
+          "c5af489829dc4d54827a2502d63ef68983507c3551ae2a2b655ed6e6e3700ee8",
+          "61e09ffb85f907bd9b7ce3b75e79cab66868cd8d2e9418260dc23c57f426a91f",
+          "aa6a82082851d8e0587ab78ae0e38678b6649927e50ea04242db85607128378c",
+          "7e232f5c2d9199452cbcd573f0cbba11c07481afc9ca88e82f963f98a421a984",
+          "4a583a91d2da1ce1b53e6272538eb1bf9c3152be02861d61926cf1624e10bac2",
+          "ebcf17b3edaa9fdffd89d7c7897774e9b2ae57631bc8290a55ba3867b285e231",
+          "a1727991fad4acdd07804089fa079314c4e71ea819a38b3f1316d45612a77108",
+          "94a53221d600cc71b305c0f37cb5663b55758b2bdf4339d65c445131cadc5337",
+          "dd6f3c88ff1991c3745bd136881dcb12dba3e4a8eae5adce79df888c47385e55",
+          "804fdfc95a11211e52256322574d66bf3e9c159658b55060da1164e001df672f",
+          "546b2e1f3f0370866e1b62f1bceb6aacda2a08f58fb653fe7ce85d4d6d936c28",
+          "cedec6eb33a362da1f381f103a9d2c5ecb30223aaeced61449cf67841c6355b4"
+        ]
+      }
+    },
+    {
+      "id": "brand",
+      "label": "GIGA Brand",
+      "groups": null,
+      "fingerprint": {
+        "runtime": "keyboard",
+        "size": [
+          1920,
+          1080
+        ],
+        "orderedSlideIds": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "structures": [
+          "84882be71079afe41c79bbb606d4aee4be55f6e7aba3d74e4ec61a0658bd3468",
+          "c4b3ac8b7f9408027245b8b52921370dc27f208ef9797f117b3c5a882165e3a3",
+          "428c3a02d6d08217dcdda93fe62a3b12d6e6e331cd8b67a1fd61224aaa0a870f",
+          "3ecd0c8765d51d96da089a7412abc6b94e54e6f256cbcae48c7772db0b9545db",
+          "ccbc42ecb52d74acb6383621d774f9911c97d969e1a96b6d05e67824e94f270b",
+          "7507e42ef53d64835e3c1015710819c419360c558a14834835c5c94620e770d2",
+          "336cc04356f6edcd9ad8a1817361d18597b062f5765f3c7379b46693302e7135",
+          "5e961db92e8b141684c2e3072db9a9e76ab64c0546d8e150a073e5f20727fe52",
+          "ccbc42ecb52d74acb6383621d774f9911c97d969e1a96b6d05e67824e94f270b",
+          "b86ae80a70b1fe7cdc68c1ed3a108e4c4a4059b7b2ea9e5c582643dd91d2539d",
+          "7f767b45d975f20c76f71c0e35615df5feee3dadc41b92956d6d35b4004d2280",
+          "5e961db92e8b141684c2e3072db9a9e76ab64c0546d8e150a073e5f20727fe52",
+          "ccbc42ecb52d74acb6383621d774f9911c97d969e1a96b6d05e67824e94f270b",
+          "e3b583f6ad990b9e71f5cb30d57910ee2a550a120b0fb989cd299ff4c286a87c",
+          "4b715a83a03a95e55c97afb288cde201d18508e6563359075178e4846c9aa995"
+        ]
+      }
+    },
+    {
+      "id": "meetup",
+      "label": "GigaCode Meetup",
+      "groups": null,
+      "fingerprint": {
+        "runtime": "keyboard",
+        "size": [
+          1280,
+          720
+        ],
+        "orderedSlideIds": [
+          "soon",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "questions"
+        ],
+        "structures": [
+          "6334106003fd3423cdbbe8e9db29be3458b9a724e80424ab293f52b1adaba7d2",
+          "594f37354adc2559c74f70ce770ce2807e1af882cb9f6a9a3e13fdc8e9133086",
+          "b49c9b563aa5004b25303db3227079c9fa21306d1742e0c0d65f639475a533e6",
+          "7b8b7882cb3c986942b65d47c6f6d1c2bcd0345a92ae2fdf3b57ee29a5625486",
+          "e3bdc9f74fa6cc109a34ca9655e326f78771c6385cf253fa9bccb36e819b8a93",
+          "05cdc141e24c7f7bd2b0ada5b5b0823cbd1290c2558e50b6289f931f85721179",
+          "c9c98f60b686a0d35411e14273c5b409a0ab392cdedb1fa251941e6b84eaf122",
+          "c9c98f60b686a0d35411e14273c5b409a0ab392cdedb1fa251941e6b84eaf122",
+          "05cdc141e24c7f7bd2b0ada5b5b0823cbd1290c2558e50b6289f931f85721179",
+          "c9c98f60b686a0d35411e14273c5b409a0ab392cdedb1fa251941e6b84eaf122",
+          "b49c9b563aa5004b25303db3227079c9fa21306d1742e0c0d65f639475a533e6",
+          "94da15f392f0b06eb7ec4fca53105fb441bb4d68194d2fbeb6b4e8e27478b354",
+          "05cdc141e24c7f7bd2b0ada5b5b0823cbd1290c2558e50b6289f931f85721179",
+          "6334106003fd3423cdbbe8e9db29be3458b9a724e80424ab293f52b1adaba7d2"
+        ]
+      }
+    }
+  ]
+}

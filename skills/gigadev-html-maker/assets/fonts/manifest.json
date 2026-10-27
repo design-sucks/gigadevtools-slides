@@ -1,0 +1,37 @@
+{
+  "source": "User-provided installed SB Sans family; original names/metadata retained",
+  "faces": [
+    {
+      "family": "SB Sans Text",
+      "weight": 400,
+      "path": "fonts/SBSansText-Regular.otf",
+      "sha256": "c5d3c1f1be069773cfbfba3b7ba994f9df123ece9f51f18912892d5f09ecabcd",
+      "glyphs": 674,
+      "fsType": 0
+    },
+    {
+      "family": "SB Sans Text",
+      "weight": 600,
+      "path": "fonts/SBSansText-Semibold.otf",
+      "sha256": "ec7962dc2c545357ab01db6fc92626a28b6b32d877dcb23b4ccd8b9dddea1e12",
+      "glyphs": 674,
+      "fsType": 0
+    },
+    {
+      "family": "SB Sans Display",
+      "weight": 400,
+      "path": "fonts/SBSansDisplay-Regular.otf",
+      "sha256": "655c598db3b374517d01e511fb8e565e3a21cc79bf36e55b43e18654498b798a",
+      "glyphs": 679,
+      "fsType": 0
+    },
+    {
+      "family": "SB Sans Display",
+      "weight": 600,
+      "path": "fonts/SBSansDisplay-SemiBold.otf",
+      "sha256": "b4060e81d8e8d81394c6730f1d8fe6ddb9bc42b25200223b4ab0ac6841d6467f",
+      "glyphs": 685,
+      "fsType": 0
+    }
+  ]
+}

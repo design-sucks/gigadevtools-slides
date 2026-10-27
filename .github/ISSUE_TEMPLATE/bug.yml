@@ -1,0 +1,27 @@
+name: Bug report
+description: A reproducible conversion or shell problem
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Skill and version
+      placeholder: HTML Maker 0.17.4
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: OS, browser/PowerPoint and viewport
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps, expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: sample
+    attributes:
+      label: Minimal shareable example or screenshots
+      description: Remove private content and share only material you may publish.

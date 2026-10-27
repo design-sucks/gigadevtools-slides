@@ -1,0 +1,150 @@
+{
+  "title": "HTML Maker · демо",
+  "version": 1,
+  "motion": null,
+  "slides": [
+    {
+      "id": "cover",
+      "label": "Начало",
+      "section": "Знакомство",
+      "topic": "HTML Maker",
+      "sourceNumber": 1,
+      "header": "none",
+      "html": "<div data-gd-flow class=\"dm dm-cover\">\n<p class=\"dm-eyebrow\">GigaDevTools · HTML Maker</p>\n<h1 class=\"dm-wide\">Слайды, с которыми<br>удобно работать.</h1>\n<p class=\"dm-cover-lead\">Листайте, редактируйте и собирайте слайды под встречу.<br>Всё остаётся в одном HTML-файле.</p>\n<div class=\"dm-capabilities\"><div><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m9 5 11 7-11 7Z\"/></svg><span>Показ</span></div><div><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m15 4 5 5M4 20l5-1L20 8a3 3 0 0 0-5-5L4 14l-1 7Z\"/></svg><span>Правки</span></div><div><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"4\" y=\"3\" width=\"16\" height=\"5\" rx=\"1.5\"/><rect x=\"4\" y=\"11\" width=\"16\" height=\"5\" rx=\"1.5\"/><path d=\"M4 21h16\"/></svg><span>Порядок</span></div><div><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 3h12l4 4v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2ZM7 3v6h10V3M7 21v-8h10v8M14 5v2\"/></svg><span>Версии</span></div></div>\n<p data-gd-tail class=\"dm-caption\">Шрифты и графика встроены. Для открытия достаточно браузера.</p></div>"
+    },
+    {
+      "id": "view",
+      "label": "Показ",
+      "section": "Возможности",
+      "topic": "Просмотр и навигация",
+      "sourceNumber": 2,
+      "header": "full",
+      "html": "<div data-gd-flow class=\"dm \"><div class=\"dm-head\"><h2>Мышь, клавиатура или кликер.</h2><p class=\"dm-lead\">Выбирайте привычный способ переключать слайды.</p></div>\n<div class=\"dm-navigation\"><div class=\"dm-nav-item\"><svg class=\"dm-icon dm-hero-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"6\" y=\"2\" width=\"12\" height=\"20\" rx=\"6\"/><path d=\"M12 6v4\"/></svg><h3>Колёсиком</h3><p>Свободная прокрутка<br>между слайдами.</p><p class=\"dm-small\">Размытие и прозрачность<br>следуют за движением.</p></div><div class=\"dm-nav-item\"><svg class=\"dm-icon dm-hero-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"2\" y=\"5\" width=\"20\" height=\"14\" rx=\"2\"/><path d=\"M6 9h0m4 0h0m4 0h0m4 0h0M6 13h0m4 0h0m4 0h0m4 0h0M7 16h10\"/></svg><h3>Клавиатурой</h3><p>Переходите сразу<br>к следующему слайду.</p><div class=\"dm-key-row\"><kbd>←</kbd><kbd>→</kbd></div></div><div class=\"dm-card dm-show-card\"><svg class=\"dm-icon dm-hero-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"7\" y=\"2\" width=\"10\" height=\"20\" rx=\"4\"/><path d=\"m10 7 3-2v4l-3-2Zm4 6-3-2v4l3-2Z\"/><circle cx=\"12\" cy=\"18\" r=\".8\"/></svg><h3>Кликером</h3><p>Назад и вперёд,<br>как при показе<br>в PowerPoint.</p><div class=\"dm-key-row\"><kbd>PageUp</kbd><kbd>PageDown</kbd></div></div></div>\n<div data-gd-tail class=\"dm-view-footer\"><div class=\"dm-key-row\"><kbd>F</kbd><span>режим показа</span><kbd>Esc</kbd><span>вернуться</span></div><p data-gd-tail class=\"dm-caption\">Подходят кликеры, которые отправляют PageUp/PageDown или стрелки.</p></div></div>"
+    },
+    {
+      "id": "shortcuts",
+      "label": "Хоткеи",
+      "section": "Управление",
+      "topic": "Хоткеи",
+      "header": "full",
+      "html": "<div data-gd-flow class=\"dm \"><div class=\"dm-head\"><h2>Хоткеи</h2><p class=\"dm-lead\">Те же действия, что и в верхнем меню.</p></div>\n<div class=\"dm-shortcut-columns\"><div><p class=\"dm-group-label\">Работа со слайдами</p><div class=\"dm-shortcut\"><kbd>E</kbd><div><h3>Править текст</h3><p>Включить или выключить редактор</p></div></div><div class=\"dm-shortcut\"><kbd>O</kbd><div><h3>Порядок слайдов</h3><p>Открыть или закрыть панель</p></div></div><div class=\"dm-shortcut\"><kbd>J</kbd><div><h3>Журнал</h3><p>Открыть или закрыть журнал</p></div></div></div><div><p class=\"dm-group-label\">Показ и сохранение</p><div class=\"dm-shortcut\"><kbd>F</kbd><div><h3>Показ</h3><p>Скрыть меню и начать выступление</p></div></div><div class=\"dm-shortcut\"><kbd>C</kbd><div><h3>Настройки экрана</h3><p>Открыть контраст и другие настройки</p></div></div><div class=\"dm-shortcut\"><kbd>S</kbd><div><h3>Новая версия</h3><p>Открыть форму сохранения</p></div></div></div></div>\n<div class=\"dm-shortcut-extra\"><span><kbd>N</kbd> список слайдов</span><span><kbd>M</kbd> анимация</span><span><kbd>T</kbd> тема</span><span><kbd>G</kbd> номер слайда</span><span><kbd>Cmd / Ctrl + S</kbd> сохранить</span></div><p data-gd-tail class=\"dm-caption\">Буквенные команды работают вне полей ввода. Во время показа панели не открываются.</p></div>",
+      "sourceNumber": 3
+    },
+    {
+      "id": "edit",
+      "label": "Правки",
+      "section": "Возможности",
+      "topic": "Редактирование текста",
+      "sourceNumber": 4,
+      "header": "full",
+      "html": "<div data-gd-flow class=\"dm \"><div class=\"dm-head\"><h2>Поправьте текст прямо на слайде.</h2></div>\n<div class=\"dm-edit-grid\">\n <div class=\"dm-card dm-edit-sample\"><p class=\"dm-small\">Попробуйте изменить этот абзац</p><p class=\"dm-editable\" data-source-id=\"demo-editable\">Мы подготовили презентацию для команды. Добавьте сюда вашу цель встречи.</p><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m15 4 5 5M4 20l5-1L20 8a3 3 0 0 0-5-5L4 14l-1 7Z\"/></svg></div>\n <ol class=\"dm-steps\"><li><span>01</span><div><h3>Включите правки</h3><p>Нажмите карандаш в меню или <kbd>E</kbd>.</p></div></li><li><span>02</span><div><h3>Нажмите на текст</h3><p>Измените абзац, заголовок или ячейку.</p></div></li><li><span>03</span><div><h3>Завершите правку</h3><p>Нажмите галочку внизу.</p></div></li></ol>\n</div>\n<p data-gd-tail class=\"dm-caption\">В режиме правок: Cmd / Ctrl + Z — отмена. Для сложной вёрстки используйте модель или исходный проект.</p></div>"
+    },
+    {
+      "id": "order",
+      "label": "Порядок",
+      "section": "Возможности",
+      "topic": "Сборка под встречу",
+      "sourceNumber": 5,
+      "header": "full",
+      "html": "<div data-gd-flow class=\"dm \"><div class=\"dm-head\"><h2>Выберите слайды под встречу.</h2><p class=\"dm-lead\">Меняйте порядок, убирайте лишнее из показа и возвращайте обратно.</p></div>\n<div class=\"dm-order-grid\"><div><h3>В рабочей версии</h3><div class=\"dm-tile-stack\"><div class=\"dm-slide-tile\"><span>02</span><p>Показ</p></div><div class=\"dm-slide-tile\"><span>04</span><p>Правки</p></div><div class=\"dm-slide-tile dm-dim\"><span>05</span><p>Порядок</p></div><div class=\"dm-slide-tile\"><span>06</span><p>Журнал</p></div></div></div><div class=\"dm-flow-arrow\"><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 12h17m-6-6 6 6-6 6\"/></svg></div><div><h3>В сборке для встречи</h3><div class=\"dm-tile-stack\"><div class=\"dm-slide-tile\"><span>01</span><p>Правки</p></div><div class=\"dm-slide-tile\"><span>02</span><p>Журнал</p></div><div class=\"dm-slide-tile\"><span>03</span><p>Показ</p></div></div><p class=\"dm-small\">Номера пересчитаются по новому порядку.</p></div></div>\n<p data-gd-tail class=\"dm-caption\">Пример выбора из нескольких слайдов. Убранный слайд остаётся в рабочей версии.</p></div>"
+    },
+    {
+      "id": "journal",
+      "label": "Журнал",
+      "section": "Возможности",
+      "topic": "Изменения и решения",
+      "sourceNumber": 6,
+      "header": "full",
+      "html": "<div data-gd-flow class=\"dm \"><div class=\"dm-head\"><h2>Видно, что изменилось.</h2><p class=\"dm-lead\">Откройте журнал рядом со слайдом или разверните его для общего просмотра.</p></div>\n<div class=\"dm-journal-grid\"><div class=\"dm-card\"><div class=\"dm-icon-heading\"><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M6 3h9l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2ZM14 3v5h5M8 12h7M8 16h7\"/></svg><h3>Автоправки</h3></div><p>Исправления и предложения,<br>добавленные при подготовке.</p><div class=\"dm-decisions\"><span><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m5 12 4 4L19 6\"/></svg>Подтвердить</span><span><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m6 6 12 12M6 18 18 6\"/></svg>Отклонить</span></div><p class=\"dm-small\">Решение можно изменить.<br>Запись остаётся в журнале.</p></div>\n<div class=\"dm-journal-own\"><div class=\"dm-icon-heading\"><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m15 4 5 5M4 20l5-1L20 8a3 3 0 0 0-5-5L4 14l-1 7Z\"/></svg><h3>Ваши правки</h3></div><p>Изменения текста, порядка<br>и настроек просмотра.</p><div class=\"dm-notification\"><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 3h12l4 4v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2ZM7 3v6h10V3M7 21v-8h10v8M14 5v2\"/></svg><div><p class=\"dm-small\">Пример комментария к версии</p><h4>v02 · Рабочая версия</h4><p>Обновил данные для встречи.</p></div></div></div></div>\n<p data-gd-tail class=\"dm-caption\">Два учебных примера — на следующем слайде «Проверка журнала».</p></div>"
+    },
+    {
+      "id": "review-example",
+      "label": "Проверка журнала",
+      "section": "Практика",
+      "topic": "Учебные автоправки",
+      "header": "full",
+      "html": "<div data-gd-flow class=\"dm \"><div class=\"dm-head\"><h2>Проверьте журнал на примерах.</h2><p class=\"dm-lead\">Нажмите J, выберите «Автоправки» и попробуйте подтвердить или отменить решение.</p></div>\n<div class=\"dm-review-examples\"><div><p class=\"dm-group-label\">01 · Уже исправлено</p><h3>Опечатка</h3><p class=\"dm-example-target\" data-source-id=\"edit-version-note\">Исправления можно подтвердить или отменить.</p><p class=\"dm-small\">До исправления: «можна».<br>Отклоните правку, чтобы увидеть исходный текст.</p></div><div><p class=\"dm-group-label\">02 · Предложено</p><h3>Кавычки</h3><p class=\"dm-example-target\" data-source-id=\"edit-save-note\">Добавьте комментарий \"Обновил данные\".</p><p class=\"dm-small\">Примите предложение —<br>кавычки заменятся на «ёлочки».</p></div></div>\n<p data-gd-tail class=\"dm-caption\">Это учебные записи. Состояние каждой правки и ваше решение видны в журнале.</p></div>",
+      "sourceNumber": 7
+    },
+    {
+      "id": "screen",
+      "label": "Темы и экран",
+      "section": "Возможности",
+      "topic": "Подготовка к показу",
+      "sourceNumber": 8,
+      "header": "full",
+      "html": "<div data-gd-flow class=\"dm \"><div class=\"dm-head\"><h2>Подготовьте слайды к экрану.</h2></div>\n<div class=\"dm-screen-grid\"><div class=\"dm-theme-pair\"><div class=\"dm-theme-preview dm-theme-dark\"><span>Тёмная</span><p>Содержание<br>на первом плане.</p><i></i></div><div class=\"dm-theme-preview dm-theme-light\"><span>Светлая</span><p>Содержание<br>на первом плане.</p><i></i></div><p class=\"dm-small\">В этой демоверсии доступны обе темы.<br>В других презентациях может быть одна.</p></div>\n<div class=\"dm-screen-settings\"><div class=\"dm-icon-heading\"><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"13\" rx=\"2\"/><path d=\"M8 21h8m-4-4v4M12 7v7M12 7a3.5 3.5 0 0 1 0 7\"/></svg><h3>Настройки в верхнем меню</h3></div><table class=\"dm-screen-table\"><tbody><tr><th>Контраст</th><td>Разница между светлым и тёмным</td></tr><tr><th>Детали в тенях</th><td>Читаемость тёмных элементов</td></tr><tr><th>Вторичный текст</th><td>Заметность подписей</td></tr><tr><th>Насыщенность</th><td>Сила цвета</td></tr></tbody></table></div></div>\n<p data-gd-tail class=\"dm-caption\">Настройки сохраняются в HTML. Фото, скриншоты и видео сохраняют свои цвета.</p></div>"
+    },
+    {
+      "id": "save",
+      "label": "Сохранение",
+      "section": "Возможности",
+      "topic": "Версии и передача",
+      "sourceNumber": 9,
+      "header": "full",
+      "html": "<div data-gd-flow class=\"dm \"><div class=\"dm-head\"><h2>Сохраните нужную версию.</h2><p class=\"dm-lead\">В меню сохранения задайте имя файла, название презентации, версию и комментарий.</p></div>\n<table class=\"dm-save-table\"><thead><tr><th></th><th>Рабочая версия</th><th>Только сборка</th></tr></thead><tbody><tr><th>Слайды</th><td>Все, включая убранные</td><td>Только выбранные</td></tr><tr><th>Правки и настройки</th><td>Сохраняются</td><td>Сохраняются</td></tr><tr><th>Когда использовать</th><td>Для дальнейшей работы</td><td>Для конкретной встречи</td></tr></tbody></table>\n<div class=\"dm-save-note\"><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 3h12l4 4v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2ZM7 3v6h10V3M7 21v-8h10v8M14 5v2\"/></svg><div><h3>v01 <span>→</span> v02</h3><p>Новый HTML-файл с вашими изменениями.</p></div><p class=\"dm-small\">Комментарий останется в журнале.<br>Старую историю можно очистить при сохранении.</p></div></div>"
+    },
+    {
+      "id": "principles",
+      "label": "Принципы",
+      "section": "Как работает скилл",
+      "topic": "Содержание и стиль",
+      "sourceNumber": 10,
+      "header": "full",
+      "html": "<div data-gd-flow class=\"dm dm-principles\"><h2 class=\"dm-wide dm-principle-title\">Содержание. Стиль.<br>Удобное управление.</h2>\n<div class=\"dm-ingredients\"><div><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 5h16M12 5v15M8 20h8M4 5v3m16-3v3\"/></svg><h3>Содержание</h3><p>Тексты, цифры и иллюстрации из вашего материала.</p></div><div><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m12 3 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 16l9 5 9-5\"/></svg><h3>Стиль</h3><p>Шрифты, цвета и композиция под задачу или референс.</p></div><div><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"13\" rx=\"2\"/><path d=\"M8 21h8m-4-4v4M12 7v7M12 7a3.5 3.5 0 0 1 0 7\"/></svg><h3>Оболочка</h3><p>Показ, правки, порядок, журнал и сохранение.</p></div></div>\n<p data-gd-tail class=\"dm-caption\">Меняйте оформление слайдов, сохраняя знакомое управление.</p></div>"
+    },
+    {
+      "id": "source",
+      "label": "Что приложить",
+      "section": "Как работает скилл",
+      "topic": "Материал и референсы",
+      "sourceNumber": 11,
+      "header": "full",
+      "html": "<div data-gd-flow class=\"dm \"><div class=\"dm-head\"><h2>Что приложить к задаче</h2></div>\n<div class=\"dm-brief-rows\"><div><span class=\"dm-step-number\">01</span><div><h3>Материал</h3><p class=\"dm-small\">PPTX или готовый текст</p></div><p>Тексты, цифры и иллюстрации.<br>Укажите аудиторию и цель презентации.</p></div><div><span class=\"dm-step-number\">02</span><div><h3>Пример оформления</h3><p class=\"dm-small\">Шаблон, HTML или картинки</p></div><p>Лучше — PPTX-шаблон и 5–8 готовых слайдов.<br>HTML или изображения тоже подойдут.</p></div><div><span class=\"dm-step-number\">03</span><div><h3>Что изменить</h3><p class=\"dm-small\">Сохранить вид или оформить заново</p></div><p>Скажите, что оставить и что переделать.<br>Модель соберёт HTML и проверит результат.</p></div></div>\n<p data-gd-tail class=\"dm-caption\">По умолчанию тексты и цифры сохраняются. Переписываем их по вашей просьбе.</p></div>"
+    },
+    {
+      "id": "formats",
+      "label": "Форматы",
+      "section": "Как работает скилл",
+      "topic": "HTML, PPTX и PDF",
+      "sourceNumber": 12,
+      "header": "full",
+      "html": "<div data-gd-flow class=\"dm \"><div class=\"dm-head\"><h2>Для каждой задачи — свой формат.</h2></div>\n<div class=\"dm-format-grid\"><div><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M6 3h8l5 5v13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2ZM14 3v6h5M8 13h7M8 17h7\"/></svg><h3>HTML</h3><p>Показ, правки<br>и сохранение версий.</p></div><div><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M6 3h8l5 5v13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2ZM14 3v6h5M8 13h7M8 17h7\"/></svg><h3>PPTX</h3><p>Дальнейшая работа<br>в PowerPoint.</p></div><div><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M6 3h8l5 5v13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2ZM14 3v6h5M8 13h7M8 17h7\"/></svg><h3>PDF</h3><p>Просмотр<br>и отправка.</p></div></div>\n<div class=\"dm-format-flows\"><div><p>Материал + стиль</p><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 12h17m-6-6 6 6-6 6\"/></svg><p class=\"dm-skill-name\">HTML Maker</p><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 12h17m-6-6 6 6-6 6\"/></svg><p>HTML</p></div><div><p>Готовый HTML</p><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 12h17m-6-6 6 6-6 6\"/></svg><p class=\"dm-skill-name\">HTML Export</p><svg class=\"dm-icon \" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 12h17m-6-6 6 6-6 6\"/></svg><p>PPTX / PDF</p></div></div>\n<p data-gd-tail class=\"dm-caption\">Для PPTX используйте отдельный скилл HTML Export. Результат проверяем в PowerPoint.</p></div>"
+    },
+    {
+      "id": "finish",
+      "label": "Попробуйте сами",
+      "section": "Демонстрация",
+      "topic": "Короткая практика",
+      "sourceNumber": 13,
+      "header": "number",
+      "html": "<div data-gd-flow class=\"dm dm-finish\">\n<h2 class=\"dm-wide dm-finish-title\">Попробуйте сами.</h2><p class=\"dm-lead\">Эта презентация — рабочее демо. Все функции можно проверить здесь.</p>\n<div class=\"dm-practice\"><div><span>01</span><p>Измените абзац<br>на слайде «Правки».</p></div><div><span>02</span><p>Переставьте слайд<br>или уберите его из показа.</p></div><div><span>03</span><p>Посмотрите изменения<br>в журнале.</p></div><div><span>04</span><p>Сохраните новую версию<br>со своим комментарием.</p></div></div>\n<p data-gd-tail class=\"dm-caption\">Откройте новый HTML-файл: ваши правки, порядок и настройки останутся в нём.</p></div>"
+    }
+  ],
+  "preparationChanges": [
+    {
+      "id": "demo-spelling",
+      "slide": "review-example",
+      "sourceId": "edit-version-note",
+      "actor": "llm",
+      "kind": "text",
+      "status": "applied",
+      "title": "Учебный пример: исправлена опечатка",
+      "before": "Исправления можна подтвердить или отменить.",
+      "after": "Исправления можно подтвердить или отменить.",
+      "demo": true
+    },
+    {
+      "id": "demo-quotes",
+      "slide": "review-example",
+      "sourceId": "edit-save-note",
+      "actor": "llm",
+      "kind": "typography",
+      "status": "pending",
+      "title": "Учебный пример: кавычки-ёлочки",
+      "before": "Добавьте комментарий \"Обновил данные\".",
+      "after": "Добавьте комментарий «Обновил данные».",
+      "demo": true
+    }
+  ]
+}

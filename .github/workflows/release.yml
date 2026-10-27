@@ -1,0 +1,27 @@
+name: Release packages
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: python3 scripts/check_release.py
+      - run: python3 scripts/build_demo.py --check
+      - run: python3 scripts/package_release.py
+      - uses: actions/upload-artifact@v7
+        with:
+          name: skill-packages
+          path: dist/
+          if-no-files-found: error
+          retention-days: 30

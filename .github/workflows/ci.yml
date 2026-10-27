@@ -1,0 +1,19 @@
+name: Source checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: python3 scripts/check_release.py
+      - run: python3 skills/gigadev-html-maker/scripts/self_test.py
+      - run: python3 scripts/build_demo.py --check
+      - run: python3 scripts/package_release.py

@@ -1,0 +1,23 @@
+{
+  "status": "verified patch release",
+  "ancestor": "v17; UI ancestor accepted v15",
+  "changedModules": [
+    "adapter.js",
+    "deck.css",
+    "flow.js"
+  ],
+  "modules": {
+    "adapter.js": "58e82087f0d0c11c9a1e77adc57eaa2ccc94b7acb13d0f5b1f9a901388799faf",
+    "controller.js": "67b6c2fd04700277712f661c67ae353e2ce29af2b9c10614bc20b466e76a7084",
+    "deck.css": "b1293f4840522af66e2acebec4f43d1f67088f9db6be6b57a3bb08edfea8393a",
+    "editor.js": "3800ee60998dddde0922e19ca61c0278a12707a23ddda010d45d31f253a7fa37",
+    "flow.js": "1fa0a39e68051b54c05a19d85e152e7d553d2e59a3aa0e3dd01fbf86311b6cc0",
+    "journal.js": "0f905830f2618f9db948cd3719e6e65e0af0756fc4aa8ba895e083ee1b900c92",
+    "motion.js": "2db91de180dc291fc813516c2f74ccad9c0762b810b771a1bce99d0546fc63be",
+    "navigation.js": "b892df83507d025f8e5beda85cb20961f64af0a53ede4a738bb244e4a2797cdb",
+    "shell.html": "98f6e81737db173b48e2f33ba37595e410d165e806a686204c4bb9f66b8e0bd5",
+    "tooltips.js": "2ac8930baf291059cfca3083ea3d9eaac7459d1fa9d807702974d3df625e1192",
+    "ui.css": "f5039cf9434588047c58384a6aee258ca8a66da1d13af09793e80853ec17dccb"
+  },
+  "scope": "Chrome Mac; first/all-slide reading anchors, compact wheel, showing/export, edits/save. No Windows/Safari/hardware clicker QA."
+}

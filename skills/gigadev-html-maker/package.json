@@ -1,0 +1,12 @@
+{
+  "name": "gigadev-html-maker",
+  "version": "0.17.4",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "playwright": "1.62.1"
+  }
+}

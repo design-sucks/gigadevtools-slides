@@ -1,0 +1,45 @@
+name: Browser regression
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'skills/gigadev-html-maker/**'
+      - 'examples/shell-demo/**'
+      - 'scripts/build_demo.py'
+      - '.github/workflows/browser.yml'
+  pull_request:
+    paths:
+      - 'skills/gigadev-html-maker/**'
+      - 'examples/shell-demo/**'
+      - 'scripts/build_demo.py'
+      - '.github/workflows/browser.yml'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      HTML_MAKER_CHROME: bundled
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: skills/gigadev-html-maker/package-lock.json
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: npm ci --prefix skills/gigadev-html-maker
+      - run: npx --prefix skills/gigadev-html-maker playwright install --with-deps chromium
+      - run: python3 scripts/build_demo.py --check
+      - run: node skills/gigadev-html-maker/scripts/check.mjs examples/shell-demo/index.html --out build/shell-qa
+      - run: node skills/gigadev-html-maker/scripts/check_compact.mjs examples/shell-demo/index.html build/compact-qa
+      - run: node skills/gigadev-html-maker/scripts/check_shortcuts.mjs examples/shell-demo/index.html build/keys-qa
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: browser-qa
+          path: build/
+          retention-days: 7

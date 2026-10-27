@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "slides": [
+        2
+      ],
+      "selector": ".kib-output-card",
+      "name": "Output Metric Card",
+      "expected": 3
+    },
+    {
+      "slides": [
+        2
+      ],
+      "selector": ".kib-detail-card",
+      "name": "KIB Detail Card",
+      "expected": 4
+    },
+    {
+      "slides": [
+        2
+      ],
+      "selector": ".kib-lt-info",
+      "name": "Lead Time Context",
+      "expected": 1
+    },
+    {
+      "slides": [
+        3
+      ],
+      "selector": ".q35-product-agent",
+      "name": "GigaCode Agent",
+      "expected": 1
+    },
+    {
+      "slides": [
+        3
+      ],
+      "selector": ".q35-product-harness",
+      "name": "ServerSide Harness",
+      "expected": 1
+    },
+    {
+      "slides": [
+        3
+      ],
+      "selector": ".q35-neutral-tags",
+      "name": "Agent Surfaces",
+      "expected": 1
+    },
+    {
+      "slides": [
+        3
+      ],
+      "selector": ".q35-transfer-note",
+      "name": "Task and Context Handoff",
+      "expected": 1
+    },
+    {
+      "slides": [
+        4
+      ],
+      "selector": ".q43-token-graph",
+      "name": "Token Consumption Chart",
+      "expected": 1
+    },
+    {
+      "slides": [
+        4
+      ],
+      "selector": ".q43-token-graph svg > g[aria-hidden]",
+      "name": "Chart Axis",
+      "expected": 1
+    },
+    {
+      "slides": [
+        4
+      ],
+      "selector": ".q43-token-graph svg > g:not([aria-hidden])",
+      "name": "Token Consumption Period",
+      "expected": 3
+    },
+    {
+      "slides": [
+        5,
+        6
+      ],
+      "selector": ".qbr-segment-table",
+      "name": "User Segmentation Table",
+      "expected": 1
+    },
+    {
+      "slides": [
+        5,
+        6
+      ],
+      "selector": ".q43-segmentation thead > tr",
+      "name": "Table Header",
+      "expected": 1
+    },
+    {
+      "slides": [
+        5,
+        6
+      ],
+      "selector": ".q43-segmentation tbody > tr",
+      "name": "Segmentation Row",
+      "expected": 7
+    },
+    {
+      "slides": [
+        7
+      ],
+      "selector": ".q43-model-family",
+      "name": "Model Family",
+      "expected": 4
+    },
+    {
+      "slides": [
+        7
+      ],
+      "selector": ".q43-model-row",
+      "name": "Model Entry",
+      "expected": 8
+    },
+    {
+      "slides": [
+        8
+      ],
+      "selector": ".q43-gc-card",
+      "name": "GigaCode Metric Card",
+      "expected": 3
+    },
+    {
+      "slides": [
+        8
+      ],
+      "selector": ".q43-gc-surfaces",
+      "name": "Usage by Surface",
+      "expected": 1
+    },
+    {
+      "slides": [
+        9
+      ],
+      "selector": ".q43-desktop-dau",
+      "name": "Desktop DAU",
+      "expected": 1
+    },
+    {
+      "slides": [
+        9
+      ],
+      "selector": ".q35-demo-feature:not(:last-child)",
+      "name": "Desktop Feature",
+      "expected": 4
+    },
+    {
+      "slides": [
+        10
+      ],
+      "selector": ".q35-panel",
+      "name": "Harness Metric Card",
+      "expected": 9
+    },
+    {
+      "slides": [
+        10
+      ],
+      "selector": ".q35-remote-consumption",
+      "name": "Token Consumption Chart",
+      "expected": 1
+    },
+    {
+      "slides": [
+        11
+      ],
+      "selector": ".harness-chat-body",
+      "name": "Support Chat QR",
+      "expected": 1
+    },
+    {
+      "slides": [
+        9
+      ],
+      "selector": ".q35-demo-sidebar",
+      "name": "Desktop Features",
+      "expected": 1
+    },
+    {
+      "slides": [
+        3
+      ],
+      "selector": ".q35-triangle-path",
+      "name": "Task Transfer Connector",
+      "expected": 1
+    }
+  ]
+}

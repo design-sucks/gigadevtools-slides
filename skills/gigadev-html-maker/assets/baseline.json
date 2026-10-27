@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "baseline": "shell-v06",
+  "status": "user-accepted",
+  "approvedOn": "2026-10-26",
+  "timezone": "Europe/Moscow",
+  "previewFilename": "HTML_Maker_Shell_v06.html",
+  "previewSha256": "30ac8d3e531645c46a920b672658730eae57d7577e65f7916cc46ce29efcc072",
+  "files": {
+    "assets/adapter.js": "d4a4cee515131683466e4f65c130bb6707390ac65bdacf03b61ab793c96857d3",
+    "assets/controller.js": "9d9a67eedce1216997fb1bff9b72a59a1535e21db8175e23df8061cf83c31aa8",
+    "assets/deck.css": "737940ec6b2a9ebcdc090450c78ddbfdd1940a701d71adf5010e19d95f9f2802",
+    "assets/editor.js": "f0ef4e7fbb5fc34755b8d6737a8f2419a236f591252acb06b8cd00e5bb258420",
+    "assets/motion.js": "121477666fa92326037d3ad07fb8151220768e193d3117a6298d7e600a1db84b",
+    "assets/navigation.js": "b892df83507d025f8e5beda85cb20961f64af0a53ede4a738bb244e4a2797cdb",
+    "assets/shell.html": "a2ff18e4d672dde4b9cb970b3d55145d4acdd79964d7092b3da3c2e2b82182a0",
+    "assets/ui.css": "32117635c4a181057ca6f7d694f3ec50007fa7f867d7ca2c31bb6517494b554a"
+  }
+}

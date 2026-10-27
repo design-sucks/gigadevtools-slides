@@ -1,0 +1,21 @@
+{
+  "status": "preview",
+  "ancestor": "accepted v15",
+  "changedModules": [
+    "shell.html",
+    "controller.js",
+    "journal.js"
+  ],
+  "modules": {
+    "adapter.js": "da12ebb812831fccd0ff4b84608cb6dc07ad74a52ea16920878bf44ff13634de",
+    "shell.html": "0f7f4f92de04cbaf81efaeed8553a10b7668b2fd659c624e854cd163104e7cad",
+    "tooltips.js": "2ac8930baf291059cfca3083ea3d9eaac7459d1fa9d807702974d3df625e1192",
+    "controller.js": "db746474d0ab8c0eedf1f86df8729a2706de0f9364b0e6995a1774b88b9a3626",
+    "journal.js": "0f905830f2618f9db948cd3719e6e65e0af0756fc4aa8ba895e083ee1b900c92",
+    "editor.js": "3800ee60998dddde0922e19ca61c0278a12707a23ddda010d45d31f253a7fa37",
+    "ui.css": "f5039cf9434588047c58384a6aee258ca8a66da1d13af09793e80853ec17dccb",
+    "navigation.js": "b892df83507d025f8e5beda85cb20961f64af0a53ede4a738bb244e4a2797cdb",
+    "deck.css": "737940ec6b2a9ebcdc090450c78ddbfdd1940a701d71adf5010e19d95f9f2802",
+    "motion.js": "121477666fa92326037d3ad07fb8151220768e193d3117a6298d7e600a1db84b"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "acceptedAt": "2026-10-27",
+  "shellVersion": "v15",
+  "modules": {
+    "adapter.js": "da12ebb812831fccd0ff4b84608cb6dc07ad74a52ea16920878bf44ff13634de",
+    "shell.html": "c1435f4c7413853b317ec77e8a3b4cfcebb0107e68741f303fd3a312854d819c",
+    "tooltips.js": "2ac8930baf291059cfca3083ea3d9eaac7459d1fa9d807702974d3df625e1192",
+    "controller.js": "9a6f630b385e46f6a845d539f30cbfbb70c5d8f900af8effe94e142ce4f6478a",
+    "journal.js": "a5a88f483f96f8283533168e75e577d9ef22df266d85b24a4bb18225ca7278b8",
+    "editor.js": "3800ee60998dddde0922e19ca61c0278a12707a23ddda010d45d31f253a7fa37",
+    "ui.css": "f5039cf9434588047c58384a6aee258ca8a66da1d13af09793e80853ec17dccb",
+    "navigation.js": "b892df83507d025f8e5beda85cb20961f64af0a53ede4a738bb244e4a2797cdb",
+    "deck.css": "737940ec6b2a9ebcdc090450c78ddbfdd1940a701d71adf5010e19d95f9f2802",
+    "motion.js": "121477666fa92326037d3ad07fb8151220768e193d3117a6298d7e600a1db84b"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "slides": [
+        2
+      ],
+      "selector": ".metric",
+      "name": "Metric Card",
+      "expected": 3
+    },
+    {
+      "slides": [
+        2
+      ],
+      "selector": ".metric-matrix",
+      "name": "Dot Matrix",
+      "expected": 3
+    },
+    {
+      "slides": [
+        5
+      ],
+      "selector": ".loop-role-card",
+      "name": "Loop Role Card",
+      "expected": 2
+    },
+    {
+      "slides": [
+        5
+      ],
+      "selector": ".validation",
+      "name": "Validation",
+      "expected": 1
+    },
+    {
+      "slides": [
+        5
+      ],
+      "selector": ".governance",
+      "name": "Governance",
+      "expected": 1
+    },
+    {
+      "slides": [
+        6
+      ],
+      "selector": ".skill",
+      "name": "Competency",
+      "expected": 6
+    },
+    {
+      "slides": [
+        14
+      ],
+      "selector": ".tool-usage > article",
+      "name": "Tool Card",
+      "expected": 3
+    },
+    {
+      "slides": [
+        14
+      ],
+      "selector": ".usage-chart",
+      "name": "Usage Chart",
+      "expected": 3
+    }
+  ]
+}

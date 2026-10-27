@@ -1,0 +1,4 @@
+interface:
+  display_name: "GigaDevTools HTML Maker"
+  short_description: "PPTX и содержание → редактируемые HTML-презентации"
+  default_prompt: "Используй $gigadev-html-maker: собери из приложенной презентации редактируемый HTML с готовой оболочкой и оформлением по референсу."

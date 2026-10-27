@@ -1,0 +1,702 @@
+{
+  "source": "Demo v02 pre-compact reading; measured Chrome Mac with embedded fonts",
+  "scope": "Bundled demo anchor regression only; no source HTML dependency",
+  "rows": [
+    {
+      "theme": "dark",
+      "viewport": {
+        "width": 1600,
+        "height": 900
+      },
+      "slides": [
+        {
+          "id": "cover",
+          "titleY": 304.153564453125,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.7435302734375
+        },
+        {
+          "id": "view",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.7435302734375
+        },
+        {
+          "id": "shortcuts",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.74365234375
+        },
+        {
+          "id": "edit",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.74365234375
+        },
+        {
+          "id": "order",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.74365234375
+        },
+        {
+          "id": "journal",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.74365234375
+        },
+        {
+          "id": "review-example",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.74365234375
+        },
+        {
+          "id": "screen",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.74365234375
+        },
+        {
+          "id": "save",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.74365234375
+        },
+        {
+          "id": "principles",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.7431640625
+        },
+        {
+          "id": "source",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.7431640625
+        },
+        {
+          "id": "formats",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.7431640625
+        },
+        {
+          "id": "finish",
+          "titleY": 248.603515625,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.7431640625
+        }
+      ]
+    },
+    {
+      "theme": "dark",
+      "viewport": {
+        "width": 1400,
+        "height": 1330
+      },
+      "slides": [
+        {
+          "id": "cover",
+          "titleY": 538.4698486328125,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.2425537109375
+        },
+        {
+          "id": "view",
+          "titleY": 421.728759765625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.24267578125
+        },
+        {
+          "id": "shortcuts",
+          "titleY": 421.728759765625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.24267578125
+        },
+        {
+          "id": "edit",
+          "titleY": 421.72900390625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.24267578125
+        },
+        {
+          "id": "order",
+          "titleY": 421.72900390625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.24267578125
+        },
+        {
+          "id": "journal",
+          "titleY": 421.72900390625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.24267578125
+        },
+        {
+          "id": "review-example",
+          "titleY": 421.728515625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.2421875
+        },
+        {
+          "id": "screen",
+          "titleY": 421.728515625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.2421875
+        },
+        {
+          "id": "save",
+          "titleY": 421.728515625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.2421875
+        },
+        {
+          "id": "principles",
+          "titleY": 421.728515625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.2421875
+        },
+        {
+          "id": "source",
+          "titleY": 421.728515625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.2421875
+        },
+        {
+          "id": "formats",
+          "titleY": 421.728515625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.2421875
+        },
+        {
+          "id": "finish",
+          "titleY": 489.9296875,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.2421875
+        }
+      ]
+    },
+    {
+      "theme": "dark",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "slides": [
+        {
+          "id": "cover",
+          "titleY": 286.9737548828125,
+          "bodyY": 171.75,
+          "bodyHeight": 491.6248779296875
+        },
+        {
+          "id": "view",
+          "titleY": 181.86590576171875,
+          "bodyY": 171.75,
+          "bodyHeight": 491.6248779296875
+        },
+        {
+          "id": "shortcuts",
+          "titleY": 181.865966796875,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "edit",
+          "titleY": 181.865966796875,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "order",
+          "titleY": 181.865966796875,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "journal",
+          "titleY": 181.86572265625,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "review-example",
+          "titleY": 181.86572265625,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "screen",
+          "titleY": 181.86572265625,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "save",
+          "titleY": 181.86572265625,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "principles",
+          "titleY": 181.86572265625,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "source",
+          "titleY": 181.86572265625,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "formats",
+          "titleY": 181.8662109375,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "finish",
+          "titleY": 243.26171875,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        }
+      ]
+    },
+    {
+      "theme": "dark",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "slides": [
+        {
+          "id": "cover",
+          "titleY": 386.0802307128906,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.2479248046875
+        },
+        {
+          "id": "view",
+          "titleY": 349.6937255859375,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.2479248046875
+        },
+        {
+          "id": "shortcuts",
+          "titleY": 349.6937255859375,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "edit",
+          "titleY": 349.69384765625,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "order",
+          "titleY": 349.69384765625,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "journal",
+          "titleY": 349.69384765625,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "review-example",
+          "titleY": 349.69384765625,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "screen",
+          "titleY": 349.69384765625,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "save",
+          "titleY": 349.69384765625,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "principles",
+          "titleY": 349.69384765625,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "source",
+          "titleY": 349.693359375,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "formats",
+          "titleY": 349.693359375,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "finish",
+          "titleY": 370.947265625,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        }
+      ]
+    },
+    {
+      "theme": "light",
+      "viewport": {
+        "width": 1600,
+        "height": 900
+      },
+      "slides": [
+        {
+          "id": "cover",
+          "titleY": 304.153564453125,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.7435302734375
+        },
+        {
+          "id": "view",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.7435302734375
+        },
+        {
+          "id": "shortcuts",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.74365234375
+        },
+        {
+          "id": "edit",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.74365234375
+        },
+        {
+          "id": "order",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.74365234375
+        },
+        {
+          "id": "journal",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.74365234375
+        },
+        {
+          "id": "review-example",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.74365234375
+        },
+        {
+          "id": "screen",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.74365234375
+        },
+        {
+          "id": "save",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.74365234375
+        },
+        {
+          "id": "principles",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.7431640625
+        },
+        {
+          "id": "source",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.7431640625
+        },
+        {
+          "id": "formats",
+          "titleY": 170.62109375,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.7431640625
+        },
+        {
+          "id": "finish",
+          "titleY": 248.603515625,
+          "bodyY": 157.765625,
+          "bodyHeight": 624.7431640625
+        }
+      ]
+    },
+    {
+      "theme": "light",
+      "viewport": {
+        "width": 1400,
+        "height": 1330
+      },
+      "slides": [
+        {
+          "id": "cover",
+          "titleY": 538.4698486328125,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.2425537109375
+        },
+        {
+          "id": "view",
+          "titleY": 421.728759765625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.24267578125
+        },
+        {
+          "id": "shortcuts",
+          "titleY": 421.728759765625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.24267578125
+        },
+        {
+          "id": "edit",
+          "titleY": 421.72900390625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.24267578125
+        },
+        {
+          "id": "order",
+          "titleY": 421.72900390625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.24267578125
+        },
+        {
+          "id": "journal",
+          "titleY": 421.72900390625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.24267578125
+        },
+        {
+          "id": "review-example",
+          "titleY": 421.728515625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.2421875
+        },
+        {
+          "id": "screen",
+          "titleY": 421.728515625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.2421875
+        },
+        {
+          "id": "save",
+          "titleY": 421.728515625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.2421875
+        },
+        {
+          "id": "principles",
+          "titleY": 421.728515625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.2421875
+        },
+        {
+          "id": "source",
+          "titleY": 421.728515625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.2421875
+        },
+        {
+          "id": "formats",
+          "titleY": 421.728515625,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.2421875
+        },
+        {
+          "id": "finish",
+          "titleY": 489.9296875,
+          "bodyY": 410.484375,
+          "bodyHeight": 546.2421875
+        }
+      ]
+    },
+    {
+      "theme": "light",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "slides": [
+        {
+          "id": "cover",
+          "titleY": 286.9737548828125,
+          "bodyY": 171.75,
+          "bodyHeight": 491.6248779296875
+        },
+        {
+          "id": "view",
+          "titleY": 181.86590576171875,
+          "bodyY": 171.75,
+          "bodyHeight": 491.6248779296875
+        },
+        {
+          "id": "shortcuts",
+          "titleY": 181.865966796875,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "edit",
+          "titleY": 181.865966796875,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "order",
+          "titleY": 181.865966796875,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "journal",
+          "titleY": 181.86572265625,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "review-example",
+          "titleY": 181.86572265625,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "screen",
+          "titleY": 181.86572265625,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "save",
+          "titleY": 181.86572265625,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "principles",
+          "titleY": 181.86572265625,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "source",
+          "titleY": 181.86572265625,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "formats",
+          "titleY": 181.8662109375,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        },
+        {
+          "id": "finish",
+          "titleY": 243.26171875,
+          "bodyY": 171.75,
+          "bodyHeight": 491.625
+        }
+      ]
+    },
+    {
+      "theme": "light",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "slides": [
+        {
+          "id": "cover",
+          "titleY": 386.0802307128906,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.2479248046875
+        },
+        {
+          "id": "view",
+          "titleY": 349.6937255859375,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.2479248046875
+        },
+        {
+          "id": "shortcuts",
+          "titleY": 349.6937255859375,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "edit",
+          "titleY": 349.69384765625,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "order",
+          "titleY": 349.69384765625,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "journal",
+          "titleY": 349.69384765625,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "review-example",
+          "titleY": 349.69384765625,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "screen",
+          "titleY": 349.69384765625,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "save",
+          "titleY": 349.69384765625,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "principles",
+          "titleY": 349.69384765625,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "source",
+          "titleY": 349.693359375,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "formats",
+          "titleY": 349.693359375,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        },
+        {
+          "id": "finish",
+          "titleY": 370.947265625,
+          "bodyY": 346.1875,
+          "bodyHeight": 170.248046875
+        }
+      ]
+    }
+  ]
+}

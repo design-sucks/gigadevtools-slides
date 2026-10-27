@@ -1,0 +1,29 @@
+{
+  "status": "verified release",
+  "ancestor": "accepted v15",
+  "changedModules": [
+    "adapter.js",
+    "shell.html",
+    "controller.js",
+    "journal.js",
+    "deck.css",
+    "motion.js"
+  ],
+  "addedModules": [
+    "flow.js"
+  ],
+  "modules": {
+    "adapter.js": "c2024fb547ca79ad20cb7aaf05a8fa30fbcd8af7ab5037b9fa518c05c28392f1",
+    "controller.js": "67b6c2fd04700277712f661c67ae353e2ce29af2b9c10614bc20b466e76a7084",
+    "deck.css": "10cf169a9c97c1cfcb1a4f1615d375697cc2f733f5bfb7684f704e85299483a1",
+    "editor.js": "3800ee60998dddde0922e19ca61c0278a12707a23ddda010d45d31f253a7fa37",
+    "flow.js": "670e612a0210a322319de3016d37566c28774dd32e2769ff9c9667c4d2c7ac3d",
+    "journal.js": "0f905830f2618f9db948cd3719e6e65e0af0756fc4aa8ba895e083ee1b900c92",
+    "motion.js": "2db91de180dc291fc813516c2f74ccad9c0762b810b771a1bce99d0546fc63be",
+    "navigation.js": "b892df83507d025f8e5beda85cb20961f64af0a53ede4a738bb244e4a2797cdb",
+    "shell.html": "98f6e81737db173b48e2f33ba37595e410d165e806a686204c4bb9f66b8e0bd5",
+    "tooltips.js": "2ac8930baf291059cfca3083ea3d9eaac7459d1fa9d807702974d3df625e1192",
+    "ui.css": "f5039cf9434588047c58384a6aee258ca8a66da1d13af09793e80853ec17dccb"
+  },
+  "verification": "Chrome Mac; see delivery verification reports. No physical clicker, Safari or Windows test."
+}
