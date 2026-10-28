@@ -13,24 +13,26 @@ def run():
   para=lambda t:f'<a:p><a:r><a:t>{t}</a:t></a:r></a:p>'
   shape=lambda i,t:f'<p:sp><p:nvSpPr><p:cNvPr id="{i}" name="Object {i}"/></p:nvSpPr><p:txBody>{para(t)}</p:txBody></p:sp>'
   body=shape(1,'Точное название')+'<p:grpSp><p:nvGrpSpPr><p:cNvPr id="2" name="Group"/></p:nvGrpSpPr>'+shape(3,'Вложенная подпись 12,5%')+'</p:grpSp>'
-  body+='<p:graphicFrame><p:nvGraphicFramePr><p:cNvPr id="4" name="Table"/></p:nvGraphicFramePr><a:graphic><a:graphicData><a:tbl><a:tr><a:tc><a:txBody>'+para('Категория')+'</a:txBody></a:tc><a:tc><a:txBody>'+para('Значение')+'</a:txBody></a:tc></a:tr><a:tr><a:tc><a:txBody>'+para('A')+'</a:txBody></a:tc><a:tc><a:txBody>'+para('42')+'</a:txBody></a:tc></a:tr></a:tbl></a:graphicData></a:graphic></p:graphicFrame>'
+  body+='<p:graphicFrame><p:nvGraphicFramePr><p:cNvPr id="4" name="Table"/></p:nvGraphicFramePr><p:xfrm><a:off x="123456" y="654321"/><a:ext cx="4567890" cy="2345678"/></p:xfrm><a:graphic><a:graphicData><a:tbl><a:tr><a:tc><a:txBody>'+para('Категория')+'</a:txBody></a:tc><a:tc><a:txBody>'+para('Значение')+'</a:txBody></a:tc></a:tr><a:tr><a:tc><a:txBody>'+para('A')+'</a:txBody></a:tc><a:tc><a:txBody>'+para('42')+'</a:txBody></a:tc></a:tr></a:tbl></a:graphicData></a:graphic></p:graphicFrame>'
   body+='<p:graphicFrame><p:nvGraphicFramePr><p:cNvPr id="5" name="Chart"/></p:nvGraphicFramePr><a:graphic><a:graphicData><c:chart r:id="chart1"/></a:graphicData></a:graphic></p:graphicFrame>'
   body+='<p:sp><p:nvSpPr><p:cNvPr id="6" name="Number"/></p:nvSpPr><p:txBody><a:p><a:fld type="slidenum"><a:t>7</a:t></a:fld></a:p></p:txBody></p:sp>'
+  body+='<p:pic><p:nvPicPr><p:cNvPr id="7" name="Full slide image"/><p:cNvPicPr/><p:nvPr/></p:nvPicPr><p:blipFill><a:blip r:embed="image1"/><a:stretch><a:fillRect/></a:stretch></p:blipFill><p:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="12192000" cy="6858000"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic>'
   with ZipFile(ppt,'w') as z:
    z.writestr('ppt/presentation.xml',f'<p:presentation xmlns:p="{p}" xmlns:r="{rel}"><p:sldIdLst><p:sldId id="256" r:id="s1"/></p:sldIdLst><p:sldSz cx="12192000" cy="6858000"/></p:presentation>')
    z.writestr('ppt/_rels/presentation.xml.rels','<Relationships><Relationship Id="s1" Target="slides/slide1.xml" Type="x/slide"/></Relationships>')
-   z.writestr('ppt/slides/slide1.xml',f'<p:sld xmlns:p="{p}" xmlns:a="{a}" xmlns:c="{c}" xmlns:r="{rel}"><p:cSld><p:spTree>{body}</p:spTree></p:cSld></p:sld>')
-   z.writestr('ppt/slides/_rels/slide1.xml.rels','<Relationships><Relationship Id="chart1" Target="../charts/chart1.xml" Type="x/chart"/><Relationship Id="notes1" Target="../notesSlides/notesSlide1.xml" Type="x/notesSlide"/></Relationships>')
+   z.writestr('ppt/slides/slide1.xml',f'<p:sld xmlns:p="{p}" xmlns:a="{a}" xmlns:c="{c}" xmlns:r="{rel}"><p:cSld><p:bg><p:bgPr><a:solidFill><a:srgbClr val="112233"/></a:solidFill></p:bgPr></p:bg><p:spTree>{body}</p:spTree></p:cSld></p:sld>')
+   z.writestr('ppt/slides/_rels/slide1.xml.rels','<Relationships><Relationship Id="chart1" Target="../charts/chart1.xml" Type="x/chart"/><Relationship Id="notes1" Target="../notesSlides/notesSlide1.xml" Type="x/notesSlide"/><Relationship Id="image1" Target="../media/pixel.png" Type="x/image"/></Relationships>')
+   z.writestr('ppt/media/pixel.png',bytes.fromhex('89504e470d0a1a0a0000000d49484452000000010000000108060000001f15c4890000000b49444154789c636000020000050001a5f645400000000049454e44ae426082'))
    z.writestr('ppt/charts/chart1.xml',f'<c:chartSpace xmlns:c="{c}"><c:chart><c:plotArea><c:barChart><c:ser><c:tx><c:v>Показатель</c:v></c:tx><c:cat><c:strCache><c:pt idx="0"><c:v>A</c:v></c:pt></c:strCache></c:cat><c:val><c:numCache><c:pt idx="0"><c:v>12.50</c:v></c:pt></c:numCache></c:val></c:ser></c:barChart></c:plotArea></c:chart></c:chartSpace>')
    z.writestr('ppt/notesSlides/notesSlide1.xml',f'<p:notes xmlns:p="{p}" xmlns:a="{a}">'+shape(1,'Внутренняя заметка')+'</p:notes>')
-  deck=extract(ppt,r/'project');s=deck['slides'][0];assert s['sourceNumber']==1
+  deck=extract(ppt,r/'project');s=deck['slides'][0];assert s['sourceNumber']==1;assert '112233' in s['sourceBackground']['xml'];candidate=next(b for b in s['blocks'] if b.get('backgroundCandidate'));assert candidate['rawGeometryEMU']=={'xEMU':0,'yEMU':0,'widthEMU':12192000,'heightEMU':6858000};assert any(w['code']=='background-candidate' for w in deck['warnings'])
   nested=next(b for b in s['blocks'] if b.get('paragraphs',[{}])[0].get('text')=='Вложенная подпись 12,5%');assert nested['group']=='s1-o2'
-  table=next(b for b in s['blocks'] if b['kind']=='table');assert table['rows'][1][1][0]['text']=='42'
+  table=next(b for b in s['blocks'] if b['kind']=='table');assert table['rows'][1][1][0]['text']=='42';assert table['transform']['children']==[{'off':{'x':'123456','y':'654321'}},{'ext':{'cx':'4567890','cy':'2345678'}}], 'native graphic-frame geometry must survive extraction'
   chart=next(b for b in s['blocks'] if b['kind']=='chart');assert chart['series'][0]['values']==['12.50'];assert s['metadata'][0]['paragraphs'][0]['text']=='7';assert 'Внутренняя заметка' in s['notes']
   result=build(r/'project/deck.json',r/'result.html');assert '12.50' in result and '12,5%' in result;assert 'Внутренняя заметка' not in result;assert '@@GD_' not in result
   deck['order']=['missing'];(r/'project/deck.json').write_text(json.dumps(deck))
   try:build(r/'project/deck.json',r/'invalid.html')
   except ValueError:pass
   else:raise AssertionError('Unknown order id accepted')
- print('PASS nested source text, exact table/chart values, page metadata, private notes and invalid-order rejection')
+ print('PASS nested source text, exact table/chart values, page metadata, private notes, PPTX native background evidence, full-slide picture candidate and invalid-order rejection')
 if __name__=='__main__':run()

@@ -1,0 +1,29 @@
+{
+  "name": "Maker Neutral Base",
+  "themes": [
+    "dark"
+  ],
+  "primary": "dark",
+  "font": "\"SB Sans Text\", Arial, sans-serif",
+  "displayFont": "\"SB Sans Display\", Arial, sans-serif",
+  "builtinFonts": true,
+  "colors": {
+    "dark": {
+      "bg": "#111722",
+      "shell": "#111722",
+      "ink": "#F4F6FA",
+      "muted": "#AAB4C5",
+      "accent": "#83A8FF",
+      "line": "#354153"
+    },
+    "light": {
+      "bg": "#F4F6FA",
+      "shell": "#F4F6FA",
+      "ink": "#172334",
+      "muted": "#566477",
+      "accent": "#315FA8",
+      "line": "#CBD3DF"
+    }
+  },
+  "cssFile": "base-style.css"
+}

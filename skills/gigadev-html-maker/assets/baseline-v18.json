@@ -1,0 +1,18 @@
+{
+  "status": "browser-verified local candidate; user slide design review pending",
+  "ancestor": "v17.2 accepted shell; existing demo content retained",
+  "modules": {
+    "adapter.js": "3f8299d5110b51c2ec8cd9fd6158a90e03a40a17850ae1984c0b80b8dd9ffb47",
+    "controller.js": "2da6f31de2144d751e4e788e12577f2b040626d852fba8cd89cf29e5ba8c256d",
+    "deck.css": "030009761ee47d3ca96c6564f45da330bf3bb39f28ebc81224dc672e90824829",
+    "editor.js": "3800ee60998dddde0922e19ca61c0278a12707a23ddda010d45d31f253a7fa37",
+    "flow.js": "1fa0a39e68051b54c05a19d85e152e7d553d2e59a3aa0e3dd01fbf86311b6cc0",
+    "journal.js": "fa5d98e75bca955d6fc718e136e517a157027d5968d2aef4d5c6899ac0ecae25",
+    "motion.js": "7e618f69a6f9e406bcc044292ecfdb53d7200bff19f330475f727ba53dbc8b3b",
+    "navigation.js": "b892df83507d025f8e5beda85cb20961f64af0a53ede4a738bb244e4a2797cdb",
+    "shell.html": "98f6e81737db173b48e2f33ba37595e410d165e806a686204c4bb9f66b8e0bd5",
+    "tooltips.js": "2ac8930baf291059cfca3083ea3d9eaac7459d1fa9d807702974d3df625e1192",
+    "ui.css": "f5039cf9434588047c58384a6aee258ca8a66da1d13af09793e80853ec17dccb"
+  },
+  "scope": "Chrome Mac: shell 15 checks, compact 8 checks, core 9 checks. Native PowerPoint/Windows acceptance is output-specific and separate."
+}

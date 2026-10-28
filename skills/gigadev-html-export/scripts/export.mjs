@@ -15,9 +15,11 @@ const {chromium}=req('playwright'),Pptx=req('pptxgenjs'),Zip=req('jszip');
 const fontReq=process.env.HTML_EXPORT_FONT_MODULES?createRequire(path.join(process.env.HTML_EXPORT_FONT_MODULES,'package.json')):req;
 const sharp=req('sharp');
 const arg=n=>{const i=process.argv.indexOf(n);return i<0?undefined:process.argv[i+1]};
-if(process.argv.includes('--help')){console.log('Usage: node scripts/export.mjs --source deck.html --out NEW_DIRECTORY [--format pptx|pdf|both] [--pdf-mode browser|raster] [--groups auto|profile.json] [--inspect] [--verbose] [--cache-dir DIRECTORY] [--no-cache] [--no-slide-cache]');process.exit(0);}
+if(process.argv.includes('--help')){console.log('Usage: node scripts/export.mjs --source deck.html --out NEW_DIRECTORY [--format pptx|pdf|both] [--theme current|primary|dark|light] [--pdf-mode browser|raster] [--groups auto|profile.json] [--inspect] [--verbose] [--cache-dir DIRECTORY] [--no-cache] [--no-slide-cache]');process.exit(0);}
 const format=arg('--format')||'pptx',pdfMode=arg('--pdf-mode')||'browser',inspect=process.argv.includes('--inspect'),verbose=process.argv.includes('--verbose');
+const requestedTheme=arg('--theme')||'current';
 if(!['pptx','pdf','both'].includes(format)||!['browser','raster'].includes(pdfMode))throw Error('Invalid --format or --pdf-mode');
+if(!['current','primary','dark','light'].includes(requestedTheme))throw Error('Invalid --theme: use current, primary, dark or light');
 if(format==='pdf'&&arg('--groups'))throw Error('PDF viewing mode does not use native PPTX groups');
 const wantPptx=format!=='pdf',wantPdf=format!=='pptx';
 const autoGroups=arg('--groups')==='auto';
@@ -44,7 +46,20 @@ try{
  await page.addInitScript(rules=>{window.__HTML_EXPORT_GROUP_RULES=rules},groupProfile?.rules||[]);
  page.on('pageerror',e=>report.warnings.push({type:'page-error',message:e.message}));
  await page.goto(pathToFileURL(source).href,{waitUntil:'load',timeout:60000});
- await page.evaluate(async()=>{if(window.GigaDevDeck){if(window.GigaDevDeck.schema!==1)throw Error('Unsupported GigaDev HTML Maker schema');await window.GigaDevDeck.prepareExport();}});
+ const themeSelection=await page.evaluate(async requested=>{
+  if(window.GigaDevDeck){
+   if(window.GigaDevDeck.schema!==1)throw Error('Unsupported GigaDev HTML Maker schema');
+   const result=await window.GigaDevDeck.prepareExport({theme:requested});
+   const actual=result?.theme||document.documentElement.dataset.skTheme||document.documentElement.dataset.theme||null;
+   if(requested!=='current'&&!result?.availableThemes)throw Error('This deck adapter cannot verify explicit theme selection; rebuild with the updated Maker or use its current saved theme.');
+   if(['dark','light'].includes(requested)&&actual!==requested)throw Error('Deck did not select the requested theme');
+   if(requested==='primary'&&actual!==result.primaryTheme)throw Error('Deck did not select its primary theme');
+   return {requested,selected:actual,primary:result?.primaryTheme||null,available:result?.availableThemes||null};
+  }
+  if(requested!=='current')throw Error('Explicit theme selection needs a theme-aware deck adapter; export a file saved in the desired theme or use --theme current.');
+  return {requested,selected:document.documentElement.dataset.theme||document.documentElement.dataset.skTheme||null,primary:null,available:null};
+ },requestedTheme);
+ report.theme=themeSelection;
  await page.evaluate(async()=>{await Promise.allSettled([...document.fonts].map(f=>f.load()));await document.fonts.ready;});
  await page.evaluate(()=>{window.GigaMotion?.setEnabled(false);window.GigaReveal?.stop();});
  const info=await page.evaluate(()=>{
@@ -57,7 +72,7 @@ try{
   const w=canvas?canvas.viewBox.baseVal.width:stage?parseFloat(getComputedStyle(stage).width):1920,h=canvas?canvas.viewBox.baseVal.height:stage?parseFloat(getComputedStyle(stage).height):1080;
   const sizeBasis=canvas?'intrinsic-svg-viewBox':stage?'stage-design-size':'default-16:9';
   const faces=[];for(const sheet of document.styleSheets){try{for(const r of sheet.cssRules)if(r.type===CSSRule.FONT_FACE_RULE)faces.push({family:r.style.getPropertyValue('font-family').replace(/["']/g,'').trim(),weight:parseInt(r.style.getPropertyValue('font-weight'))||400,src:r.style.getPropertyValue('src')});}catch{}}
-  return {count:roots.length,w,h,sizeBasis,display,faces,nested:(window.GIGA_EMBEDDED_DECKS||[]).filter(x=>x.href||x.html||x.src||x.file).length,canvases:document.querySelectorAll('canvas').length,theme:document.documentElement.dataset.theme,style:document.documentElement.dataset.style,animationState:'disabled-complete'};
+  return {count:roots.length,w,h,sizeBasis,display,faces,nested:(window.GIGA_EMBEDDED_DECKS||[]).filter(x=>x.href||x.html||x.src||x.file).length,canvases:document.querySelectorAll('canvas').length,theme:document.documentElement.dataset.skTheme||document.documentElement.dataset.theme||null,style:document.documentElement.dataset.style,animationState:'disabled-complete'};
  });
  const registry=JSON.parse(await fs.readFile(path.join(here,'../profiles/registry.json'),'utf8'));
  if(registry.version!==1||!Array.isArray(registry.profiles))throw Error('Invalid profile registry');
@@ -103,7 +118,7 @@ try{
  }
  report.timings.fontSeconds=(performance.now()-fontStarted)/1000;
  const fontFingerprint=digest(Buffer.concat(fonts.map(f=>f.data)));
- const slideSalt={engineHash,fontFingerprint,browser:browser.version(),node:process.version,os:[process.platform,process.arch,os.release()],python:fontRuntime?.stdout||'',format,pdfMode,groups:groupProfile};
+ const slideSalt={engineHash,fontFingerprint,browser:browser.version(),node:process.version,os:[process.platform,process.arch,os.release()],python:fontRuntime?.stdout||'',format,pdfMode,theme:themeSelection.selected,groups:groupProfile};
  const captureStarted=performance.now();
  const pptx=wantPptx?new Pptx():null;if(pptx){pptx.defineLayout({name:'HTML',width:info.w/96,height:info.h/96});pptx.layout='HTML';pptx.title=path.basename(source,'.html');}
  const face=(family,weight)=>{const first=family.split(',')[0].replace(/["']/g,'').trim(),matches=fonts.filter(f=>f.family===first);return matches.sort((a,b)=>Math.abs(a.weight-weight)-Math.abs(b.weight-weight))[0]?.alias||first;};
@@ -248,7 +263,7 @@ try{
  report.timings.verifySeconds=(performance.now()-verifyStarted)/1000;report.timings.totalSeconds=(performance.now()-started)/1000;
  report.verification=JSON.parse(verified.stdout.trim());
  await fs.writeFile(path.join(out,'report.json'),JSON.stringify(report,null,2));
- const summary={status:'pass',engineVersion:'v08',format,slides:info.count,pptx:output||null,pdf:report.pdf||null,fonts:fonts.length,fontEmbeddingVerified:fonts.length>0,groups:scenes.reduce((n,s)=>n+s.groups.length,0),seconds:report.timings.totalSeconds,timings:report.timings,cache:report.cache,warnings:report.warnings,compatibility:assessment.publicResult.status,selectedProfile:assessment.publicResult.selectedProfile,preflight:path.join(out,'preflight.json'),report:path.join(out,'report.json'),nativePowerPointVerified:false};
+ const summary={status:'pass',engineVersion:'v08',format,theme:themeSelection,slides:info.count,pptx:output||null,pdf:report.pdf||null,fonts:fonts.length,fontEmbeddingVerified:fonts.length>0,groups:scenes.reduce((n,s)=>n+s.groups.length,0),seconds:report.timings.totalSeconds,timings:report.timings,cache:report.cache,warnings:report.warnings,compatibility:assessment.publicResult.status,selectedProfile:assessment.publicResult.selectedProfile,preflight:path.join(out,'preflight.json'),report:path.join(out,'report.json'),nativePowerPointVerified:false};
  await fs.writeFile(path.join(out,'summary.json'),JSON.stringify(summary,null,2));console.log(JSON.stringify(summary));
 }finally{await browser.close();}
 

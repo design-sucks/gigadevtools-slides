@@ -1,0 +1,18 @@
+{
+  "status": "Chrome Mac browser-verified local shell bugfix",
+  "ancestor": "v18.0 local candidate; content/style preserved",
+  "modules": {
+    "adapter.js": "6949d48a8fe8da7599227f1edf1f560fc95a5352fec1a402cd6f45d799825a85",
+    "controller.js": "485f13e4ea787389ab46e8a1c2fd8b57371850792cba748587b8459181f0e306",
+    "deck.css": "3589c4546807e2f103ee8be9bfb4b1b843a5e415493c56e3f36f193ab76edccf",
+    "editor.js": "3800ee60998dddde0922e19ca61c0278a12707a23ddda010d45d31f253a7fa37",
+    "flow.js": "1fa0a39e68051b54c05a19d85e152e7d553d2e59a3aa0e3dd01fbf86311b6cc0",
+    "journal.js": "fa5d98e75bca955d6fc718e136e517a157027d5968d2aef4d5c6899ac0ecae25",
+    "motion.js": "bc271accb85ebf313e033a4167e37082c4b5383143b99cf5d36062461e2d171d",
+    "navigation.js": "b892df83507d025f8e5beda85cb20961f64af0a53ede4a738bb244e4a2797cdb",
+    "shell.html": "98f6e81737db173b48e2f33ba37595e410d165e806a686204c4bb9f66b8e0bd5",
+    "tooltips.js": "2ac8930baf291059cfca3083ea3d9eaac7459d1fa9d807702974d3df625e1192",
+    "ui.css": "f5039cf9434588047c58384a6aee258ca8a66da1d13af09793e80853ec17dccb"
+  },
+  "scope": "Background 12 checks; existing shell 15, compact 8 and core 9 checks passed. Actual GLM static export comparison and motion QA recorded separately. No new Windows/native PowerPoint acceptance."
+}

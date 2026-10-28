@@ -4,10 +4,11 @@
 | --- | --- |
 | Accepted HTML shell | Chrome on Mac; 13 slides; two themes; first/last/dense slides |
 | HID clicker | Standard PageUp/PageDown/arrow event path checked; no universal hardware claim |
+| Typography/design | Density, line length and awkward wraps remain open quality weaknesses; passing geometry checks are insufficient |
 | Text editing | Paragraphs, table text, undo, journal and version saves; no object-layout handles |
 | PPTX import | Content/geometry inventory; unsupported effects require review, not a pixel-faithful arbitrary-PPTX renderer |
 | HTML export | Fixed-layout profile-driven reconstruction; arbitrary websites require adaptation |
-| PowerPoint | Historical Mac proofs described in Export references; this pilot does not add a fresh demo PPTX proof |
+| PowerPoint | Historical Export proofs plus a fresh private 10-slide Mac proof; bundled shell demo is not that case |
 | Windows / Safari | Separate verification required |
 | Other LLM clients | Standard skill folder; client-specific registration/execution must be checked |
 | Fonts | SB Sans corporate profile; separate rights required, not MIT |

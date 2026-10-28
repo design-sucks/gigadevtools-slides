@@ -21,6 +21,7 @@
     let settings=validSettings(meta.settings),order=(meta.order||all).filter(id=>byId.has(id));
     let version=meta.version||1,nav=innerWidth>700,nativeShow=false,currentId='',dragId='',toastTimer,thumbURL='',thumbObserver;
     let preparation=clone(meta.preparationChanges||[]);
+    const proofreadingStatus=meta.proofreadingStatus||'not_checked';
     let presentationTitle=meta.title||'Презентация',fileStem=meta.fileStem||presentationTitle,organizerDocked=false;
     const opened={title:presentationTitle,fileStem,order:order.slice(),settings:clone(settings),edits:{},preparation:clone(preparation)};
     let saved=clone(opened);
@@ -108,12 +109,18 @@
       const stage=$('sk-stage'),canvas=$('sk-canvas'),show=root.hasAttribute('data-sk-present');
       if(!show&&nav&&innerWidth>700)root.style.setProperty('--gd-nav-space',Math.max(180,$('bread').offsetWidth+24)+'px');
       const safeTop=show?0:innerWidth<=700?68:72,safeBottom=show?0:56;
-      const scale=Math.max(.01,Math.min(stage.clientWidth/1920,Math.max(1,stage.clientHeight-safeTop-safeBottom)/1080));
+      const navSpace=!show&&innerWidth>700&&nav?Math.max(180,$('bread').offsetWidth+24):0;
+      const leftGutter=show?0:navSpace||20;
+      const workspaceDock=root.hasAttribute('data-sk-journal-dock')||root.hasAttribute('data-sk-organizer-dock');
+      const rightGutter=show||workspaceDock?0:innerWidth<=700?8:20;
+      const usableWidth=Math.max(1,stage.clientWidth-leftGutter-rightGutter);
+      const scale=Math.max(.01,Math.min(usableWidth/1920,Math.max(1,stage.clientHeight-safeTop-safeBottom)/1080));
       // Native scroll distances stay in viewport pixels. Only the content is
       // scaled; scaling the scrollport would slow wheel input and its fade.
-      const contentLeft=(stage.clientWidth-1920*scale)/2+112*scale;
+      const contentLeft=leftGutter+(usableWidth-1920*scale)/2+112*scale;
       const contentTop=safeTop+(stage.clientHeight-safeTop-safeBottom-1080*scale)/2+120*scale;
       root.style.setProperty('--gd-scroll-height',stage.clientHeight+'px');
+      root.style.setProperty('--gd-scroll-width',stage.clientWidth+'px');
       root.style.setProperty('--gd-content-left',contentLeft+'px');
       root.style.setProperty('--gd-content-top',contentTop+'px');
       root.style.setProperty('--gd-view-scale',String(scale));
@@ -371,7 +378,7 @@
     window.addEventListener('load',()=>{applyOrder(currentId);fit();});
     document.fonts?.ready.then(scheduleFit);
     setNav(nav);applySettings();applyOrder();editorMode();syncDirty();syncSelection();reflectIdentity();
-    window.SalesKitUI={version:'shell-v17-preview',fit,closeScreen,closeWindow,syncToolbarLayer,exportDocument,openOrganizer,closeOrganizer,journalSnapshot,journalPending:()=>preparation.filter(p=>reviewState(p)==='pending').length,decidePreparation,setOrder:next=>{if(!Array.isArray(next)||!next.length||new Set(next).size!==next.length||next.some(id=>!byId.has(id)))throw Error('Invalid slide order');setOrder(next);},getState:()=>({...snapshot(),all:all.slice(),history:clone(history),version,changes:diffChanges(),current:current()?.dataset.skId,dirty:syncDirty()}),reset:resetOpened};
+    window.SalesKitUI={version:'shell-v18.2',fit,closeScreen,closeWindow,syncToolbarLayer,exportDocument,openOrganizer,closeOrganizer,journalSnapshot,journalPending:()=>preparation.filter(p=>reviewState(p)==='pending').length,proofreadingStatus:()=>proofreadingStatus,decidePreparation,setTheme:theme=>{if(!(meta.themes||['dark']).includes(theme))throw Error(`Theme ${theme} is not available`);settings.theme=theme;applySettings();},setOrder:next=>{if(!Array.isArray(next)||!next.length||new Set(next).size!==next.length||next.some(id=>!byId.has(id)))throw Error('Invalid slide order');setOrder(next);},getState:()=>({...snapshot(),all:all.slice(),history:clone(history),version,changes:diffChanges(),current:current()?.dataset.skId,dirty:syncDirty()}),reset:resetOpened};
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();

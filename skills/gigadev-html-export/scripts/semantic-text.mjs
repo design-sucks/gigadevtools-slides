@@ -69,7 +69,9 @@ export function installSemanticText(){
   const sign=root.nodeType===1?prefix(root):null;
   if(sign){const st=style(element,sign.style),margin=number(sign.style.marginRight);const before=[{text:sign.text,...st}];if(margin)before.push({text:' ',...st,spacing:margin-metrics(st).space});runs.unshift(...before);}
   const fonts=runs.filter(r=>r.text.trim()),maxFont=Math.max(...fonts.map(r=>r.size)),naturalHeight=Math.max(...fonts.map(r=>metrics(r).ascent+metrics(r).descent));
-  const deltas=visible.slice(1).map((l,i)=>l.baseline-visible[i].baseline),pitch=deltas.length?deltas[0]:naturalHeight;
+  const deltas=visible.slice(1).map((l,i)=>l.baseline-visible[i].baseline);
+  const declaredPitch=cs.lineHeight==='normal'?NaN:number(cs.lineHeight);
+  const pitch=Number.isFinite(declaredPitch)&&declaredPitch>0?declaredPitch:(deltas.length?deltas[0]:naturalHeight);
   const irregular=deltas.some(d=>Math.abs(d-pitch)>1.6);
   // Office treats nonzero rPr.baseline as sub/superscript and shrinks glyphs.
   // Extra CSS line gaps therefore become paragraph spacing inside the same textbox.

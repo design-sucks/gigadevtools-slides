@@ -35,7 +35,7 @@ Example prompts:
 
 [Open the live shell demo](https://design-sucks.github.io/gigadevtools-slides/) or download examples/shell-demo/index.html and open it locally. It is one file with embedded fonts/graphics. The demo starts at **v01**; saving proposes **v02**. Slide 03 explains the hotkeys, including **N** for the slide list and **M** for motion. HID clickers emitting PageUp/PageDown or arrows use the navigation path; hardware compatibility is not claimed for every remote.
 
-The example teaches the shell. A source-to-result case study will be added after a separate user-provided test; it is not fabricated from this tutorial deck.
+The example teaches the shell. A separate private PPTX case has been tested locally; its content is not included in this repository. New slide design still needs visual review.
 
 ## Corporate font scope
 
@@ -44,6 +44,8 @@ The example teaches the shell. A source-to-result case study will be added after
 This public pilot targets a company workflow whose publisher reports font rights. It is not a general license grant for SB Sans. The OTF files and embedded copies are excluded from MIT. Check [third-party notices](THIRD_PARTY_NOTICES.md) before using or redistributing them. An independently reviewed open-font profile is planned for broader use.
 
 ## What is verified
+
+Generated slide design still needs visual review: text density, long lines and awkward wrapping are known weaknesses. The reference pack and passing geometry checks do not guarantee polished typography. [Current text-layout review](skills/gigadev-html-maker/references/text-layout.md).
 
 The accepted shell was checked in Chrome on Mac: 13 slides, both themes, preserved content anchors, 208 settled visibility states with motion on/off, text edit/undo, save/reopen and 16:9 show/export-adapter geometry. Package versions and inherited evidence are described in [testing](docs/testing.md).
 
@@ -59,3 +61,5 @@ python3 scripts/package_release.py
 ```
 
 See [contributing](CONTRIBUTING.md), [release process](docs/release-process.md), [compatibility](docs/compatibility.md) and [changelog](CHANGELOG.md). Versioned ZIPs are generated from one repository state; local runtimes, caches and client presentations are excluded.
+
+Composition references 2.0.0: 24 accepted editable examples for Maker (v06 review). Shared geometry and type hierarchy; input palette and graphics take precedence. [Selection and updates](skills/gigadev-html-maker/references/reference-pack.md). Legacy renderer 1.0.0 remains for pinned projects.

@@ -7,7 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
 const here=path.dirname(fileURLToPath(import.meta.url)),root=path.dirname(here),args=process.argv.slice(2);
 const value=n=>{const i=args.indexOf(n);return i<0?undefined:args[i+1]};
-if(args.includes('--help')){console.log('node scripts/run.mjs --source deck.html --out NEW_DIRECTORY [--format pptx|pdf|both] [--groups auto|profile.json] [--inspect] [--cache-dir DIRECTORY] [--no-cache] [--no-slide-cache]\nnode scripts/run.mjs --doctor [--format pdf] [--pdf-mode raster]\nnode scripts/run.mjs --compare --source EXPORT_DIR --powerpoint-pdf proof.pdf --out REVIEW_DIR [--only-outliers]\nOptional host runtime config: --runtime config.json (or runtime.local.json beside SKILL.md).');process.exit(0);}
+if(args.includes('--help')){console.log('node scripts/run.mjs --source deck.html --out NEW_DIRECTORY [--format pptx|pdf|both] [--theme current|primary|dark|light] [--groups auto|profile.json] [--inspect] [--cache-dir DIRECTORY] [--no-cache] [--no-slide-cache]\nnode scripts/run.mjs --doctor [--format pdf] [--pdf-mode raster]\nnode scripts/run.mjs --compare --source EXPORT_DIR --powerpoint-pdf proof.pdf --out REVIEW_DIR [--only-outliers]\nOptional host runtime config: --runtime config.json (or runtime.local.json beside SKILL.md).');process.exit(0);}
 const configFile=value('--runtime')||path.join(root,'runtime.local.json');
 const config=fs.existsSync(configFile)?JSON.parse(fs.readFileSync(configFile,'utf8')):{};
 const runtime=path.join(os.homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies');

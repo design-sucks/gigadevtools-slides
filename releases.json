@@ -1,14 +1,14 @@
 {
-  "release": "v0.1.0-pilot.1",
+  "release": "v0.5.1-pilot.1",
   "channel": "corporate-pilot",
   "skills": {
-    "gigadev-html-maker": "0.17.4",
-    "gigadev-html-export": "0.8.3"
+    "gigadev-html-maker": "0.21.1",
+    "gigadev-html-export": "0.9.1"
   },
   "demo": {
     "version": 1,
     "nextSavedVersion": 2,
-    "shell": "v17.2",
+    "shell": "v18.2",
     "path": "examples/shell-demo/index.html"
   },
   "fonts": {
@@ -16,6 +16,9 @@
     "rightsBasis": "user reports company rights; no general third-party font license grant",
     "mitIncludesFonts": false
   },
-  "newCaseStudy": "awaiting separate user material and test",
-  "releaseState": "prerelease"
+  "newCaseStudy": "GLM/DeepSeek/Qwen source-style and all-format retest; private case content not included in public package",
+  "releaseState": "prerelease",
+  "runtimeBaseline": "baseline-v18_2.json",
+  "compositionLibrary": "2.0.0",
+  "compositionRenderer": "1.0.0 (legacy compatibility)"
 }

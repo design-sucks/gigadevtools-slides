@@ -30,7 +30,8 @@ def check():
     deck = json.loads((ROOT/'examples/shell-demo/project/deck.json').read_text())
     assert deck['version'] == release['demo']['version'] == 1 and len(deck['slides']) == 13
     assets = ROOT/'skills/gigadev-html-maker/assets'
-    baseline = json.loads((assets/'baseline-v17_2.json').read_text())['modules']
+    baseline_name = release.get('runtimeBaseline', 'baseline-v17_2.json')
+    baseline = json.loads((assets/baseline_name).read_text())['modules']
     for name, digest in baseline.items():
         assert hashlib.sha256((assets/name).read_bytes()).hexdigest() == digest, f'Runtime baseline changed: {name}; review intended changes'
     for face in json.loads((assets/'fonts/manifest.json').read_text())['faces']:
@@ -53,7 +54,7 @@ def check():
         if p.suffix in {'.js', '.mjs'}:
             subprocess.run(['node', '--check', str(p)], check=True, capture_output=True)
     assert (ROOT/'docs/index.html').read_bytes() == (ROOT/'examples/shell-demo/index.html').read_bytes()
-    print(json.dumps({'status':'pass', 'release':release['release'], 'sourceFiles':len(files), 'runtime':'unchanged v17.2', 'fontScope':'third-party corporate pilot, not MIT'}))
+    print(json.dumps({'status':'pass', 'release':release['release'], 'sourceFiles':len(files), 'runtimeBaseline':baseline_name, 'fontScope':'third-party corporate pilot, not MIT'}))
     return files
 
 if __name__ == '__main__':

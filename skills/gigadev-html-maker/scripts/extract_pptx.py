@@ -4,11 +4,13 @@ from zipfile import ZipFile
 from xml.etree import ElementTree as E
 from collections import Counter
 import argparse, hashlib, json, posixpath, re, mimetypes
+from source_style import inventory as style_inventory
 
 NS={'p':'http://schemas.openxmlformats.org/presentationml/2006/main',
     'a':'http://schemas.openxmlformats.org/drawingml/2006/main',
     'r':'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
-    'c':'http://schemas.openxmlformats.org/drawingml/2006/chart'}
+    'c':'http://schemas.openxmlformats.org/drawingml/2006/chart',
+    'asvg':'http://schemas.microsoft.com/office/drawing/2016/SVG/main'}
 def text(node):return ''.join(e.text or '' for e in node.findall('.//a:t',NS))
 def extract(source,out):
  source=Path(source);out=Path(out)
@@ -35,6 +37,14 @@ def extract(source,out):
   parts=[pr[e.get('{'+NS['r']+'}id')]['target'] for e in pres.findall('p:sldIdLst/p:sldId',NS)]
   for number,part in enumerate(parts,1):
    tree=xml(part);rr=rels(part);seen=set();sid=f's{number}';blocks=[];meta=[]
+   source_bg=tree.find('p:cSld/p:bg',NS);background_evidence=None
+   if source_bg is not None:
+    evidence={'kind':'native-background','xml':E.tostring(source_bg,encoding='unicode')}
+    blip=source_bg.find('.//a:blip',NS)
+    if blip is not None:
+     rid=blip.get('{'+NS['r']+'}embed');rel=rr.get(rid,{})
+     if rel and not rel.get('external') and rel['target'] in z.namelist():evidence.update(asset=asset(rel['target']),relationshipId=rid)
+    background_evidence=evidence
    def paragraphs(node):
     result=[]
     for p in node.findall('.//a:p',NS):
@@ -65,7 +75,8 @@ def extract(source,out):
      if kind in ['nvGrpSpPr','grpSpPr']:continue
      nv=node.find('.//p:cNvPr',NS);oid=(nv.get('id') if nv is not None else str(len(blocks)+1));bid=f'{sid}-o{oid}'
      item={'id':bid,'source':{'slide':number,'part':part,'objectId':oid},'name':nv.get('name','') if nv is not None else kind,'group':group}
-     xf=node.find('.//a:xfrm',NS)
+     # Transform ownership differs for graphic frames and drawing shapes.
+     xf=node.find('p:xfrm',NS) if kind=='graphicFrame' else node.find('p:grpSpPr/a:xfrm',NS) if kind=='grpSp' else node.find('p:spPr/a:xfrm',NS)
      if xf is not None:item['transform']={'attributes':xf.attrib,'children':[{e.tag.rsplit('}',1)[-1]:e.attrib} for e in xf]}
      if kind=='grpSp':
       item['kind']='group';blocks.append(item);walk(node,bid);continue
@@ -87,10 +98,21 @@ def extract(source,out):
       blocks.append(item);continue
      if kind=='pic':
       blip=node.find('.//a:blip',NS);rid=blip.get('{'+NS['r']+'}embed') if blip is not None else None;rel=rr.get(rid,{})
+      svg_blip=node.find('.//asvg:svgBlip',NS);svg_rid=svg_blip.get('{'+NS['r']+'}embed') if svg_blip is not None else None;svg_rel=rr.get(svg_rid,{})
       if rel and not rel.get('external'):
-       item.update(kind='image',asset=asset(rel['target']),alt=nv.get('descr','') if nv is not None else '')
+       fallback=asset(rel['target'])
+       preferred=asset(svg_rel['target']) if svg_rel and not svg_rel.get('external') and svg_rel['target'] in z.namelist() else fallback
+       item.update(kind='image',asset=preferred,alt=nv.get('descr','') if nv is not None else '')
+       if preferred!=fallback:item.update(fallbackAsset=fallback,assetPreference='svg',assetProvenance={'preferredRelationship':svg_rid,'fallbackRelationship':rid})
        crop=node.find('.//a:srcRect',NS)
        if crop is not None:item['crop']=crop.attrib
+       if xf is not None:
+        off=xf.find('a:off',NS);ext=xf.find('a:ext',NS)
+        if off is not None and ext is not None:
+         geometry={'xEMU':int(off.get('x','0')),'yEMU':int(off.get('y','0')),'widthEMU':int(ext.get('cx','0')),'heightEMU':int(ext.get('cy','0'))}
+         item['rawGeometryEMU']=geometry
+         if geometry=={'xEMU':0,'yEMU':0,'widthEMU':source_size['widthEMU'],'heightEMU':source_size['heightEMU']}:
+          item['backgroundCandidate']=True;warnings.append({'slide':number,'object':bid,'code':'background-candidate','message':'Full-slide-sized picture; review before using as slide background'})
        if Path(item['asset']).suffix in ['.emf','.wmf','.tif','.tiff']:warnings.append({'slide':number,'object':bid,'code':'browser-image-adapter','asset':item['asset']})
       else:item.update(kind='unsupported',reason='external or missing image')
       blocks.append(item);continue
@@ -118,13 +140,16 @@ def extract(source,out):
     if b['kind']=='unsupported':warnings.append({'slide':number,'object':b['id'],'code':'unsupported-object','reason':b['reason']})
    # Audit visible XML strings without trusting the inferred semantic roles.
    source_strings=Counter(t.text or '' for t in tree.findall('.//a:t',NS));assert all(id(t) in seen or any(b.get('review') and b['paragraphs'][0]['text']==t.text for b in blocks) for t in tree.findall('.//a:t',NS))
-   slides.append({'id':sid,'label':title,'title':title,'sourceNumber':number,'section':'','topic':title,'header':'full','blocks':blocks,'metadata':meta,'notes':notes,'sourceTextStrings':sum(source_strings.values())})
+   record={'id':sid,'label':title,'title':title,'sourceNumber':number,'section':'','topic':title,'header':'full','blocks':blocks,'metadata':meta,'notes':notes,'sourceTextStrings':sum(source_strings.values())}
+   if background_evidence is not None:record['sourceBackground']=background_evidence
+   slides.append(record)
   themes=[]
   for part in z.namelist():
    if re.fullmatch(r'ppt/theme/theme\d+\.xml',part):
     tr=xml(part);themes.append({'part':part,'colors':[{e.tag.rsplit('}',1)[-1]:[c.attrib for c in e]} for e in tr.findall('.//a:clrScheme/*',NS)],'fonts':[e.attrib for e in tr.findall('.//a:fontScheme//a:latin',NS)]})
  result={'schema':1,'title':source.stem,'version':1,'source':{'name':source.name,'sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'canvas':source_size},'order':[s['id'] for s in slides],'slides':slides,'assets':list(assets.values()),'sourceThemes':themes,'warnings':warnings}
  (out/'deck.json').write_text(json.dumps(result,ensure_ascii=False,indent=2));(out/'inventory.json').write_text(json.dumps({'slides':len(slides),'objects':dict(Counter(b['kind'] for s in slides for b in s['blocks'])),'assets':len(assets),'warnings':warnings},ensure_ascii=False,indent=2))
+ (out/'style-inventory.json').write_text(json.dumps(style_inventory(source,result),ensure_ascii=False,indent=2))
  print(json.dumps({'status':'extracted','slides':len(slides),'assets':len(assets),'reviewItems':len(warnings),'project':str((out/'deck.json').resolve())},ensure_ascii=False))
  return result
 if __name__=='__main__':

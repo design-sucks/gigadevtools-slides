@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "title": "Reusable Maker archetypes",
+  "version": 1,
+  "order": [
+    "s1",
+    "s2",
+    "s3",
+    "s4",
+    "s5",
+    "s6"
+  ],
+  "slides": [
+    {
+      "id": "s1",
+      "label": "Cover",
+      "topic": "Cover",
+      "sourceNumber": 1,
+      "header": "none",
+      "html": "<article class=\"gd-base\"><p class=\"gd-kicker\">A concise framing line</p><h1>One clear idea<br>with room to breathe</h1><p>Supporting context belongs here.</p></article>"
+    },
+    {
+      "id": "s2",
+      "label": "Split",
+      "topic": "Split",
+      "sourceNumber": 2,
+      "header": "full",
+      "html": "<article class=\"gd-base\"><h1>Explain the decision</h1><div class=\"gd-split\"><p>One concise framing paragraph.</p><div class=\"gd-rows\"><div class=\"gd-row\"><b class=\"gd-row__index\">01</b><p>First supporting point</p></div><div class=\"gd-row\"><b class=\"gd-row__index\">02</b><p>Second supporting point</p></div></div></div></article>"
+    },
+    {
+      "id": "s3",
+      "label": "Sequence",
+      "topic": "Sequence",
+      "sourceNumber": 3,
+      "header": "full",
+      "html": "<article class=\"gd-base\"><h1>A sequence of steps</h1><div class=\"gd-rows\"><div class=\"gd-row\"><b class=\"gd-row__index\">01</b><p>First step and its purpose</p></div><div class=\"gd-row\"><b class=\"gd-row__index\">02</b><p>Second step and its purpose</p></div><div class=\"gd-row\"><b class=\"gd-row__index\">03</b><p>Third step and its purpose</p></div></div></article>"
+    },
+    {
+      "id": "s4",
+      "label": "Matrix",
+      "topic": "Matrix",
+      "sourceNumber": 4,
+      "header": "full",
+      "html": "<article class=\"gd-base\"><h1>Compare the facts</h1><table class=\"gd-matrix\"><thead><tr><th>Measure</th><th>Option A</th><th>Option B</th></tr></thead><tbody><tr><th>First measure</th><td>Value</td><td>Value</td></tr><tr><th>Second measure</th><td>Value</td><td>Value</td></tr></tbody></table></article>"
+    },
+    {
+      "id": "s5",
+      "label": "Decision",
+      "topic": "Decision",
+      "sourceNumber": 5,
+      "header": "full",
+      "html": "<article class=\"gd-base\"><p class=\"gd-kicker\">Decision frame</p><h1>State the choice<br>in plain language</h1><p>Keep evidence and recommendation distinct.</p></article>"
+    },
+    {
+      "id": "s6",
+      "label": "Sources",
+      "topic": "Sources",
+      "sourceNumber": 6,
+      "header": "full",
+      "html": "<article class=\"gd-base\"><h1>Evidence and references</h1><div class=\"gd-rows\"><div class=\"gd-row\"><b class=\"gd-row__index\">01</b><p>Source title and short relevance note</p></div><div class=\"gd-row\"><b class=\"gd-row__index\">02</b><p>Source title and short relevance note</p></div></div></article>"
+    }
+  ]
+}

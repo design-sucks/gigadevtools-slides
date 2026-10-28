@@ -22,18 +22,20 @@
  }
 
  root.setAttribute('data-sk-motion-ready','');
- const isBackground=el=>el.classList.contains('sk-cover-motion');
+ const isBackground=el=>el.classList.contains('sk-cover-motion')||el.classList.contains('gd-slide-background');
+ const isDeckBackground=el=>el.classList.contains('gd-slide-background');
  function groups(slide){
   const inner=slide?.querySelector('.slide-inner');if(!inner)return [];
   if(slide.hasAttribute('data-sk-live-cover'))return [inner,slide.querySelector('.sk-cover-motion')].filter(Boolean);
   const visibleChildren=parent=>[...parent.children].filter(el=>!el.hidden&&!el.matches('style,script')&&el.getBoundingClientRect().height>0&&getComputedStyle(el).position!=='absolute');
   const nodes=[];
+  const background=inner.querySelector(':scope>.gd-slide-background');if(background)nodes.push(background);
   for(const el of visibleChildren(inner.querySelector(':scope>.gd-content')||inner)){
    const split=el.matches('.grid3,.fc,.m-grid,.pricing,.surfaces,.eff-hero,.effect,.profile-cards,.sk-analytics-metrics,.probs,.c-contact-glass');
    const children=split?visibleChildren(el):[];
    nodes.push(...(children.length>1&&children.length<=8?children:[el]));
   }
-  const background=slide.querySelector('.sk-cover-motion');if(background)nodes.push(background);
+  const legacyBackground=slide.querySelector('.sk-cover-motion');if(legacyBackground&&!nodes.includes(legacyBackground))nodes.push(legacyBackground);
   return nodes;
  }
  function state(el){const c=getComputedStyle(el);return {opacity:c.opacity,filter:c.filter,translate:c.translate};}
@@ -53,6 +55,7 @@
   if(!enabled()){phase='idle';return;}
   Promise.all(nodes.map((el,i)=>{
    const {now,base}=states.get(el),text=el.matches('h1,h2,.lead,.eyebrow,.hero-tag');
+   if(isDeckBackground(el))return animate(el,[fromCurrent?now:{opacity:0,filter:'blur(14px)'},{opacity:base.opacity,filter:base.filter}],base,root.dataset.skTheme==='light'?1000:1300,0,'cubic-bezier(.42,0,.24,1)');
    if(isBackground(el))return animate(el,[fromCurrent?now:{opacity:0},{opacity:base.opacity}],base,root.dataset.skTheme==='light'?1000:1300,0,'cubic-bezier(.42,0,.24,1)');
    // One continuous curve, with >90% overlap between the content groups.
    const cover=slide.hasAttribute('data-sk-live-cover'),shift=dir*(cover?16:text?16:12),blur=cover||text?12:9;
@@ -82,8 +85,9 @@
   const nodes=scrolled?[inner,visible.querySelector('.sk-cover-motion')].filter(Boolean):groups(visible);
   const states=nodes.map(el=>({el,now:state(el),base:owned.get(el)?.base||scrollOwned.get(el)?.base||state(el)}));
   ++serial;cancel(root.hasAttribute('data-gd-compact'));phase='exit';window.lockScroll=true;const token=serial;
-  Promise.all(states.map(({el,now,base})=>isBackground(el)
-   ?animate(el,[{opacity:now.opacity},{opacity:0}],base,520,0,'cubic-bezier(.4,0,.8,.6)',true)
+  Promise.all(states.map(({el,now,base})=>isDeckBackground(el)
+   ?animate(el,[now,{opacity:0,filter:'blur(14px)'}],base,520,0,'cubic-bezier(.4,0,.8,.6)',true)
+   :isBackground(el)?animate(el,[{opacity:now.opacity},{opacity:0}],base,520,0,'cubic-bezier(.4,0,.8,.6)',true)
    :animate(el,[now,hidden(base,-direction*14,10,el)],base,visible.hasAttribute('data-sk-live-cover')?340:280,0,'cubic-bezier(.4,0,.8,.5)',true)))
    .then(()=>{if(serial===token)showTarget();});
  }

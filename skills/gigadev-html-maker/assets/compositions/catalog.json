@@ -1,0 +1,798 @@
+{
+  "schema": 1,
+  "version": "1.0.0",
+  "canvas": [
+    1920,
+    1080
+  ],
+  "contentFrame": [
+    1696,
+    874
+  ],
+  "aliases": {
+    "next-step": "cover"
+  },
+  "selection": "Choose by rhetorical purpose, content volume and evidence type. Source style wins; this library supplies composition only.",
+  "compositions": [
+    {
+      "id": "cover",
+      "version": "1.0.0",
+      "name": "Обложка с крупным тезисом",
+      "useWhen": "Открыть историю и назвать её главный предмет.",
+      "avoidWhen": "Не использовать для длинного объяснения, списка фактов или таблицы.",
+      "intents": [
+        "opening",
+        "closing"
+      ],
+      "required": [
+        "title"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {},
+      "itemBodyMax": 180,
+      "example": "examples/cover.json",
+      "fragment": "templates/cover.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "B:1",
+        "A:39"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer",
+        "detail",
+        "image",
+        "imageAlt",
+        "actions"
+      ],
+      "preview": "previews/cover.jpg"
+    },
+    {
+      "id": "divider",
+      "version": "1.0.0",
+      "name": "Разделитель главы",
+      "useWhen": "Переключить тему, дать аудитории паузу.",
+      "avoidWhen": "Не использовать как замену содержательному слайду; здесь нужен один короткий переход.",
+      "intents": [
+        "section",
+        "pause"
+      ],
+      "required": [
+        "title"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {},
+      "itemBodyMax": 180,
+      "example": "examples/divider.json",
+      "fragment": "templates/divider.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "B:3"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer",
+        "detail",
+        "image",
+        "imageAlt",
+        "actions"
+      ],
+      "preview": "previews/divider.jpg"
+    },
+    {
+      "id": "agenda",
+      "version": "1.0.0",
+      "name": "Маршрут рассказа",
+      "useWhen": "Показать состав доклада и логику разделов.",
+      "avoidWhen": "Не использовать для подробного доказательства каждого пункта; это маршрут, а не шесть статей.",
+      "intents": [
+        "agenda",
+        "overview"
+      ],
+      "required": [
+        "title",
+        "items"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {
+        "items": [
+          4,
+          6
+        ]
+      },
+      "itemBodyMax": 100,
+      "example": "examples/agenda.json",
+      "fragment": "templates/agenda.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "B:2"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer"
+      ],
+      "preview": "previews/agenda.jpg"
+    },
+    {
+      "id": "thesis-evidence",
+      "version": "1.0.0",
+      "name": "Тезис и доказательства",
+      "useWhen": "Объяснить изменение, пользу или позицию.",
+      "avoidWhen": "Не использовать для равноправных вариантов без общего тезиса или для более четырёх оснований.",
+      "intents": [
+        "argument",
+        "explain"
+      ],
+      "required": [
+        "title",
+        "thesis",
+        "items"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {
+        "items": [
+          2,
+          4
+        ]
+      },
+      "itemBodyMax": 180,
+      "example": "examples/thesis-evidence.json",
+      "fragment": "templates/thesis-evidence.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "A:3",
+        "A:16"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer",
+        "detail"
+      ],
+      "preview": "previews/thesis-evidence.jpg"
+    },
+    {
+      "id": "role-process",
+      "version": "1.0.0",
+      "name": "Роли и процесс",
+      "useWhen": "Показать, кто за что отвечает.",
+      "avoidWhen": "Не использовать для ветвящегося процесса, более трёх ролей или технической схемы.",
+      "intents": [
+        "roles",
+        "process"
+      ],
+      "required": [
+        "title",
+        "items"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {
+        "items": [
+          3,
+          3
+        ]
+      },
+      "itemBodyMax": 140,
+      "example": "examples/role-process.json",
+      "fragment": "templates/role-process.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "A:5"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer",
+        "detail"
+      ],
+      "preview": "previews/role-process.jpg"
+    },
+    {
+      "id": "problem-cards",
+      "version": "1.0.0",
+      "name": "Набор проблем или критериев",
+      "useWhen": "Сопоставить несколько однородных пунктов.",
+      "avoidWhen": "Не использовать для непрерывного рассказа или взаимосвязей, которые карточки скрывают.",
+      "intents": [
+        "criteria",
+        "problems"
+      ],
+      "required": [
+        "title",
+        "items"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {
+        "items": [
+          3,
+          6
+        ]
+      },
+      "itemBodyMax": 100,
+      "example": "examples/problem-cards.json",
+      "fragment": "templates/problem-cards.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "A:9"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer",
+        "highlight"
+      ],
+      "preview": "previews/problem-cards.jpg"
+    },
+    {
+      "id": "architecture",
+      "version": "1.0.0",
+      "name": "Состав системы",
+      "useWhen": "Объяснить устройство решения.",
+      "avoidWhen": "Не использовать для сложного графа зависимостей: здесь две части и один общий слой.",
+      "intents": [
+        "system",
+        "architecture"
+      ],
+      "required": [
+        "title",
+        "items",
+        "core"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {
+        "items": [
+          2,
+          2
+        ]
+      },
+      "itemBodyMax": 120,
+      "example": "examples/architecture.json",
+      "fragment": "templates/architecture.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "B:32"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer",
+        "detail"
+      ],
+      "preview": "previews/architecture.jpg"
+    },
+    {
+      "id": "feature-map",
+      "version": "1.0.0",
+      "name": "Группы возможностей",
+      "useWhen": "Показать направления и состав предложения.",
+      "avoidWhen": "Не использовать, если все пять элементов равнозначны; первый блок заведомо главнее.",
+      "intents": [
+        "capabilities",
+        "overview"
+      ],
+      "required": [
+        "title",
+        "items"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {
+        "items": [
+          5,
+          5
+        ]
+      },
+      "itemBodyMax": 110,
+      "example": "examples/feature-map.json",
+      "fragment": "templates/feature-map.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "B:44"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer"
+      ],
+      "preview": "previews/feature-map.jpg"
+    },
+    {
+      "id": "comparison",
+      "version": "1.0.0",
+      "name": "Сравнение вариантов",
+      "useWhen": "Помочь принять решение.",
+      "avoidWhen": "Не использовать без общих критериев; слишком длинные ячейки требуют иной вёрстки.",
+      "intents": [
+        "compare",
+        "decision"
+      ],
+      "required": [
+        "title",
+        "columns",
+        "rows"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {
+        "columns": [
+          3,
+          5
+        ],
+        "rows": [
+          3,
+          6
+        ]
+      },
+      "itemBodyMax": 180,
+      "example": "examples/comparison.json",
+      "fragment": "templates/comparison.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "A:17"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer",
+        "tableSourceId",
+        "highlightColumn"
+      ],
+      "preview": "previews/comparison.jpg"
+    },
+    {
+      "id": "metrics",
+      "version": "1.0.0",
+      "name": "Крупные показатели",
+      "useWhen": "Показать масштаб и результат.",
+      "avoidWhen": "Не использовать для произвольных крупных чисел без единиц, базы и смыслового пояснения.",
+      "intents": [
+        "results",
+        "metrics"
+      ],
+      "required": [
+        "title",
+        "items"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {
+        "items": [
+          3,
+          3
+        ],
+        "secondary": [
+          0,
+          4
+        ]
+      },
+      "itemBodyMax": 180,
+      "example": "examples/metrics.json",
+      "fragment": "templates/metrics.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "A:20"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer",
+        "secondary"
+      ],
+      "preview": "previews/metrics.jpg"
+    },
+    {
+      "id": "trend",
+      "version": "1.0.0",
+      "name": "Динамика и вывод",
+      "useWhen": "Объяснить изменение во времени.",
+      "avoidWhen": "Не использовать для отрицательных значений, нескольких рядов или нерегулярной временной шкалы.",
+      "intents": [
+        "trend",
+        "chart"
+      ],
+      "required": [
+        "title",
+        "values",
+        "labels",
+        "metric",
+        "takeaway"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {
+        "values": [
+          4,
+          8
+        ],
+        "labels": [
+          4,
+          8
+        ]
+      },
+      "itemBodyMax": 180,
+      "example": "examples/trend.json",
+      "fragment": "templates/trend.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "B:23",
+        "A:21"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer",
+        "detail"
+      ],
+      "preview": "previews/trend.jpg"
+    },
+    {
+      "id": "progress",
+      "version": "1.0.0",
+      "name": "Статус и готовность",
+      "useWhen": "Показать прогресс выполнения.",
+      "avoidWhen": "Не использовать для хронологии или причинно-следственной цепочки; это два текущих списка статусов.",
+      "intents": [
+        "status",
+        "progress"
+      ],
+      "required": [
+        "title",
+        "items"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {
+        "items": [
+          2,
+          2
+        ]
+      },
+      "itemBodyMax": 180,
+      "example": "examples/progress.json",
+      "fragment": "templates/progress.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "B:19"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer"
+      ],
+      "preview": "previews/progress.jpg"
+    },
+    {
+      "id": "roadmap",
+      "version": "1.0.0",
+      "name": "Дорожная карта",
+      "useWhen": "Показать будущую последовательность.",
+      "avoidWhen": "Не использовать как диаграмму точных длительностей: колонки означают периоды, не масштаб времени.",
+      "intents": [
+        "plan",
+        "roadmap"
+      ],
+      "required": [
+        "title",
+        "items",
+        "periods"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {
+        "items": [
+          2,
+          3
+        ],
+        "periods": [
+          3,
+          3
+        ]
+      },
+      "itemBodyMax": 140,
+      "example": "examples/roadmap.json",
+      "fragment": "templates/roadmap.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "B:92"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer"
+      ],
+      "preview": "previews/roadmap.jpg"
+    },
+    {
+      "id": "maturity",
+      "version": "1.0.0",
+      "name": "Ступени развития",
+      "useWhen": "Объяснить зрелость или развитие навыка.",
+      "avoidWhen": "Не использовать для неупорядоченных вариантов или фактического рейтинга без общей шкалы.",
+      "intents": [
+        "levels",
+        "maturity"
+      ],
+      "required": [
+        "title",
+        "items"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {
+        "items": [
+          4,
+          6
+        ]
+      },
+      "itemBodyMax": 180,
+      "example": "examples/maturity.json",
+      "fragment": "templates/maturity.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "A:34"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer"
+      ],
+      "preview": "previews/maturity.jpg"
+    },
+    {
+      "id": "offer",
+      "version": "1.0.0",
+      "name": "Варианты предложения",
+      "useWhen": "Выбрать формат использования или поставки.",
+      "avoidWhen": "Не использовать для трёх и более пакетов или несопоставимых по структуре предложений.",
+      "intents": [
+        "packages",
+        "choice"
+      ],
+      "required": [
+        "title",
+        "items"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {
+        "items": [
+          2,
+          2
+        ]
+      },
+      "itemBodyMax": 110,
+      "example": "examples/offer.json",
+      "fragment": "templates/offer.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "A:22"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer",
+        "detail"
+      ],
+      "preview": "previews/offer.jpg"
+    },
+    {
+      "id": "demo",
+      "version": "1.0.0",
+      "name": "Продуктовый экран с пояснением",
+      "useWhen": "Продемонстрировать сценарий, а не перечислять функции.",
+      "avoidWhen": "Не использовать для полноэкранного фонового изображения; этот слот показывает интерфейс целиком.",
+      "intents": [
+        "screen",
+        "demo"
+      ],
+      "required": [
+        "title",
+        "image",
+        "metric",
+        "takeaway"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {},
+      "itemBodyMax": 180,
+      "example": "examples/demo.json",
+      "fragment": "templates/demo.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "B:45"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer",
+        "imageAlt",
+        "notes"
+      ],
+      "preview": "previews/demo.jpg"
+    },
+    {
+      "id": "gallery",
+      "version": "1.0.0",
+      "name": "Изображения и короткие подписи",
+      "useWhen": "Показать примеры, события или результаты визуально.",
+      "avoidWhen": "Не использовать для обязательного чтения мелкого текста внутри трёх изображений.",
+      "intents": [
+        "visual-evidence",
+        "gallery"
+      ],
+      "required": [
+        "title",
+        "items"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {
+        "items": [
+          3,
+          3
+        ],
+        "metrics": [
+          0,
+          2
+        ]
+      },
+      "itemBodyMax": 180,
+      "example": "examples/gallery.json",
+      "fragment": "templates/gallery.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "B:71"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer",
+        "metrics"
+      ],
+      "preview": "previews/gallery.jpg"
+    },
+    {
+      "id": "scorecard",
+      "version": "1.0.0",
+      "name": "Оценка и объяснение",
+      "useWhen": "Объяснить качество нескольких сценариев.",
+      "avoidWhen": "Не использовать без объяснения шкалы и оснований оценки; не изображать вымышленные результаты.",
+      "intents": [
+        "diagnosis",
+        "scorecard"
+      ],
+      "required": [
+        "title",
+        "items"
+      ],
+      "limits": {
+        "title": 100,
+        "lead": 210,
+        "footer": 280
+      },
+      "collections": {
+        "items": [
+          2,
+          2
+        ]
+      },
+      "itemBodyMax": 100,
+      "example": "examples/scorecard.json",
+      "fragment": "templates/scorecard.html",
+      "density": "regular",
+      "sourceGeometry": [
+        "B:84"
+      ],
+      "status": "verified examples; new content requires rendered QA",
+      "optional": [
+        "sampleOnly",
+        "kicker",
+        "lead",
+        "footer"
+      ],
+      "preview": "previews/scorecard.jpg"
+    }
+  ],
+  "verification": {
+    "normalStates": 36,
+    "headingStressStates": 108,
+    "unevenTextStates": 12,
+    "realContentProbeSlides": 3,
+    "scope": "Chrome, static block bounds plus reviewed renders; not arbitrary content or PowerPoint approval"
+  }
+}

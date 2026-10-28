@@ -1,4 +1,4 @@
 interface:
   display_name: "GigaDevTools HTML Export"
   short_description: "HTML-презентации → редактируемый PPTX и PDF"
-  default_prompt: "Используй $gigadev-html-export: перенеси HTML-презентацию в редактируемый PPTX и PDF для просмотра, сохрани оформление и проверь результат."
+  default_prompt: "Используй $gigadev-html-export: уточни PDF для просмотра, редактируемый PPTX или оба формата, если выбор ещё не задан. Экспортируй одну выбранную тему, сохрани оформление и проверь результат."
