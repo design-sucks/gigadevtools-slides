@@ -2,7 +2,7 @@
 from pathlib import Path
 import hashlib, json, re, subprocess
 ROOT = Path(__file__).resolve().parents[1]
-TOP = {'README.md', 'README.ru.md', 'LICENSE', 'THIRD_PARTY_NOTICES.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'SECURITY.md', 'releases.json', '.gitignore', '.gitattributes', 'skills', 'examples', 'docs', 'scripts', 'tests', '.github'}
+TOP = {'README.md', 'README.ru.md', 'README.en.md', 'LICENSE', 'THIRD_PARTY_NOTICES.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'SECURITY.md', 'releases.json', '.gitignore', '.gitattributes', 'skills', 'examples', 'docs', 'scripts', 'tests', '.github'}
 SKIP = {'.git', 'node_modules', '__pycache__', '.venv', 'build', 'dist', '.cache'}
 FORBIDDEN = {'runtime.local.json', '.DS_Store', '.env'}
 

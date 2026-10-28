@@ -1,65 +1,50 @@
 # GigaDevTools Slides
 
-**Build editable HTML presentations. Export HTML decks to editable PowerPoint or viewing PDF.**
+**Редактируемые HTML-презентации и перенос HTML в PowerPoint/PDF.**
 
-A corporate pilot with two portable Agent Skills and an interactive, offline-ready example.
+Корпоративный пилот: два переносимых скилла и интерактивный пример оболочки.
 
-[Русский](README.ru.md) · [Try the demo](https://design-sucks.github.io/gigadevtools-slides/) · [Download packages](https://github.com/design-sucks/gigadevtools-slides/releases) · [Quick start](docs/quickstart.md)
+[English](README.en.md) · [Открыть демо](https://design-sucks.github.io/gigadevtools-slides/) · [Скачать пакеты](https://github.com/design-sucks/gigadevtools-slides/releases) · [Быстрый старт](docs/quickstart.md)
 
-![HTML Maker demo](examples/shell-demo/previews/cover.png)
+![Демо HTML Maker](examples/shell-demo/previews/cover.png)
 
-## Choose a skill
-
-| Skill | Use it for | Output |
+| Скилл | Задача | Результат |
 | --- | --- | --- |
-| [HTML Maker](skills/gigadev-html-maker/SKILL.md) | Turn PPTX or supplied content into a styled web deck | Editable standalone HTML |
-| [HTML Export](skills/gigadev-html-export/SKILL.md) | Convert a measured HTML presentation | Editable PPTX or viewing PDF |
+| [HTML Maker](skills/gigadev-html-maker/SKILL.md) | PPTX или содержание → веб-презентация | Один редактируемый HTML |
+| [HTML Export](skills/gigadev-html-export/SKILL.md) | HTML-презентация → другие форматы | Редактируемый PPTX или PDF для просмотра |
 
-The HTML shell includes native free scrolling, soft transitions, keyboard/clicker navigation, text editing and undo, slide organization, a change journal, version saves and deliberately prepared themes. Slide styling is separate from the UI shell. The editor edits text; it is not a drag-and-drop layout editor.
+В оболочке есть свободная прокрутка, мягкие переходы, навигация клавиатурой/кликером, редактор текста и undo, порядок слайдов, журнал, сохранение версий и подготовленные темы. Оформление слайдов отделено от интерфейса. Это редактор текста, а не свободное перетаскивание объектов.
 
-## Start in three steps
+## Начать за три шага
 
-1. Download a skill ZIP from Releases, or clone this repository.
-2. Put the corresponding skills folder in your agent client's skill directory. A client without skill registration can read SKILL.md and execute its scripts.
-3. Attach your source and a style reference, then invoke the appropriate skill. The agent needs filesystem and code execution; a text-only conversation cannot run the converter.
+1. Скачать ZIP нужного скилла из Releases или клонировать репозиторий.
+2. Поместить соответствующий каталог skills в каталог скиллов своего клиента. Если регистрации скиллов нет, агент может прочитать SKILL.md и запустить скрипты.
+3. Приложить материал и стилевой референс, вызвать $gigadev-html-maker либо $gigadev-html-export. Агенту нужны файлы и выполнение кода; обычный текстовый чат не выполнит конвертацию.
 
-Example prompts:
+Пример запроса: «Используй $gigadev-html-maker. Собери из приложенной презентации редактируемый офлайн-HTML по стилевому референсу. Сохрани все тексты и числа, используй готовую оболочку, начни с v01 и проверь каждый слайд в браузере».
 
-> Use $gigadev-html-maker. Turn the attached deck into an editable offline HTML presentation using the supplied style reference. Preserve all source text and numbers, use the bundled shell, and start the deck at v01. Check every slide in a browser.
+Для экспорта: «Используй $gigadev-html-export. Перенеси HTML в редактируемый PPTX, сохрани вёрстку, ссылки и шрифты. Укажи, что проверено в целевом PowerPoint».
 
-> Use $gigadev-html-export. Export the attached HTML as editable PPTX. Preserve layout, links and typography, and report what was verified in the target PowerPoint.
+[Установка и команды](docs/installation.md). После браузерных правок сохраняйте новую HTML-версию: именно она становится актуальным источником, а прежний deck.json автоматически не обновляется.
 
-[Installation](docs/installation.md) has the runtime setup and commands. Source files remain unchanged. After browser edits, save a new HTML version and use that file as the current source.
+## Пример
 
-## Try the example
+[Демо оболочки](https://design-sucks.github.io/gigadevtools-slides/) можно открыть онлайн или скачать examples/shell-demo/index.html для локального просмотра. Шрифты и графика внутри файла. Базовая версия — **v01**, следующее сохранение — **v02**. На слайде 03 есть хоткеи: **N** — список, **M** — анимация. Кликеры, отправляющие PageUp/PageDown или стрелки, используют тот же путь навигации; физически все модели пультов не проверялись.
 
-[Open the live shell demo](https://design-sucks.github.io/gigadevtools-slides/) or download examples/shell-demo/index.html and open it locally. It is one file with embedded fonts/graphics. The demo starts at **v01**; saving proposes **v02**. Slide 03 explains the hotkeys, including **N** for the slide list and **M** for motion. HID clickers emitting PageUp/PageDown or arrows use the navigation path; hardware compatibility is not claimed for every remote.
+Отдельный кейс на исходном PPTX протестирован локально; частный материал в репозиторий не включён. Демо показывает функции оболочки. Качество дизайна новых слайдов всё ещё требует ручной визуальной оценки.
 
-The example teaches the shell. A separate private PPTX case has been tested locally; its content is not included in this repository. New slide design still needs visual review.
+## Шрифты и лицензия
 
-## Corporate font scope
+**Наш код и документация — MIT. SB Sans — сторонние шрифтовые ресурсы с отдельными условиями.** Пилот предназначен для корпоративного сценария; публикующая сторона сообщает о правах компании. Это не выдаёт всем посетителям лицензию на шрифт. OTF и встроенные в HTML копии исключены из MIT. См. [условия сторонних ресурсов](THIRD_PARTY_NOTICES.md). Для более широкого использования планируется отдельный проверенный профиль с открытыми шрифтами.
 
-**Original code and documentation: MIT. SB Sans font assets: separate third-party terms.**
+## Проверки и ограничения
 
-This public pilot targets a company workflow whose publisher reports font rights. It is not a general license grant for SB Sans. The OTF files and embedded copies are excluded from MIT. Check [third-party notices](THIRD_PARTY_NOTICES.md) before using or redistributing them. An independently reviewed open-font profile is planned for broader use.
+Дизайн созданных слайдов пока требует визуальной доработки: плотность текста, длинные строки и неудачные переносы остаются слабыми местами. Набор эталонов и успешная проверка границ не гарантируют аккуратную типографику. [Как проверять текстовую вёрстку](skills/gigadev-html-maker/references/text-layout.md).
 
-## What is verified
+Принятая оболочка проверена в Chrome на Mac: 13 слайдов, обе темы, якоря контента, 208 остановочных состояний с анимацией/без неё, редактирование/undo, сохранение/повторное открытие, 16:9 в показе и экспортном адаптере. [Границы проверенного](docs/testing.md).
 
-Generated slide design still needs visual review: text density, long lines and awkward wrapping are known weaknesses. The reference pack and passing geometry checks do not guarantee polished typography. [Current text-layout review](skills/gigadev-html-maker/references/text-layout.md).
+Необычные PPTX-эффекты требуют адаптации или растрового представления. HTML-скриншот не подтверждает точность PPTX. Для выдачи PowerPoint нужна проверка в целевой программе; Windows, Safari и другие клиенты проверяются отдельно. Конвертер использует профили и не обещает одинаковый результат для произвольного HTML.
 
-The accepted shell was checked in Chrome on Mac: 13 slides, both themes, preserved content anchors, 208 settled visibility states with motion on/off, text edit/undo, save/reopen and 16:9 show/export-adapter geometry. Package versions and inherited evidence are described in [testing](docs/testing.md).
+[Как участвовать](CONTRIBUTING.md) · [Как выпускать обновления](docs/release-process.md) · [Совместимость](docs/compatibility.md) · [История](CHANGELOG.md).
 
-Arbitrary PPTX effects may need raster fallbacks or adaptation. Browser appearance does not prove PowerPoint fidelity. Real target PowerPoint review remains part of PPTX delivery; Windows, Safari and each new client require their own verification. The exporter is a profile-driven pipeline, not a universal arbitrary-HTML renderer.
-
-## Development
-
-```sh
-python3 scripts/check_release.py
-python3 skills/gigadev-html-maker/scripts/self_test.py
-python3 scripts/build_demo.py --check
-python3 scripts/package_release.py
-```
-
-See [contributing](CONTRIBUTING.md), [release process](docs/release-process.md), [compatibility](docs/compatibility.md) and [changelog](CHANGELOG.md). Versioned ZIPs are generated from one repository state; local runtimes, caches and client presentations are excluded.
-
-Composition references 2.0.0: 24 accepted editable examples for Maker (v06 review). Shared geometry and type hierarchy; input palette and graphics take precedence. [Selection and updates](skills/gigadev-html-maker/references/reference-pack.md). Legacy renderer 1.0.0 remains for pinned projects.
+Библиотека композиций 2.0.0: 24 утверждённых редактируемых эталона для Maker. Они задают сетку и типографическую иерархию; цвета и графика берутся из исходника или стилевого референса. [Выбор и обновление эталонов](skills/gigadev-html-maker/references/reference-pack.md). Прежний генератор 1.0.0 сохранён для совместимости с существующими проектами.

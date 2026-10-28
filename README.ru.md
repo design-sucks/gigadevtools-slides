@@ -4,7 +4,7 @@
 
 Корпоративный пилот: два переносимых скилла и интерактивный пример оболочки.
 
-[English](README.md) · [Открыть демо](https://design-sucks.github.io/gigadevtools-slides/) · [Скачать пакеты](https://github.com/design-sucks/gigadevtools-slides/releases) · [Быстрый старт](docs/quickstart.md)
+[English](README.en.md) · [Открыть демо](https://design-sucks.github.io/gigadevtools-slides/) · [Скачать пакеты](https://github.com/design-sucks/gigadevtools-slides/releases) · [Быстрый старт](docs/quickstart.md)
 
 ![Демо HTML Maker](examples/shell-demo/previews/cover.png)
 
@@ -47,4 +47,4 @@
 
 [Как участвовать](CONTRIBUTING.md) · [Как выпускать обновления](docs/release-process.md) · [Совместимость](docs/compatibility.md) · [История](CHANGELOG.md).
 
-Composition references 2.0.0: 24 accepted editable examples for Maker (v06 review). Shared geometry and type hierarchy; input palette and graphics take precedence. [Selection and updates](skills/gigadev-html-maker/references/reference-pack.md). Legacy renderer 1.0.0 remains for pinned projects.
+Библиотека композиций 2.0.0: 24 утверждённых редактируемых эталона для Maker. Они задают сетку и типографическую иерархию; цвета и графика берутся из исходника или стилевого референса. [Выбор и обновление эталонов](skills/gigadev-html-maker/references/reference-pack.md). Прежний генератор 1.0.0 сохранён для совместимости с существующими проектами.
