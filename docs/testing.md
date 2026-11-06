@@ -59,3 +59,5 @@ Source checks, release publishing and the 15-check shell regression passed. The 
 ## Prepared RC17 qualification
 
 See [release scope](release-v0.6.0-pilot.1.md). Source/metadata/font-baseline and package checks,12 journal string cases in both themes/views, real review and user-edit persistence/undo, refreshed public 13-slide demo with15 shell checks. This does not certify full original decks or new native export. Historical baselines remain unchanged; releases.json selects baseline-release-rc17.json.
+
+RC17 publication CI reproduced the exact pre-existing narrow Linux discrepancy (390px cover title +1.345px against the saved Mac fixture). The tolerance and product runtime are unchanged. Journal and shortcut checks run before compact checking so this known failure does not suppress their independent results.
