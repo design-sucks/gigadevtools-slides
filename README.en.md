@@ -63,3 +63,7 @@ python3 scripts/package_release.py
 See [contributing](CONTRIBUTING.md), [release process](docs/release-process.md), [compatibility](docs/compatibility.md) and [changelog](CHANGELOG.md). Versioned ZIPs are generated from one repository state; local runtimes, caches and client presentations are excluded.
 
 Composition references 2.0.0: 24 accepted editable examples for Maker (v06 review). Shared geometry and type hierarchy; input palette and graphics take precedence. [Selection and updates](skills/gigadev-html-maker/references/reference-pack.md). Legacy renderer 1.0.0 remains for pinned projects.
+
+## Update v0.6.0-pilot.1
+
+Maker **0.22.0-rc17**, Export **0.9.1**. Adds inline journal differences and consolidates bounded source/layout/font/media/navigation fixes. Existing composition assets are retained. No Typograf or new template/chart library is included. This is a corporate pilot/prerelease with bounded qualification. See [release scope and validation](docs/release-v0.6.0-pilot.1.md).

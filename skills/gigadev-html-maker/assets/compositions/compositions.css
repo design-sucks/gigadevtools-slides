@@ -14,3 +14,13 @@
 .cp-card-copy{display:flex;flex-direction:column;gap:10px;flex-shrink:0}.cp-card-copy--paragraphs p{font-size:24px;line-height:1.3}
 
 .cp-row-heading{display:flex;align-items:baseline;gap:22px}.cp-foot p{font-size:18px;line-height:1.3}
+/* Pilot variants: layout options only; project palette and content remain authoritative. */
+.cp--comparison.cp--variant-wide-labels .cp-matrix :is(th,td):first-child{width:38%}
+.cp--progress.cp--variant-wide-first .cp-grid--2{grid-template-columns:1.35fr 1fr}
+.cp--progress.cp--variant-wide-first .cp-grid--3{grid-template-columns:1.35fr 1fr 1fr}
+.cp--scorecard.cp--variant-side-by-side .cp-scorecards{flex-direction:row}
+.cp--scorecard.cp--variant-side-by-side .cp-scorecard{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:16px}
+.cp--scorecard.cp--variant-side-by-side .cp-scorecard>div:first-child{flex-direction:row;justify-content:flex-start;align-items:baseline;gap:20px}
+.cp--progress .cp-grid{align-items:start}
+.cp--scorecard.cp--variant-side-by-side .cp-scorecards{align-items:start}
+.cp--comparison.cp--table-dense .cp-matrix :is(th,td){padding-top:9px;padding-bottom:9px}

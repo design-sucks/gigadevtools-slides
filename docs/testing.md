@@ -55,3 +55,7 @@ The user still found the resulting design too primitive, with density, line-leng
 ## Hosted Linux CI note for v0.5.1-pilot.1
 
 Source checks, release publishing and the 15-check shell regression passed. The compact-reading regression stopped at the 390px cover heading anchor: 387.4252px versus 386.0802px in the saved Mac fixture (difference 1.3450px, tolerance 0.7px). The cause has not been established; the tolerance and accepted layout have not been changed. The following compact checks and separate shortcut step did not run in that hosted job. This is a remaining CI/compatibility issue, not a completed Linux visual qualification. [Failed run](https://github.com/design-sucks/gigadevtools-slides/actions/runs/40721755081).
+
+## Prepared RC17 qualification
+
+See [release scope](release-v0.6.0-pilot.1.md). Source/metadata/font-baseline and package checks,12 journal string cases in both themes/views, real review and user-edit persistence/undo, refreshed public 13-slide demo with15 shell checks. This does not certify full original decks or new native export. Historical baselines remain unchanged; releases.json selects baseline-release-rc17.json.

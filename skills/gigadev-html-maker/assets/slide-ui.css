@@ -1,0 +1,45 @@
+/* Optional slide-local UI ink; absent/auto retains the accepted shell theme. */
+html[data-gd-shell-ink="light"] :is(#bread,#sk-header,#sk-show-meta){--sk-muted:#e3e8ec;--sk-ink:#fff;--sk-chrome-ink:#fff;--sk-accent-text:#fff}
+html[data-gd-shell-ink="dark"] :is(#bread,#sk-header,#sk-show-meta){--sk-muted:#3f4850;--sk-ink:#15191d;--sk-chrome-ink:#15191d;--sk-accent-text:#15191d}
+.slide[data-gd-shell-ink="light"] .gd-export-meta{color:#fff}
+.slide[data-gd-shell-ink="dark"] .gd-export-meta{color:#15191d}
+/* A 16:9 reference/content frame uses the fitted 1920x1080 canvas, not cover-cropping. */
+#slides>.slide .gd-slide-background--content-frame{background-size:calc(1920px * var(--gd-view-scale) / var(--gd-motion-zoom)) calc(1080px * var(--gd-view-scale) / var(--gd-motion-zoom))!important;background-position:calc((var(--gd-content-left) - 112px * var(--gd-view-scale)) / var(--gd-motion-zoom)) calc((var(--gd-content-top) - 120px * var(--gd-view-scale)) / var(--gd-motion-zoom))!important}
+html[data-gd-export] #slides>.slide .gd-slide-background--content-frame{background-size:1920px 1080px!important;background-position:0 0!important}
+/* Explicit full-canvas video; other slide content uses the normal safe frame. */
+html:not([data-gd-export]) #slides>.slide[data-gd-media-frame="full"] .gd-content{left:calc((var(--gd-content-left) - 112px * var(--gd-view-scale)) / var(--gd-motion-zoom));top:calc((var(--gd-content-top) - 120px * var(--gd-view-scale)) / var(--gd-motion-zoom));width:1920px;height:1080px}
+html[data-gd-export] #slides>.slide[data-gd-media-frame="full"] .gd-content{left:0!important;top:0!important;width:1920px;height:1080px}
+@media print{#slides>.slide[data-gd-media-frame="full"] .gd-content{left:0!important;top:0!important;width:1920px;height:1080px}}
+#slides>.slide[data-gd-media-frame="full"] .gd-content video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+/* Title surfaces are independent; navigation paints only hover and one active bubble. */
+html[data-gd-shell-ink="light"] #sk-header .sk-title-pill{background:rgba(18,22,25,.68);color:#f4f6f7}
+html[data-gd-shell-ink="dark"] #sk-header .sk-title-pill{background:rgba(255,255,255,.64);color:#20252a}
+html[data-gd-shell-ink="light"] #sk-header .sk-title-icon{color:#e3e8ec}
+html[data-gd-shell-ink="dark"] #sk-header .sk-title-icon{color:#3f4850}
+html[data-sk-theme="dark"]{--gd-title-surface:rgba(18,22,25,.68);--gd-title-ink:#f4f6f7;--gd-title-icon:#e3e8ec}
+html[data-sk-theme="light"]{--gd-title-surface:rgba(255,255,255,.64);--gd-title-ink:#20252a;--gd-title-icon:#3f4850}
+html:not([data-gd-shell-ink]) #sk-header .sk-title-pill{background:var(--gd-title-surface);color:var(--gd-title-ink)}
+html:not([data-gd-shell-ink]) #sk-header .sk-title-icon{color:var(--gd-title-icon)}
+#sk-header #gd-title{color:inherit}
+html #bread .bread-item{background:transparent}
+html[data-gd-shell-ink="light"] #bread{--sk-chrome-fill:rgba(255,255,255,.64);--sk-accent-text:#102c1b;--sk-chrome-hover:rgba(35,42,46,.72);--sk-chrome-ink:#fff}
+html[data-gd-shell-ink="dark"] #bread{--sk-chrome-fill:rgba(16,44,27,.68);--sk-accent-text:#fff;--sk-chrome-hover:rgba(255,255,255,.68);--sk-chrome-ink:#20252a}
+html #bread .bread-item:not(.on):hover{background:var(--sk-chrome-hover);color:var(--sk-chrome-ink)}
+html #bread .bread-item.on,html #bread .bread-item.on:hover{background:transparent;color:var(--sk-accent-text)}
+#sk-header .sk-title-pill:focus-visible,#bread .bread-item:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+
+/* Native controls need unscaled layout. In presentation, enable this only
+   for portrait viewports tall enough that the whole fitted 16:9 frame lies
+   above the 85px presentation-controls hover zone. */
+@media screen{
+ html:not([data-sk-present]):not([data-gd-export]) #slides>.slide[data-gd-media-frame="full"]:has(>.slide-inner>.gd-content>video:only-child)>.slide-inner{zoom:1;width:100%;height:100%}
+ html:not([data-sk-present]):not([data-gd-export]) #slides>.slide[data-gd-media-frame="full"]:has(>.slide-inner>.gd-content>video:only-child) .gd-slide-background{width:var(--gd-scroll-width);height:var(--gd-scroll-height)}
+ html:not([data-sk-present]):not([data-gd-export]) #slides>.slide[data-gd-media-frame="full"]:has(>.slide-inner>.gd-content>video:only-child) .gd-slide-background--content-frame{background-size:calc(1920px * var(--gd-view-scale)) calc(1080px * var(--gd-view-scale))!important;background-position:calc(var(--gd-content-left) - 112px * var(--gd-view-scale)) calc(var(--gd-content-top) - 120px * var(--gd-view-scale))!important}
+ html:not([data-sk-present]):not([data-gd-export]) #slides>.slide[data-gd-media-frame="full"]:has(>.slide-inner>.gd-content>video:only-child) .gd-content{left:calc(var(--gd-content-left) - 112px * var(--gd-view-scale));top:calc(var(--gd-content-top) - 120px * var(--gd-view-scale));width:calc(1920px * var(--gd-view-scale));height:calc(1080px * var(--gd-view-scale));transform:none}
+}
+@media screen and (max-aspect-ratio:1/1) and (min-height:600px){
+ html[data-sk-present]:not([data-gd-export]) #slides>.slide[data-gd-media-frame="full"]:has(>.slide-inner>.gd-content>video:only-child)>.slide-inner{zoom:1;width:100%;height:100%}
+ html[data-sk-present]:not([data-gd-export]) #slides>.slide[data-gd-media-frame="full"]:has(>.slide-inner>.gd-content>video:only-child) .gd-slide-background{width:var(--gd-scroll-width);height:var(--gd-scroll-height)}
+ html[data-sk-present]:not([data-gd-export]) #slides>.slide[data-gd-media-frame="full"]:has(>.slide-inner>.gd-content>video:only-child) .gd-slide-background--content-frame{background-size:calc(1920px * var(--gd-view-scale)) calc(1080px * var(--gd-view-scale))!important;background-position:calc(var(--gd-content-left) - 112px * var(--gd-view-scale)) calc(var(--gd-content-top) - 120px * var(--gd-view-scale))!important}
+ html[data-sk-present]:not([data-gd-export]) #slides>.slide[data-gd-media-frame="full"]:has(>.slide-inner>.gd-content>video:only-child) .gd-content{left:calc(var(--gd-content-left) - 112px * var(--gd-view-scale));top:calc(var(--gd-content-top) - 120px * var(--gd-view-scale));width:calc(1920px * var(--gd-view-scale));height:calc(1080px * var(--gd-view-scale));transform:none}
+}

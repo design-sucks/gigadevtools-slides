@@ -1,3 +1,7 @@
+# Current release baseline
+
+Maker 0.22.0-rc17 uses `assets/baseline-release-rc17.json` for release checks. It records the intentional RC11–RC17 repairs and journal highlighting; old snapshots below remain historical evidence and are not the current expected module hashes. Qualification scope is in [RC17 notes](release-rc17.md).
+
 # Runtime baseline
 
 Maker package0.19.1 retains the accepted shellv18.2 runtime and adds source-style/graphics inventory, decision checks and QA resize synchronization. Runtime module hashes stay in `baseline-v18_2.json`; this update does not change slide motion or UI paint.

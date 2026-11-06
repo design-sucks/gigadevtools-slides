@@ -390,7 +390,8 @@
         "lead",
         "footer",
         "tableSourceId",
-        "highlightColumn"
+        "highlightColumn",
+        "variant"
       ],
       "preview": "previews/comparison.jpg"
     },
@@ -512,7 +513,7 @@
       "collections": {
         "items": [
           2,
-          2
+          3
         ]
       },
       "itemBodyMax": 180,
@@ -527,7 +528,8 @@
         "sampleOnly",
         "kicker",
         "lead",
-        "footer"
+        "footer",
+        "variant"
       ],
       "preview": "previews/progress.jpg"
     },
@@ -783,7 +785,8 @@
         "sampleOnly",
         "kicker",
         "lead",
-        "footer"
+        "footer",
+        "variant"
       ],
       "preview": "previews/scorecard.jpg"
     }

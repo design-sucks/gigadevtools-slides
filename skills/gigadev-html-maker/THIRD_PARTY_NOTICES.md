@@ -32,3 +32,7 @@ The historical comparison described in Export references does not bundle Anthrop
 ## Retained upstream notice
 
 The Export package retains the MIT notice for dom-to-pptx, Copyright (c) 2025 Atharva Dharmendra Jagtap and dom-to-pptx contributors, in skills/gigadev-html-export/references/dom-to-pptx-LICENSE.txt (references/dom-to-pptx-LICENSE.txt inside its standalone ZIP). Preserve that notice with applicable redistributed portions. This is separate from the historical Anthropic comparison.
+
+## Vendored MTX decoder
+
+`vendor/mtx-decompressor/index.mjs` is the unmodified mtx-decompressor 1.8.0 npm artifact, under MPL-2.0. Retain its [license](vendor/mtx-decompressor/LICENSE) and [provenance/source notice](vendor/mtx-decompressor/NOTICE.md). Upstream source: https://github.com/ChristopherVR/mtx-decompressor . This component decodes an authorized font container; it grants no rights to any supplied font. No private source PPTX, decoded font or native proof is bundled.

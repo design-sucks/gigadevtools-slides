@@ -1,8 +1,8 @@
 {
-  "release": "v0.5.1-pilot.1",
+  "release": "v0.6.0-pilot.1",
   "channel": "corporate-pilot",
   "skills": {
-    "gigadev-html-maker": "0.21.1",
+    "gigadev-html-maker": "0.22.0-rc17",
     "gigadev-html-export": "0.9.1"
   },
   "demo": {
@@ -16,9 +16,9 @@
     "rightsBasis": "user reports company rights; no general third-party font license grant",
     "mitIncludesFonts": false
   },
-  "newCaseStudy": "GLM/DeepSeek/Qwen source-style and all-format retest; private case content not included in public package",
+  "newCaseStudy": "Bounded HTML Maker reliability and journal update; private test content excluded",
   "releaseState": "prerelease",
-  "runtimeBaseline": "baseline-v18_2.json",
+  "runtimeBaseline": "baseline-release-rc17.json",
   "compositionLibrary": "2.0.0",
   "compositionRenderer": "1.0.0 (legacy compatibility)"
 }

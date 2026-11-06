@@ -267,3 +267,15 @@ html[data-sk-theme=light] .sk-ui button:disabled:not([aria-pressed=true]){opacit
 
 /* Keep the single wrapped toolbar clear of a large workspace on narrow screens. */
 @media(max-width:700px){html[data-sk-toolbar-workspace] :is(#sk-journal,#sk-organizer):modal{inset:var(--sk-workspace-top,96px) 12px 12px;margin:0;width:auto;height:auto}}
+
+/* RC14 transparent shell surfaces retain readable text and icons. */
+#sk-header .sk-title-pill{background:var(--sk-chrome-fill);color:var(--sk-chrome-ink)}
+#sk-header .sk-title-icon{color:var(--sk-chrome-ink)}
+#bread .bread-item:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+
+/* Text-only journal differences; no content or source-state mutation. */
+#sk-journal .sk-text-diff{color:var(--sk-ink);border-radius:2px;padding:0 1px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+#sk-journal del.sk-text-diff{background:color-mix(in srgb,var(--sk-danger) 18%,var(--sk-field));text-decoration:line-through;text-decoration-thickness:1px}
+#sk-journal ins.sk-text-diff{background:color-mix(in srgb,var(--sk-accent) 26%,var(--sk-field));text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+#sk-journal .sk-diff-space{font-variant-ligatures:none}
+#sk-journal .sk-diff-legend{font-size:10px;line-height:1.5;color:var(--sk-muted);margin:9px 0 0}
