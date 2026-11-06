@@ -2,6 +2,8 @@
 
 24 anonymized, reviewed examples (accepted v06). These are editable visual references, not a universal renderer or finished content. Use their composition and type hierarchy; source/reference paint and graphics take precedence. The older 18-pattern renderer is a separate compatibility tool, not a faithful implementation of these examples.
 
+First review each actual source render and choose preserve, adapt or redesign using [composition decisions](composition-decisions.md). A good source composition may need no reference.
+
 ## Retrieve only what matters
 
 Run `python3 scripts/reference_pack.py list`. Choose by rhetorical purpose and actual content volume. `show ref-10` returns one example and preview path. Inspect 1–3 matching previews; read only their HTML if geometry needs clarification. Do not load the whole corpus or embedded fonts into context. The catalog is `assets/reference-pack/catalog.json`; exact grid/type details are in `geometry.json`.

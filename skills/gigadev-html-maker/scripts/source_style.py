@@ -3,6 +3,7 @@ from pathlib import Path
 from zipfile import ZipFile
 from xml.etree import ElementTree as ET
 from collections import Counter
+from html.parser import HTMLParser
 import argparse, hashlib, json, posixpath, re
 
 A='http://schemas.openxmlformats.org/drawingml/2006/main'
@@ -27,8 +28,11 @@ def scheme_for(z, part):
      v=c.get('val') if local(c.tag)=='srgbClr' else c.get('lastClr') if local(c.tag)=='sysClr' else None
      if v and re.fullmatch(r'[0-9a-fA-F]{6}',v): colors[local(el.tag)]='#'+v.upper()
    return part,colors
-  next_rel=next((r for r in rels.values() if r['type'] in ('slideLayout','slideMaster','theme') and not r['external']),None)
-  part=next_rel['target'] if next_rel else None
+  # A master also links back to every layout. Following the first matching
+  # relationship loops back instead of reaching its theme, depending on order.
+  wanted='slideLayout' if part.startswith('ppt/slides/') else 'slideMaster' if part.startswith('ppt/slideLayouts/') else 'theme' if part.startswith('ppt/slideMasters/') else None
+  matches=[r for r in rels.values() if r['type']==wanted and not r['external']]
+  part=matches[0]['target'] if len(matches)==1 else None
  return None,{}
 def inventory(source,deck):
  evidence=[]; fonts=[]; themes=[]
@@ -43,8 +47,8 @@ def inventory(source,deck):
    def walk(el, ancestors, obj):
     kind=local(el.tag)
     if kind in ('sp','pic','graphicFrame','cxnSp','grpSp'):
-     nv=el.find('./p:nvSpPr/p:cNvPr',N) or el.find('./p:nvPicPr/p:cNvPr',N) or el.find('./p:nvGraphicFramePr/p:cNvPr',N) or el.find('./p:nvCxnSpPr/p:cNvPr',N) or el.find('./p:nvGrpSpPr/p:cNvPr',N)
-     # Element truthiness depends on children, so find directly if necessary.
+     nv=None
+     # Test element identity: an XML leaf is still a valid match.
      for nvpath in ('./p:nvSpPr/p:cNvPr','./p:nvPicPr/p:cNvPr','./p:nvGraphicFramePr/p:cNvPr','./p:nvCxnSpPr/p:cNvPr','./p:nvGrpSpPr/p:cNvPr'):
       candidate=el.find(nvpath,N)
       if candidate is not None: nv=candidate; break
@@ -81,6 +85,96 @@ def inventory(source,deck):
   if len(row['evidenceIds'])<3:row['evidenceIds'].append(item['id'])
  color_summary=sorted([{**v,'slides':sorted(v['slides'])} for v in summary.values()],key=lambda x:(x['role'],-x['count'],str(x['resolvedBase'])))
  return {'schema':1,'source':deck['source'],'colorSummary':color_summary,'themes':themes,'colors':colors,'fonts':grouped(fonts),'graphics':images,'assets':deck['assets'],'inheritance':{'status':'unresolved','detail':'Effective inherited slide/layout/master styles and color mapping are not computed.'},'limitations':['Explicit slide XML only; master/layout inheritance, theme color maps, modifiers, transparency and effective rendered colors are not calculated.','Scheme values are base colors only, even when a theme is resolved; review actual source rendering.','Graphics are extracted image instances, not a semantic classification of logos or illustrations.']}
+def normalized_color(value):
+ value=str(value).strip()
+ if re.fullmatch(r'#[a-fA-F0-9]{3}',value): return '#'+''.join(c*2 for c in value[1:]).upper()
+ return value.upper() if re.fullmatch(r'#[a-fA-F0-9]{6}',value) else None
+
+def authored_paint(markup, theme_css='', scoped=False):
+ """Collect literal declarations and SVG paint attributes, excluding comments and scripts."""
+ class PaintParser(HTMLParser):
+  def __init__(self):
+   super().__init__(convert_charrefs=True); self.css=[]; self.paint=[]; self.svg=0; self.in_style=False; self.stack=[]
+  def handle_starttag(self,tag,attrs):
+   classes=dict(attrs).get('class','').split()
+   active=not scoped or any(v for _,v in self.stack) or bool({'gd-content','gd-slide-background'} & set(classes))
+   if tag not in ('area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'): self.stack.append((tag,active))
+   if not active:return
+   if tag=='svg': self.svg+=1
+   if tag=='style': self.in_style=True
+   for name,value in attrs:
+    if value is None: continue
+    if name=='style': self.css.append(value)
+    elif self.svg and name in ('fill','stroke','stop-color','flood-color','lighting-color'):
+     self.paint.append(value)
+  def handle_startendtag(self,tag,attrs):
+   self.handle_starttag(tag,attrs); self.handle_endtag(tag)
+  def handle_endtag(self,tag):
+   if tag=='style': self.in_style=False
+   if tag=='svg' and self.svg: self.svg-=1
+   for i in range(len(self.stack)-1,-1,-1):
+    if self.stack[i][0]==tag:
+     del self.stack[i:];break
+  def handle_data(self,data):
+   if self.in_style: self.css.append(data)
+ parser=PaintParser(); parser.feed(markup)
+ def clean_css(s):
+  # Mask comments, strings and whole url() functions, including nested parentheses.
+  token=re.compile(r'<!--.*?-->|/\*.*?\*/|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'|(?<![\w-])url\(',re.I|re.S)
+  result=[]; pos=0
+  while True:
+   match=token.search(s,pos)
+   if not match: result.append(s[pos:]); break
+   result.append(s[pos:match.start()]); result.append(' '); pos=match.end()
+   if match.group(0).lower()=='url(':
+    depth=1; quote=None
+    while pos<len(s) and depth:
+     c=s[pos]
+     if c=='\\': pos+=2; continue
+     if quote:
+      if c==quote: quote=None
+     elif c in ('"',"'"): quote=c
+     elif c=='(': depth+=1
+     elif c==')': depth-=1
+     pos+=1
+  return ''.join(result)
+ fragments=[clean_css(c) for c in parser.css+[theme_css]]
+ css='\n'.join(fragments)
+ values=[]
+ for fragment in fragments:
+  for prop,value in re.findall(r'(?:^|[;{])\s*(--[\w-]+|[a-zA-Z][\w-]*)\s*:\s*([^;{}]*)',fragment):
+   prop=prop.lower()
+   if prop.startswith('--') or prop in ('color','background','background-color','background-image','fill','stroke','stop-color','flood-color','lighting-color','outline','outline-color','box-shadow','text-shadow','text-decoration','text-decoration-color','column-rule','column-rule-color','caret-color') or re.fullmatch(r'border(?:-(?:top|right|bottom|left|block|inline|color|image|image-source|top-color|right-color|bottom-color|left-color))*',prop): values.append(value)
+ values.extend(clean_css(v) for v in parser.paint)
+ colors=set()
+ for value in values:
+  for token in re.findall(r'(?<![\w#-])#[0-9a-fA-F]{3}(?:[0-9a-fA-F]{3})?(?![\w-])',value):
+   color=normalized_color(token)
+   if color: colors.add(color)
+  for match in re.finditer(r'(?<![\w-])(rgb|rgba)\(\s*([^()]*)\)',value,re.I):
+   body=match.group(2).strip(); name=match.group(1).lower()
+   if ',' in body:
+    parts=[x.strip() for x in body.split(',')]
+    if len(parts)!=(4 if name=='rgba' else 3): continue
+   else:
+    sections=body.split('/')
+    if len(sections)>2: continue
+    parts=sections[0].split()+([sections[1].strip()] if len(sections)==2 else [])
+    if len(parts) not in (3,4): continue
+   channels=parts[:3]; alpha=parts[3:] 
+   if alpha:
+    a=alpha[0]
+    if not re.fullmatch(r'(?:\d+(?:\.\d*)?|\.\d+)%?',a): continue
+    av=float(a.rstrip('%'))/(100 if a.endswith('%') else 1)
+    if not 0<av<=1: continue
+   rgb=[]
+   for c in channels:
+    if not re.fullmatch(r'(?:\d+(?:\.\d*)?|\.\d+)%?',c): break
+    n=float(c.rstrip('%')); limit=100 if c.endswith('%') else 255
+    if not 0<=n<=limit: break
+    rgb.append(int(n*255/limit+0.5))
+   if len(rgb)==3: colors.add('#'+''.join(f'{n:02X}' for n in rgb))
+ return css,colors
 def check(project,manifest,html,theme=None):
  project=Path(project); inv=json.loads((project/'style-inventory.json').read_text()); dec=json.loads(Path(manifest).read_text()); errors=[]; warnings=[]
  mode=dec.get('mode')
@@ -89,19 +183,26 @@ def check(project,manifest,html,theme=None):
  html_text=Path(html).read_text(); deck=json.loads((project/'deck.json').read_text()); theme_data=json.loads(Path(theme).read_text()) if theme else {}
  # Only authored markup/style sources, not the extracted source records.
  authored=html_text+'\n'+'\n'.join(str(slide.get('html','')) for slide in deck.get('slides',[]))+'\n'+str(theme_data.get('css',''))
- css='\n'.join(re.findall(r'<style\b[^>]*>(.*?)</style\s*>',authored,re.I|re.S))+'\n'+str(theme_data.get('css',''))
- css+='\n'+'\n'.join(re.findall(r'style\s*=\s*["\']([^"\']*)["\']',authored,re.I))
- def normalized(value):
-  value=str(value).strip()
-  if re.fullmatch(r'#[a-fA-F0-9]{3}',value): return '#'+''.join(c*2 for c in value[1:]).upper()
-  return value.upper() if re.fullmatch(r'#[a-fA-F0-9]{6}',value) else None
+ # The generated HTML contains bundled UI CSS. Only slide content/background
+ # elements are evidence; stylesheet-only authoring must supply --theme.
+ slide_markup='\n'.join(str(slide.get('html','')) for slide in deck.get('slides',[]))
+ backgrounds=[]
+ for slide in deck.get('slides',[]):
+  bg=slide.get('background') or {}
+  if not isinstance(bg,dict):continue
+  if bg.get('type') in ('color','gradient'):backgrounds.append('background:'+str(bg.get('value','')))
+  if bg.get('type')=='image' and bg.get('wash'):backgrounds.append('background:'+str(bg['wash']))
+ css,paint_colors=authored_paint(slide_markup,str(theme_data.get('css',''))+'\n'+';'.join(backgrounds))
+ final_css,final_colors=authored_paint(html_text,scoped=True)
+ css+='\n'+final_css;paint_colors.update(final_colors)
+ normalized=normalized_color
  def chromatic(value):
   value=normalized(value)
   if not value:return False
   rgb=[int(value[i:i+2],16) for i in (1,3,5)]; high=max(rgb)
   return high>0 and (high-min(rgb))/high>=.1
  def declarations(target):
-  return [normalized(x) for x in re.findall(r'(?:^|[;{])\s*'+re.escape(target)+r'\s*:\s*([^;}]+)',css,re.I)]
+  return set().union(*(authored_paint('', '--value:'+value)[1] for value in re.findall(r'(?:^|[;{])\s*'+re.escape(target)+r'\s*:\s*([^;}]+)',css,re.I)))
  evidence={x['id']:x for x in inv['colors']}; mappings=dec.get('palette',[]); covered=set(); inherited_chromatic=False
  required_roles={c['role'] for c in inv['colors'] if c['role'] in ('text','fill','line','background') and c.get('resolvedBase')}
  for m in mappings:
@@ -118,7 +219,7 @@ def check(project,manifest,html,theme=None):
    if color not in declarations(target): errors.append('palette targetColor not declared for CSS token: '+target)
    if not re.search(r'var\(\s*'+re.escape(target)+r'\s*[,)]',css): errors.append('palette token is not used through var(): '+target)
   elif normalized(target):
-   if normalized(target)!=color or not re.search(r':\s*'+re.escape(target)+r'(?=\s*[;}])',css,re.I): errors.append('palette targetColor not used in CSS declaration: '+str(target))
+   if normalized(target)!=color or color not in paint_colors: errors.append('palette targetColor not used in CSS declaration: '+str(target))
   else: errors.append('palette target must be CSS variable or hex: '+str(target))
   if src.get('resolvedBase') and chromatic(src['resolvedBase']) and chromatic(color) and disposition in ('retained','adjusted') and (disposition=='retained' or str(m.get('reason','')).strip()): inherited_chromatic=True
  for role in sorted(required_roles-covered): errors.append('missing palette mapping for source role: '+role)

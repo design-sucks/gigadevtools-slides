@@ -35,8 +35,9 @@ jobs:
       - run: npx --prefix skills/gigadev-html-maker playwright install --with-deps chromium
       - run: python3 scripts/build_demo.py --check
       - run: node skills/gigadev-html-maker/scripts/check.mjs examples/shell-demo/index.html --out build/shell-qa
-      - run: node skills/gigadev-html-maker/scripts/check_compact.mjs examples/shell-demo/index.html build/compact-qa
       - run: node skills/gigadev-html-maker/scripts/check_shortcuts.mjs examples/shell-demo/index.html build/keys-qa
+      - run: node skills/gigadev-html-maker/scripts/test_journal_diff.mjs build/journal-diff-qa
+      - run: node skills/gigadev-html-maker/scripts/check_compact.mjs examples/shell-demo/index.html build/compact-qa
       - uses: actions/upload-artifact@v7
         if: always()
         with:

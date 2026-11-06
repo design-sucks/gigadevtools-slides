@@ -1,3 +1,12 @@
+# v0.6.0-pilot.1 — Maker 0.22.0-rc17
+
+- Preserve the existing composition/reference library and conservative text preparation. No Typograf or new external template/chart engine is added.
+- Journal highlights changed Unicode text, punctuation and whitespace in Before/After with deletion/insertion semantics. Exact source strings, review actions and saved history remain unchanged.
+- Consolidate RC11–RC16 work: source/list/style preservation gates, font readiness and approved fallbacks, guarded saved-edit reconciliation and layout changes, explicit graphic relationships/static source-effect handling, offline media controls, contrast/theme fixes and section-aware navigation without duplicate headings.
+- Rebuild the public 13-slide demo and matching Pages copy; record a new release-specific runtime baseline without rewriting historical snapshots. Export stays at 0.9.1.
+- Qualification is bounded: three real mini PPTX decks (16 slides) on RC13, targeted RC14–RC16 checks, RC17 journal/public demo/package checks. No full original-deck, other-browser or new native PPTX/PDF certification. Visual composition remains agent-authored and requires render review.
+- Existing corporate SB Sans scope remains separate from the code license. Private presentation inputs, local font maps/configuration and the experimental pilot are excluded.
+
 # v0.5.1-pilot.1
 
 - Publish Maker 0.21.1, Export 0.9.1 and accepted 24-reference pack 2.0.0 as a public corporate prerelease.

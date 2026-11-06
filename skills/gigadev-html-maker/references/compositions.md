@@ -37,3 +37,5 @@ Keep stable IDs. Patch a slot/CSS rule in scripts/compositions.py and assets/com
 Run scripts/test_compositions.py and build the demo. Run node scripts/check_compositions.mjs DEMO.html NEW_QA_DIR; inspect actual dark/light renders. Recheck short, long Russian headings and uneven bodies on affected patterns. Keep a real-content probe with a table, links and graphics. Re-run scripts/build_demo.py --check at repository level to verify the accepted shell demo is unchanged. A new PPTX delivery additionally needs native PowerPoint acceptance via HTML Export; this library release is HTML/PDF verified, not a new PPTX qualification.
 
 See assets/compositions/PROVENANCE.md for selection/dedup scope. Keep private source inventories/screenshots outside distributed assets.
+
+For experimental `comparison`, `progress`, and `scorecard` variants and selection limits, see [composition pilot](composition-pilot.md). These variants require rendered capacity, source binding and visual review before reuse.

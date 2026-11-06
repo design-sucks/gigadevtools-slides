@@ -5,7 +5,36 @@
  const make=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
  const emptySVG='<svg class="sk-journal-empty-art" viewBox="0 0 200 180" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path opacity=".25" d="M40 27H28a9 9 0 0 0-9 9v118a9 9 0 0 0 9 9h91"/><path d="M56 13h69l29 29v99a10 10 0 0 1-10 10H56a10 10 0 0 1-10-10V23a10 10 0 0 1 10-10Z"/><path d="M125 13v22a7 7 0 0 0 7 7h22M68 61h61M68 80h48M68 99h25"/><path d="m115 130 5-20 39-39a7 7 0 0 1 10 10l-39 39-15 10ZM151 79l10 10"/><path opacity=".35" d="M171 27h10m-5-5v10M26 84h10m-5-5v10"/></svg>';
  function empty(host,title,copy,edit=false){const n=make('div','sk-journal-empty');n.innerHTML=emptySVG;n.append(make('h3','',title),make('p','',copy));if(edit){const b=make('button','sk-text-button','Редактировать текст');b.type='button';b.onclick=()=>{if(!docked)close();if(!document.documentElement.classList.contains('edit-mode'))$('editBtn').click();};n.append(b);}host.append(n);return n;}
- function pair(host,c){const box=make('div','sk-revision-compare');for(const[key,label]of[['before','Было'],['after',c.before===undefined?'Стало':'Стало']])if(c[key]!==undefined){const p=make('p','sk-'+key),caption=make('b','',label);p.append(caption,document.createTextNode(c[key]));box.append(p);}host.append(box);}
+ // Bounded Unicode diff for display only. Stored strings and review guards stay exact.
+ const segmenter=typeof Intl.Segmenter==='function'?new Intl.Segmenter('ru',{granularity:'grapheme'}):null;
+ const glyphs=s=>segmenter?[...segmenter.segment(s)].map(x=>x.segment):Array.from(s);
+ function difference(before,after){
+  const a=glyphs(before),b=glyphs(after);let start=0,end=0;
+  while(start<a.length&&start<b.length&&a[start]===b[start])start++;
+  while(end<a.length-start&&end<b.length-start&&a[a.length-end-1]===b[b.length-end-1])end++;
+  const left=a.slice(start,a.length-end),right=b.slice(start,b.length-end),parts=[];
+  const add=(type,value)=>{if(!value)return;const last=parts.at(-1);if(last?.type===type)last.text+=value;else parts.push({type,text:value});};
+  add('equal',a.slice(0,start).join(''));
+  if(left.length*right.length<=200000){
+   const width=right.length+1,table=new Uint32Array((left.length+1)*width);
+   for(let i=left.length-1;i>=0;i--)for(let j=right.length-1;j>=0;j--)table[i*width+j]=left[i]===right[j]?table[(i+1)*width+j+1]+1:Math.max(table[(i+1)*width+j],table[i*width+j+1]);
+   let i=0,j=0;while(i<left.length||j<right.length){if(i<left.length&&j<right.length&&left[i]===right[j]){add('equal',left[i]);i++;j++;}else if(i<left.length&&(j===right.length||table[(i+1)*width+j]>=table[i*width+j+1]))add('delete',left[i++]);else add('insert',right[j++]);}
+  }else{add('delete',left.join(''));add('insert',right.join(''));}
+  add('equal',end?a.slice(a.length-end).join(''):'');return parts;
+ }
+ function appendDifference(host,parts,side){
+  for(const part of parts){if(part.type===(side==='before'?'insert':'delete'))continue;if(part.type==='equal'){host.append(document.createTextNode(part.text));continue;}
+   const n=make(side==='before'?'del':'ins','sk-text-diff sk-text-diff-'+part.type);n.title=side==='before'?'Удалено или заменено':'Добавлено или заменено';
+   // Visible whitespace belongs only to this comparison; copyable source remains in state.
+   for(const token of part.text.split(/([\u00a0\u202f \t\n\r]+)/u).filter(Boolean)){
+    if(/^[\u00a0\u202f \t\n\r]+$/u.test(token)){const w=make('span','sk-diff-space');w.dataset.original=token;w.textContent=Array.from(token,c=>c==='\u00a0'?'⍽':c==='\u202f'?'⍽':c===' '?'·':c==='\t'?'⇥':c==='\r'?'␍':'↵\n').join('');w.title='Пробельные символы: точный исходный текст сохранён';n.append(w);}else n.append(document.createTextNode(token));
+   }host.append(n);
+  }
+ }
+ function pair(host,c){const box=make('div','sk-revision-compare'),canDiff=typeof c.before==='string'&&typeof c.after==='string',parts=canDiff?difference(c.before,c.after):null;
+  for(const[key,label]of[['before','Было'],['after','Стало']])if(c[key]!==undefined){const p=make('p','sk-'+key),caption=make('b','',label);p.append(caption);if(parts)appendDifference(p,parts,key);else p.append(document.createTextNode(c[key]));box.append(p);}
+  host.append(box);if(canDiff&&c.before!==c.after){const legend=make('p','sk-diff-legend','Зачёркнуто — удалено; подчёркнуто — добавлено. Пробел: ·, неразрывный: ⍽.');host.append(legend);}
+ }
  function jumpButton(slide,data){const item=data.slides.find(s=>s.id===slide),b=make('button','sk-text-button sk-journal-jump',item?.included?'Перейти к слайду':'Слайд вне сборки');b.type='button';b.disabled=!item?.included;b.onclick=()=>showBeside(slide,data);return b;}
  function changes(host,list,data){for(const c of list){const row=make('article','sk-revision-change');row.dataset.change=c.type;row.append(make('h3','',c.title));const m=make('p','sk-change-meta','Пользователь · '+(c.type==='review'?'Решение по предложению':c.type==='text'?'Изменение текста':c.type==='setting'?'Настройки просмотра':'Сборка'));row.append(m);pair(row,c);if(c.slide){const actions=make('div','sk-journal-actions');actions.append(jumpButton(c.slide,data));row.append(actions);}host.append(row);}}
  function renderPreparation(data){const host=$('sk-preparation-changes');host.replaceChildren();if(!data.preparation.length){const status=api.proofreadingStatus?.()||'not_checked';const title=docked?({not_checked:'Этот текст ещё не проверяли',reviewed:'Проверка при подготовке выполнена',has_proposals:'На этом слайде предложений нет'})[status]:({not_checked:'Автопроверка текста не выполнялась',reviewed:'Проверка при подготовке выполнена',has_proposals:'Есть предложения к проверке'})[status];const copy=docked?({not_checked:'Для этого слайда автоматическая проверка ещё не проводилась.',reviewed:'Предложений по тексту нет.',has_proposals:'Откройте слайд с предложениями или большой журнал.'})[status]:({not_checked:'Проверка правописания не запускалась.',reviewed:'Предложений по тексту нет.',has_proposals:'Откройте слайды с предложениями к проверке.'})[status];const n=empty(host,title,copy);if(docked&&data.nextPreparation){const b=make('button','sk-text-button','К слайду с автоправками');b.type='button';b.onclick=()=>showBeside(data.nextPreparation.slide,data);n.append(b);}return;}

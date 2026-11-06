@@ -61,6 +61,9 @@ def render(ident,data,version=None):
  ident=catalog().get('aliases',{}).get(ident,ident)
  spec=validate(ident,data)
  if version and version!=spec['version']:raise ValueError('Composition version mismatch')
+ variants={'comparison':('standard','wide-labels'),'progress':('standard','wide-first'),'scorecard':('standard','side-by-side')}
+ variant=data.get('variant','standard')
+ if ident in variants and variant not in variants[ident]:raise ValueError('Unknown '+ident+' variant')
  title=node(data['title'],'h1' if ident in ('cover','divider') else 'h2','cp-title')
  lead=node(data['lead'],'p','cp-lead') if data.get('lead') else ''
  kicker=node(data['kicker'],'p','cp-kicker') if data.get('kicker') else ''
@@ -95,7 +98,7 @@ def render(ident,data,version=None):
    bars.append('<div class="cp-bar-col">'+node(str(v),'span','cp-bar-value')+'<div class="cp-bar" style="height:'+str(height)+'%"></div>'+node(data['labels'][i],'span','cp-bar-label')+'</div>')
   if len(data['labels'])!=len(values):raise ValueError('Trend labels must match values')
   body='<div class="cp-trend"><div class="cp-chart">'+''.join(bars)+'</div><aside class="cp-trend-summary">'+node(data['metric'],'p','cp-value')+node(data['takeaway'],'h3')+node(data.get('detail',''))+'</aside></div>'
- elif ident=='progress':body='<div class="cp-grid cp-grid--2">'+''.join('<article class="cp-panel">'+node(s['title'],'h3')+'<div class="cp-status-list">'+''.join('<div>'+node(x['label'])+node(x['status'],'span','cp-status')+'</div>'for x in s['items'])+'</div></article>'for s in items)+'</div>'
+ elif ident=='progress':body='<div class="cp-grid cp-grid--'+str(len(items))+'">'+''.join('<article class="cp-panel">'+node(s['title'],'h3')+'<div class="cp-status-list">'+''.join('<div>'+node(x['label'])+node(x['status'],'span','cp-status')+'</div>'for x in s['items'])+'</div></article>'for s in items)+'</div>'
  elif ident=='roadmap':
   periods=data['periods'];body='<div class="cp-roadmap"><div class="cp-roadmap-head"><span></span>'+''.join(node(x,'h3')for x in periods)+'</div>'
   for s in items:
@@ -110,7 +113,8 @@ def render(ident,data,version=None):
  else:raise ValueError('Renderer missing for '+ident)
  footer=('<footer class="cp-foot">'+node(data['footer'])+'</footer>'if isinstance(data.get('footer'),list)else node(data.get('footer',''),'footer','cp-foot'))if data.get('footer')else ''
  main=body if ident in ('cover','divider') else head+'<div class="cp-body">'+body+'</div>'
- result='<div class="cp cp--'+ident+(' cp--long-title'if len(text(data['title']))>64 else '')+'" data-composition="'+ident+'" data-composition-version="'+spec['version']+'"'+(' data-composition-sample="true"'if data.get('sampleOnly')else '')+'>'+main+footer+'</div>'
+ dense_table=ident=='comparison' and sum(len(text(cell)) for row in data['rows'] for cell in row)>350
+ result='<div class="cp cp--'+ident+(' cp--variant-'+variant if ident in variants and variant!='standard' else '')+(' cp--table-dense' if dense_table else '')+(' cp--long-title'if len(text(data['title']))>64 else '')+'" data-composition="'+ident+'" data-composition-version="'+spec['version']+'"'+(' data-composition-sample="true"'if data.get('sampleOnly')else '')+'>'+main+footer+'</div>'
  def retained(x):
   if isinstance(x,dict):
    for key,value in x.items():

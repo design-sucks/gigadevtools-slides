@@ -1,0 +1,7 @@
+# RC11 — candidate for three compact PPTX trials
+
+Compared with RC10: measured composition decisions and explicit layout plans preserve current saved edits; graphic contracts check a reviewed source inventory and links; final builds require a hashed candidate-review record and acceptance dimensions remain separate. Font helpers inspect actual sfnt faces and reject mismatched containers; explicit fallback preserves per-run emphasis. Narrow source-shape proofs retain transparent runs and paint, including three observed radial/tileRect patterns. Explicit lastClr static-frame contracts classify the observed video-only timing tree without claiming animation playback. Native video controls use the full video frame with compensated passive overlays.
+
+This is an integration candidate, not a universal PPTX renderer or automatic design grader. Unknown gradients, effects and timing structures reject or require review. Graphic topology depends on a complete manually reviewed inventory. Additional private fonts use local URLs and are not portable public output. Full source animation, arbitrary gradients, cross-browser media/system fullscreen and native editable-PPTX contrast parity remain outside this qualification. The accepted shell layout, editor, calibration, organizer and motion are preserved; only its media module changes.
+
+Use the documented normal extraction/build/private-font/layout entry points. Do not reproduce project-specific post-build JavaScript patches. Run source/content/design/shell/media/export acceptance separately on the actual output.
