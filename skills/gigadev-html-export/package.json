@@ -9,7 +9,7 @@
   "dependencies": {
     "playwright": "1.62.1",
     "pptxgenjs": "4.0.1",
-    "jszip": "3.10.1",
+    "jszip": "3.10.2",
     "sharp": "0.35.5",
     "fonteditor-core": "2.6.3",
     "svgpath": "2.6.0"
