@@ -18,7 +18,7 @@
   },
   "newCaseStudy": "Navigation popover, guarded saved-work/project round trip, full-reading paint and bundled-demo reference default; private test decks excluded",
   "releaseState": "prerelease",
-  "runtimeBaseline": "baseline-release-rc19.json",
+  "runtimeBaseline": "baseline-release-rc19-compact.json",
   "compositionLibrary": "2.0.0",
   "compositionRenderer": "1.0.0 (legacy compatibility)",
   "defaultCompositionReference": {

@@ -1,6 +1,6 @@
 # Current release baseline
 
-Maker 0.22.0-rc19 resolves `assets/current-baseline.json` and checks its version against package.json before loading `baseline-release-rc19.json`. This records the reviewed navigation-popover controller/UI/journal changes, retaining RC18 background/chrome and RC17 runtime repairs. Builder/navigation/reconciliation changes are covered separately. Historical snapshots remain unchanged. See [RC19 notes](release-rc19.md).
+Maker 0.22.0-rc19 resolves `assets/current-baseline.json` and checks its version against package.json before loading `baseline-release-rc19-compact.json`. This follow-up candidate inherits the reviewed RC19 runtime and records the narrow mobile left-gutter correction; the published RC19 snapshot and all historical snapshots remain unchanged. Builder/navigation/reconciliation changes are covered separately. See [RC19 notes](release-rc19.md) and the [Linux compact correction report](../../../docs/HTML_Maker_Linux_Compact_Fix_v01.md).
 
 ## Historical RC17
 

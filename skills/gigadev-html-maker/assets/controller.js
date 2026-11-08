@@ -122,7 +122,7 @@
       if(!show&&nav&&innerWidth>700)root.style.setProperty('--gd-nav-space',Math.max(180,$('bread').offsetWidth+24)+'px');
       const safeTop=show?0:innerWidth<=700?68:72,safeBottom=show?0:56;
       const navSpace=!show&&innerWidth>700&&nav?Math.max(180,$('bread').offsetWidth+24):0;
-      const leftGutter=show?0:navSpace||20;
+      const leftGutter=show?0:navSpace||(innerWidth<=700?8:20);
       const workspaceDock=root.hasAttribute('data-sk-journal-dock')||root.hasAttribute('data-sk-organizer-dock');
       const rightGutter=show||workspaceDock?0:innerWidth<=700?8:20;
       const usableWidth=Math.max(1,stage.clientWidth-leftGutter-rightGutter);
