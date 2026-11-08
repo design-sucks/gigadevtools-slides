@@ -1,4 +1,4 @@
-<!doctype html><html lang="ru" data-gd-maker="1" data-sk-doc="gd-a9b0a1b9f37325c609d2f48ca5fdf431" data-sk-theme="dark" data-sk-motion="on"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HTML Maker · демо · v01</title><style id="sk-ui-styles">
+<!doctype html><html lang="ru" data-gd-maker="1" data-sk-doc="gd-a7b072d6e6b5a5dd9635c7bcd0413619" data-sk-theme="dark" data-sk-motion="on"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HTML Maker · демо · v01</title><style id="sk-ui-styles">
 :root{
  --sk-panel:#181818;--sk-field:#252525;--sk-field-hover:#2d2d2d;--sk-field-active:#383838;--sk-focus-fill:#707070;--sk-focus-ink:#fff;--sk-focus-ring:#ddd;--sk-line:rgb(255 255 255 / .16);--sk-chrome-fill:rgb(37 37 37 / .76);--sk-chrome-hover:rgb(48 48 48 / .84);--sk-chrome-ink:#ddd;--sk-control-line:#777;
  --sk-ink:#eee;--sk-muted:#aaa;--sk-dim:#969696;--sk-accent:#9deda5;--sk-accent-text:#9deda5;--sk-check-line:#9deda5;
@@ -864,7 +864,7 @@ slidesEl.addEventListener('scroll',()=>{if(lockScroll)return;let best=0,distance
       if(!show&&nav&&innerWidth>700)root.style.setProperty('--gd-nav-space',Math.max(180,$('bread').offsetWidth+24)+'px');
       const safeTop=show?0:innerWidth<=700?68:72,safeBottom=show?0:56;
       const navSpace=!show&&innerWidth>700&&nav?Math.max(180,$('bread').offsetWidth+24):0;
-      const leftGutter=show?0:navSpace||20;
+      const leftGutter=show?0:navSpace||(innerWidth<=700?8:20);
       const workspaceDock=root.hasAttribute('data-sk-journal-dock')||root.hasAttribute('data-sk-organizer-dock');
       const rightGutter=show||workspaceDock?0:innerWidth<=700?8:20;
       const usableWidth=Math.max(1,stage.clientWidth-leftGutter-rightGutter);
