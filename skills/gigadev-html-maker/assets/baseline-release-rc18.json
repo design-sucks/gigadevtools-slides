@@ -1,0 +1,22 @@
+{
+  "status": "RC18 reading paint and source-chrome correction",
+  "ancestor": "baseline-v18_2.json; intentional RC11\u2013RC17 repairs, see release notes",
+  "modules": {
+    "adapter.js": "a5a6877fedf55a7bb03b535a7852e93c198a12fbcb5bae253b83128b734ba87d",
+    "controller.js": "dc69c24a127af5bf61340d1a4e6c7cf9d1a96a1b73e88b1ee3541b66cc50e87c",
+    "deck.css": "3dc8e986429d9e39d55132cf7c1ce67fcfcc45011edcef5d2d59a70522d51cef",
+    "editor.js": "3800ee60998dddde0922e19ca61c0278a12707a23ddda010d45d31f253a7fa37",
+    "flow.js": "1fa0a39e68051b54c05a19d85e152e7d553d2e59a3aa0e3dd01fbf86311b6cc0",
+    "journal.js": "9cb018d25a6d7b3bfec9686ce1d0c6db50c7f397e2261d1c85af409c6226ef6f",
+    "motion.js": "bc271accb85ebf313e033a4167e37082c4b5383143b99cf5d36062461e2d171d",
+    "navigation.js": "b892df83507d025f8e5beda85cb20961f64af0a53ede4a738bb244e4a2797cdb",
+    "shell.html": "98f6e81737db173b48e2f33ba37595e410d165e806a686204c4bb9f66b8e0bd5",
+    "tooltips.js": "2ac8930baf291059cfca3083ea3d9eaac7459d1fa9d807702974d3df625e1192",
+    "ui.css": "130004fdb271f0a4d7bd4ecf12fd8cbfac11c95134ff37b237c972769377b2b2",
+    "media.js": "0f4ecc93e52e0ba4b7b2a828a98f2a9892b9ff8c02c2d360cb5efaa18ca046fc",
+    "slide-ui.js": "cd53e3a814ba7e8db60c96db017ca8c6d5334b489c3e8798011ff506dad984eb",
+    "slide-ui.css": "4bda9c998ddb080dda539297b5ab7bb7480a15701b34dd1bd7d504721e57062a",
+    "screen-content.js": "ed7ae7229dc8db3f70c1d78360db483af599e8a62a5961cfc7403e1caa9408aa"
+  },
+  "scope": "Local candidate; qualification recorded separately"
+}

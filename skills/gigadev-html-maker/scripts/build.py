@@ -253,6 +253,8 @@ def build(project,out,theme=None,typography="apply",final=False,composition_plan
  nav_spec=importlib.util.spec_from_file_location('gd_navigation',Path(__file__).resolve().parent/'navigation.py')
  nav_module=importlib.util.module_from_spec(nav_spec);nav_spec.loader.exec_module(nav_module)
  navigation=nav_module.resolve(list(records.values()))
+ role_spec=importlib.util.spec_from_file_location('gd_presentation_roles',Path(__file__).resolve().parent/'presentation_roles.py')
+ role_module=importlib.util.module_from_spec(role_spec);role_spec.loader.exec_module(role_module)
  preparation=deck.get('preparationChanges',[])
  if not isinstance(preparation,list):raise ValueError('preparationChanges must be a list')
  preparation=list(preparation)
@@ -261,7 +263,7 @@ def build(project,out,theme=None,typography="apply",final=False,composition_plan
  automatic_count=0
  slides=[]
  for sid,slide in records.items():
-  body=content(slide)
+  body=role_module.prepare(slide,content(slide),deck.get('source',{}).get('canvas'),final)
   if isolation=='strict' and re.search(r'<(?:style|link)\b',body,re.I):raise ValueError('Strict slide content must not inject stylesheets; use slideCss or the theme')
   if typography!='off' and 'html' in slide:
    slide_changes=[item for item in preparation if isinstance(item,dict) and item.get('slide')==sid and isinstance(item.get('sourceId'),str)]
@@ -290,6 +292,10 @@ def build(project,out,theme=None,typography="apply",final=False,composition_plan
   section=html.escape(navigation[sid]['section']);topic=html.escape(navigation[sid]['topic']);header=slide.get('header','full')
   if header not in ['full','number','none']:raise ValueError('Unknown header mode')
   crumbs=(('<span>'+section+'</span>' if section else '')+('<i>·</i>' if section and topic else '')+('<span>'+topic+'</span>' if topic else '')) if header=='full' else ''
+  chrome={e['role']:e for e in slide.get('sourceChrome',[])}
+  def chrome_attr(role):
+   entry=chrome.get(role)
+   return (' data-gd-chrome-source="'+html.escape(entry['sourceId'],quote=True)+'" data-gd-chrome-role="'+role+'"') if entry else ''
   bg=slide.get('background');bg_markup=''
   if bg is not None:
    if not isinstance(bg,dict) or bg.get('type') not in ['color','gradient','image']:raise ValueError(f'Invalid background on slide {sid}')
@@ -320,6 +326,23 @@ def build(project,out,theme=None,typography="apply",final=False,composition_plan
     wash_attr=' data-gd-wash="1"' if wash is not None else ''
     wash_css='--gd-background-wash:'+html.escape(wash,quote=True)+';' if wash is not None else ''
     bg_markup=f'<div class="gd-slide-background{frame_class}"{wash_attr} style="background-image:url({url});background-position:{focal};background-size:{size};{wash_css}"></div>'
+  if bg_markup:
+   ident=bg.get('sourceId')
+   if ident:bg_markup=bg_markup.replace('class="gd-slide-background','data-source-id="'+html.escape(ident,quote=True)+'" class="gd-slide-background',1)
+   layers=bg.get('layers',[])
+   if not isinstance(layers,list) or (layers and bg.get('role')=='content-frame'):raise ValueError('Background layers require decorative background paint')
+   rendered_layers=[]
+   for layer in layers:
+    typ=layer.get('type');value=layer.get('value','');box=layer.get('box',[0,0,100,100])
+    if typ=='color':
+     if not re.fullmatch(r'#[0-9a-fA-F]{6}',str(value)):raise ValueError('Invalid background layer color')
+    elif typ=='gradient':
+     if not re.fullmatch(r'(?:linear|radial)-gradient\([#a-zA-Z0-9.,%\s()-]+\)',str(value)):raise ValueError('Invalid background layer gradient')
+    else:raise ValueError('Background layers support color/gradient only')
+    if not isinstance(box,list) or len(box)!=4 or any(isinstance(x,bool) or not isinstance(x,(int,float)) or not 0<=x<=100 for x in box) or not box[2] or not box[3] or box[0]+box[2]>100.001 or box[1]+box[3]>100.001:raise ValueError('Invalid relative background layer box')
+    attr=source_attr(layer.get('sourceId'));paint=f'position:absolute;left:{box[0]}%;top:{box[1]}%;width:{box[2]}%;height:{box[3]}%;pointer-events:none;background:{value}'
+    rendered_layers.append('<div class="gd-background-layer"'+attr+' style="'+html.escape(paint,quote=True)+'"></div>')
+   bg_markup=bg_markup[:-6]+''.join(rendered_layers)+'</div>'
   shell_ink=slide.get('shellInk','auto')
   if shell_ink not in ('auto','light','dark'):raise ValueError(f'Invalid shellInk on slide {sid}')
   media_frame=slide.get('mediaFrame','content')
@@ -327,7 +350,7 @@ def build(project,out,theme=None,typography="apply",final=False,composition_plan
   if media_frame=='full':
    videos=re.findall(r'<video\b[^>]*>',body,re.I)
    if len(videos)!=1 or not re.search(r'\bposter\s*=',videos[0],re.I):raise ValueError(f'{sid}: full-frame media requires exactly one video with a poster')
-  slides.append(f'<section class="slide" data-sk-id="{sid}" data-sk-section="{section}" data-sk-topic="{topic}" data-gd-header="{header}" data-gd-shell-ink="{shell_ink}" data-gd-media-frame="{media_frame}" data-gd-source-number="{int(slide.get("sourceNumber",0))}"><div class="gd-export-meta" data-header="{header}"><div class="gd-export-crumbs">{crumbs}</div><span class="slide-page">1</span></div><div class="slide-inner">{bg_markup}<div class="gd-content">{body}</div></div></section>')
+  slides.append(f'<section class="slide" data-sk-id="{sid}" data-sk-section="{section}" data-sk-topic="{topic}" data-gd-header="{header}" data-gd-shell-ink="{shell_ink}" data-gd-media-frame="{media_frame}" data-gd-source-number="{int(slide.get("sourceNumber",0))}"><div class="gd-export-meta" data-header="{header}"><div class="gd-export-crumbs"{chrome_attr("navigation")}>{crumbs}</div><span class="slide-page"{chrome_attr("page-number")}>1</span></div><div class="slide-inner">{bg_markup}<div class="gd-content">{body}</div></div></section>')
  if deck.get('proofreadingStatus','not_checked') not in ['not_checked','reviewed','has_proposals']:raise ValueError('proofreadingStatus must be not_checked, reviewed, or has_proposals')
  seen=set()
  for item in preparation:
@@ -356,7 +379,7 @@ def build(project,out,theme=None,typography="apply",final=False,composition_plan
  if not isinstance(file_stem,str) or not file_stem.strip() or re.search(r'[\\/:*?"<>|\x00-\x1f]',file_stem):raise ValueError('Invalid fileStem')
  history=deck.get('restoredHistory',[])
  if not isinstance(history,list) or any(not isinstance(item,dict) for item in history):raise ValueError('Invalid restoredHistory')
- meta={'slides':[{**{k:s[k] for k in ['id','sourceNumber','section','topic','header'] if k in s},'sourceLabel':s.get('sourceLabel',s.get('label',s.get('title','Слайд'))),'sourceTopic':s.get('sourceTopic',s.get('topic','')),'sourceSection':s.get('section',''),'section':navigation[s['id']]['section'],'navigationSection':navigation[s['id']]['navigationSection'],'navigationRole':navigation[s['id']]['role'],'navigationSectionSourceId':navigation[s['id']]['sectionSourceId'],'navigationRemovedDuplicates':navigation[s['id']]['removedDuplicates'],'navigationTopic':navigation[s['id']]['topic'],'label':navigation[s['id']]['label'],'number':i+1} for i,s in enumerate(records.values())],'order':order,'title':title,'fileStem':file_stem,'version':version,'settings':settings,'themes':themes,'primaryTheme':primary,'history':history,'preparationChanges':preparation,'proofreadingStatus':proof_status,'savedAt':0,'shellVersion':'v18.2'}
+ meta={'slides':[{**{k:s[k] for k in ['id','sourceNumber','section','topic','header'] if k in s},'sourceLabel':s.get('sourceLabel',s.get('label',s.get('title','Слайд'))),'sourceTopic':s.get('sourceTopic',s.get('topic','')),'sourceSection':s.get('section',''),'section':navigation[s['id']]['baseSection'],'navigationSection':navigation[s['id']]['navigationSection'],'navigationRole':navigation[s['id']]['role'],'navigationSectionSourceId':navigation[s['id']]['sectionSourceId'],'navigationRemovedDuplicates':navigation[s['id']]['removedDuplicates'],'navigationTopic':navigation[s['id']]['baseTopic'],'label':navigation[s['id']]['baseLabel'],**navigation[s['id']]['overrides'],'sourceChrome':s.get('sourceChrome',[]),'number':i+1} for i,s in enumerate(records.values())],'order':order,'title':title,'fileStem':file_stem,'version':version,'settings':settings,'themes':themes,'primaryTheme':primary,'history':history,'preparationChanges':preparation,'proofreadingStatus':proof_status,'savedAt':0,'shellVersion':'v18.2'}
  shell=(ASSETS/'shell.html').read_text().replace('@@GD_SLIDES@@','\n'.join(slides)).replace('@@GD_TITLE@@',html.escape(title,quote=True)).replace('@@GD_VERSION@@','v'+str(version).zfill(2))
  base=':root{'+''.join(c['name']+':'+style.get('colors',DEFAULT['colors']).get(primary,DEFAULT['colors'][primary]).get(c['name'][5:],DEFAULT['colors'][primary][c['name'][5:]])+';' for c in palette)+'--gd-font:'+style.get('font',DEFAULT['font'])+';--gd-display-font:'+style.get('displayFont',style.get('font',DEFAULT['displayFont']))+';}'
  slide_css=style.get('slideCss','')

@@ -1,12 +1,28 @@
 /* Three-way merge of leaf text edits from saved HTML back to an authored project. */
 import fs from 'node:fs/promises';import path from 'node:path';import {fileURLToPath,pathToFileURL} from 'node:url';import {createRequire} from 'node:module';
+import {spawnSync} from 'node:child_process';
 const [baseline,edited,projectFile,out]=process.argv.slice(2);if(!baseline||!edited||!projectFile||!out||process.argv.length!==6)throw Error('Usage: node reconcile_edits.mjs baseline.html edited.html project.json NEW-project.json');
 if(path.dirname(path.resolve(projectFile))!==path.dirname(path.resolve(out)))throw Error('Output must remain beside the project so its asset paths remain valid');
 try{await fs.access(out);throw Error('Output already exists');}catch(e){if(e.code!=='ENOENT')throw e;}
 const here=path.dirname(fileURLToPath(import.meta.url));let config={};try{config=JSON.parse(await fs.readFile(path.join(here,'../runtime.local.json'),'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}
 const modules=process.env.HTML_MAKER_NODE_MODULES||config.nodeModules;const require=modules?createRequire(path.join(modules,'package.json')):createRequire(import.meta.url);const {chromium}=require('playwright');const browser=await chromium.launch({headless:true,...(process.env.HTML_MAKER_CHROME==='bundled'?{}:{channel:'chrome'})});
 try {
- const snapshot=async file=>{const page=await browser.newPage({serviceWorkers:'block'});await page.route(/^https?:/,r=>r.abort());await page.goto(pathToFileURL(path.resolve(file)).href);await page.waitForFunction(()=>window.SalesKitUI&&window.GigaDevDeck);const data=await page.evaluate(()=>({state:SalesKitUI.getState(),slides:[...document.querySelectorAll('#slides > .slide[data-sk-id]')].map(s=>{const content=s.querySelector('.gd-content'),copy=content.cloneNode(true);for(const node of copy.querySelectorAll('[data-source-id]'))if(!node.querySelector('[data-source-id]'))node.innerHTML='__GD_EDITABLE_LEAF__';for(const node of copy.querySelectorAll('[data-eid],[contenteditable]')){node.removeAttribute('data-eid');node.removeAttribute('contenteditable');}return {id:s.dataset.skId,unmapped:copy.innerHTML,targets:[...content.querySelectorAll('[data-source-id]')].map(n=>({id:n.dataset.sourceId,html:n.innerHTML,hasChildren:!!n.querySelector('[data-source-id]')}))}})}));await page.close();return data;};
+ const snapshot=async file=>{
+  const page=await browser.newPage({serviceWorkers:'block'});await page.route(/^https?:/,r=>r.abort());await page.goto(pathToFileURL(path.resolve(file)).href);await page.waitForFunction(()=>window.SalesKitUI&&window.GigaDevDeck);
+  const data=await page.evaluate(()=>{
+   const state=SalesKitUI.getState(),work=document.createElement('template');
+   // Work serialization includes detached/excluded slides. The generated copy's
+   // extra save revision is not used; state above remains the actual saved state.
+   work.innerHTML=SalesKitUI.exportDocument('work');
+   const records=new Map(JSON.parse(work.content.querySelector('#sk-deck-state').textContent).slides.map(s=>[s.id,s]));
+   return {state,slides:[...work.content.querySelectorAll('#slides > .slide[data-sk-id]')].map(s=>{
+    const content=s.querySelector('.gd-content'),copy=content.cloneNode(true),record=records.get(s.dataset.skId);
+    for(const node of copy.querySelectorAll('[data-source-id]'))if(!node.querySelector('[data-source-id]'))node.innerHTML='__GD_EDITABLE_LEAF__';
+    for(const node of copy.querySelectorAll('[data-eid],[contenteditable]')){node.removeAttribute('data-eid');node.removeAttribute('contenteditable');}
+    return {id:s.dataset.skId,unmapped:copy.innerHTML,navigation:{label:record.navigationLabelOverride??record.label,section:s.dataset.skSection||'',topic:s.dataset.skTopic||'',baseLabel:record.label,baseSection:record.section||'',baseTopic:record.navigationTopic??record.topic??''},targets:[...content.querySelectorAll('[data-source-id]')].map(n=>({id:n.dataset.sourceId,html:n.innerHTML,hasChildren:!!n.querySelector('[data-source-id]')}))};
+   })};
+  });await page.close();return data;
+ };
  const original=await snapshot(baseline),saved=await snapshot(edited),project=JSON.parse(await fs.readFile(projectFile,'utf8'));const conflicts=[],changes=[];
  const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
  const stateFields=[['order',project.order||project.slides.map(s=>s.id)],['title',project.title||path.parse(projectFile).name],['fileStem',project.fileStem||original.state.fileStem],['settings',project.restoredSettings||{...original.state.settings,...(typeof project.motion==='boolean'?{motion:project.motion}:{})}],['preparation',project.preparationChanges||[]],['history',project.restoredHistory||[]],['version',project.version||1]];
@@ -16,6 +32,24 @@ try {
   changes.push({kind:'state',field,before,after});
  }
  const baseSlides=new Map(original.slides.map(s=>[s.id,s]));const savedSlides=new Map(saved.slides.map(s=>[s.id,s]));
+ const resolveNavigation=value=>{
+  const run=spawnSync('python3',[path.join(here,'navigation.py'),'-'],{input:JSON.stringify(value),encoding:'utf8',maxBuffer:8*1024*1024});
+  if(run.status!==0)throw Error('Invalid project navigation: '+run.stderr.trim());return JSON.parse(run.stdout);
+ };
+ const currentNavigation=resolveNavigation(project);
+ for(const slide of project.slides){
+  const before=baseSlides.get(slide.id)?.navigation,after=savedSlides.get(slide.id)?.navigation,current=currentNavigation[slide.id];if(!before||!after)continue;
+  const next={section:current.section,topic:current.topic};let headerChanged=false;
+  for(const [field,baseField]of [['label','baseLabel'],['section','baseSection'],['topic','baseTopic']]){
+   if(same(before[field],after[field])||same(current[field],after[field]))continue;
+   if(!same(current[field],before[field])||!same(current[baseField],before[baseField])){conflicts.push({code:'concurrent-navigation-change',slide:slide.id,field,before:before[field],after:after[field],current:current[field]});continue;}
+   if(field==='label'){if(after.label===current.baseLabel)delete slide.navigationLabelOverride;else slide.navigationLabelOverride=after.label;}
+   else{next[field]=after[field];headerChanged=true;}
+   changes.push({kind:'navigation',slide:slide.id,field,before:before[field],after:after[field]});
+  }
+  if(headerChanged){if(next.section===current.baseSection&&next.topic===current.baseTopic)delete slide.showNavigationOverride;else slide.showNavigationOverride=next;}
+ }
+ resolveNavigation(project);
  const modifications=[];
  for(const slide of project.slides){const base=baseSlides.get(slide.id),current=savedSlides.get(slide.id);if(!base||!current){conflicts.push({code:'missing-slide',slide:slide.id});continue;}if(base.unmapped!==current.unmapped)conflicts.push({code:'unmapped-or-layout-change',slide:slide.id});const byId=new Map();for(const x of current.targets){const list=byId.get(x.id)||[];list.push(x);byId.set(x.id,list);}
   for(const target of base.targets){if(target.hasChildren)continue;const matches=byId.get(target.id)||[];if(matches.length!==1){conflicts.push({code:'missing-or-ambiguous-target',slide:slide.id,sourceId:target.id});continue;}if(target.html===matches[0].html)continue;

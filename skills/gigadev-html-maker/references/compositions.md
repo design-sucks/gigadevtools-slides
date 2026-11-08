@@ -1,6 +1,6 @@
 # Legacy composition renderer 1.0.0
 
-For new design work use the accepted [24-reference pack](reference-pack.md). This simplified renderer remains for existing pinned projects; it is not a rendering implementation of the accepted v06 references.
+For new design work without a supplied reference, start with the [bundled-demo default](demo-default.md); the accepted [24-reference pack](reference-pack.md) is secondary. This simplified renderer remains for existing pinned projects; it is not a rendering implementation of the accepted v06 references.
 
 18 clean, editable HTML patterns rebuilt from reviewed presentation compositions. They supply hierarchy, geometry and content roles, not source facts, logos, screenshots or a mandatory brand palette. The library is a first vocabulary, not a universal design generator or a pixel copy of every reference slide.
 
