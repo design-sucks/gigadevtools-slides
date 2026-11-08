@@ -1,3 +1,10 @@
+# v0.7.1-pilot.1 — 2026-11-08, Maker 0.22.0-rc19.1
+
+- Package the reviewed mobile fitting correction: restore 8+8 px margins below 701 px while retaining full-window background paint and desktop/show behavior.
+- Preserve the original compact fixture and 0.7px tolerances; retain pre-assertion geometry/font diagnostics and verify intentional navigation-topic deduplication.
+- Included runtime passed Linux source/browser CI, 104 anchor comparisons and 208 rest states; an injected heading displacement is rejected. Standalone skill notes retain local, portable links.
+- Navigation editing and all RC19 features retained. Export stays 0.9.1. No new libraries or broad deck/PowerPoint recertification. Previous published assets remain immutable.
+
 # v0.7.0-pilot.1 — 2026-11-08, Maker 0.22.0-rc19
 
 - One-pencil raised navigation popover: list title and per-slide show section/topic, shared icon actions and no repeated preview.

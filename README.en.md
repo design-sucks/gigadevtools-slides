@@ -69,6 +69,6 @@ Composition references 2.0.0: 24 accepted editable examples for Maker (v06 revie
 Maker **0.22.0-rc17**, Export **0.9.1**. Adds inline journal differences and consolidates bounded source/layout/font/media/navigation fixes. Existing composition assets are retained. No Typograf or new template/chart library is included. This is a corporate pilot/prerelease with bounded qualification. See [release scope and validation](docs/release-v0.6.0-pilot.1.md).
 
 
-## v0.7.0-pilot.1 update
+## v0.7.1-pilot.1 update
 
-Maker **0.22.0-rc19**, Export **0.9.1**. A single-pencil popover edits list labels and per-slide presentation context, with guarded saved-work/project reconciliation. Includes full-reading background/source-chrome repairs and the bundled-demo composition default. No new library or Typograf. This is a corporate prerelease with bounded qualification; see [release notes](docs/release-v0.7.0-pilot.1.md).
+Maker **0.22.0-rc19.1**, Export **0.9.1**. Restores the intended narrow-screen composition scale and passes the complete Linux compact CI with the original 0.7px tolerances. All RC19 features, including navigation editing, remain available. Corporate prerelease; see [fixes and validation](docs/release-v0.7.1-pilot.1.md) and [previous RC19 features](docs/release-v0.7.0-pilot.1.md).
