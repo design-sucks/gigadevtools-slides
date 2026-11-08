@@ -82,3 +82,13 @@ The title and navigation bubbles pair their text and icon ink with a translucent
 Before authoring, inspect actual PPTX/outline dividers and mark reviewed section title slides with `navigationRole: "divider"` (a `composition.id: "divider"` also qualifies). Their visible heading sets the section for subsequent source-order slides until the next divider. Do not infer a divider merely from short text. Explicit `navigationSection` overrides a page (empty clears its header section); explicit `section` is respected. Metadata resolves in deck.slides order and stays attached to stable IDs during reorder/exclude/save; an excluded divider does not erase its members' context.
 
 The top breadcrumb removes a topic equal to the actual first h1/h2 and removes repeated section/title/topic values, ignoring cosmetic punctuation/case/spacing. It preserves an explicit empty `navigationTopic`; the runtime must not refill it from the label. Empty breadcrumbs leave the page number in place. `navigationSection` in output metadata retains the full section even on a divider whose header is suppressed. Sidebar labels remain nonempty for finding pages; use `navigationLabel` for a reviewed concise label and `navigationTopic` only for useful distinct context. Only the authoring agent summarizes semantics; the builder performs no speculative summarization or title deletion in slide bodies. Raw source labels/topics/sections are retained separately.
+
+
+## Source presentation roles (RC18)
+
+Use [presentation roles](presentation-roles.md) for `background.sourceId`/layers and reviewed `sourceChrome`. Original source blocks stay intact. The builder routes paint to the full reading viewport and source chrome to canonical show/export metadata; it does not hide body titles or data.
+
+
+## User navigation overrides (RC19)
+
+The [navigation editor](navigation-editor.md) saves optional per-slide `navigationLabelOverride` and `showNavigationOverride: {section, topic}`. Generated defaults remain in the resolved `baseLabel`, `baseSection`, `baseTopic`; built metadata keeps those defaults plus overrides. DOM/show/export use effective values. Overrides apply after automatic duplicate suppression, are per stable slide ID, and never propagate to the rest of a section. Lists need a nonempty name (max120 UTF-16 units); both show fields may be empty (max160 each). Unknown keys/types/control characters fail the build. These fields change no body content, header mode or page counter. Reconcile saved **work** HTML before rebuilding from JSON.

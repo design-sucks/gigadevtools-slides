@@ -1,5 +1,11 @@
 # Current release baseline
 
+Maker 0.22.0-rc19 resolves `assets/current-baseline.json` and checks its version against package.json before loading `baseline-release-rc19.json`. This records the reviewed navigation-popover controller/UI/journal changes, retaining RC18 background/chrome and RC17 runtime repairs. Builder/navigation/reconciliation changes are covered separately. Historical snapshots remain unchanged. See [RC19 notes](release-rc19.md).
+
+## Historical RC17
+
+# Current release baseline
+
 Maker 0.22.0-rc17 uses `assets/baseline-release-rc17.json` for release checks. It records the intentional RC11–RC17 repairs and journal highlighting; old snapshots below remain historical evidence and are not the current expected module hashes. Qualification scope is in [RC17 notes](release-rc17.md).
 
 # Runtime baseline

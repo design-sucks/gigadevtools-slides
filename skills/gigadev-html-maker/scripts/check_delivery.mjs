@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const [input, projectFile, ...extra] = process.argv.slice(2);
@@ -12,7 +13,13 @@ if (!input || !projectFile || extra.length) {
 }
 const here = path.dirname(fileURLToPath(import.meta.url));
 const project = JSON.parse(await fs.readFile(projectFile, 'utf8'));
-const baseline = JSON.parse(await fs.readFile(path.join(here, '../assets/baseline-v18_2.json'), 'utf8'));
+const rolesRun=spawnSync('python3',[path.join(here,'presentation_roles.py'),'--project-only',projectFile],{encoding:'utf8'});
+if(rolesRun.status!==0)throw Error('Invalid presentation roles: '+rolesRun.stdout);
+const roleProof=JSON.parse(rolesRun.stdout).entries;
+const pointer=JSON.parse(await fs.readFile(path.join(here,'../assets/current-baseline.json'),'utf8'));
+const pkg=JSON.parse(await fs.readFile(path.join(here,'../package.json'),'utf8'));
+if(pointer.version!==pkg.version||!/^baseline-release-[a-z0-9-]+\.json$/.test(pointer.file))throw Error('Invalid or mismatched release baseline pointer');
+const baseline=JSON.parse(await fs.readFile(path.join(here,'../assets',pointer.file),'utf8'));
 const issues = [];
 const observations = [];
 const checks = [];
@@ -24,8 +31,9 @@ const supported = new Set(['text', 'table', 'image', 'media']);
 const keyOf = (slide, id) => JSON.stringify([slide, id]);
 const expected = project.slides.filter(s => selected.has(s.id)).map(slide => ({
   id: slide.id,
+  chrome: roleProof.filter(e=>e.slideId===slide.id),
   background: slide.background?.asset,
-  blocks: (slide.blocks ?? []).filter(b => supported.has(b.kind)),
+  blocks: (slide.blocks ?? []).filter(b => supported.has(b.kind) && !(slide.sourceChrome??[]).some(c=>c.sourceId===b.id)),
 }));
 const expectedKeys = new Set(expected.flatMap(s => s.blocks.map(b => keyOf(s.id, b.id))));
 const sourceChanges = new Map();
@@ -63,10 +71,12 @@ function expectedText(block) {
 
 async function checkShell(page) {
   const ids = Object.keys(baseline.modules).filter(name => name !== 'shell.html');
+  const fragments=Object.fromEntries(await Promise.all(ids.filter(name=>name.endsWith('.css')&&!['ui.css','deck.css'].includes(name)).map(async name=>[name,await fs.readFile(path.join(here,'../assets',name),'utf8')])));
   const domIds = ids.map(name => {
     if (name === 'controller.js') return 'sk-controller';
     if (name === 'deck.css') return 'gd-deck-styles';
     if (name === 'ui.css') return 'sk-ui-styles';
+    if(name.endsWith('.css'))return 'gd-style-pack';
     return 'gd-' + name.slice(0, -3);
   });
   const parts = await page.evaluate(ids => ({
@@ -82,7 +92,8 @@ async function checkShell(page) {
     fail('shell', 'Expected a running Maker v18.2 shell and its canonical stage.');
   }
   for (const [index, name] of ids.entries()) {
-    const content = parts.contents[index];
+    let content = parts.contents[index];
+    if(fragments[name])content=content?.includes(fragments[name])?fragments[name]:null;
     if (content === null || createHash('sha256').update(content).digest('hex') !== baseline.modules[name]) {
       fail('shell-module', 'Missing or modified shell module.', { module: name });
     }
@@ -223,6 +234,15 @@ async function inspectExport(page) {
         issues.push({code:'nested-slide',slide:id,message:'Slide content contains a nested deck, frame or reserved shell structure.'});
       }
       const source = expected.find(entry => entry.id === id);
+      for(const entry of source?.chrome??[]){
+        const markers=[...slide.querySelectorAll('.gd-export-meta [data-gd-chrome-source]')].filter(n=>n.dataset.gdChromeSource===entry.sourceId&&n.dataset.gdChromeRole===entry.role);
+        const duplicates=[...content.querySelectorAll('[data-source-id]')].filter(n=>n.dataset.sourceId===entry.sourceId);
+        const enabled=slide.dataset.gdHeader!=='none'&&(entry.role!=='navigation'||slide.dataset.gdHeader==='full');
+        const number=String(meta.order.indexOf(id)+1);
+        if(markers.length!==1||duplicates.length||!enabled||(entry.role==='page-number'&&(!visible(markers[0])||markers[0].textContent.trim()!==number))){
+          issues.push({code:'source-chrome',slide:id,sourceId:entry.sourceId,message:'Reviewed source chrome must map to canonical shell metadata without a body duplicate.'});
+        }
+      }
       const targets = new Map();
       for (const node of content.querySelectorAll('[data-source-id]')) {
         const list = targets.get(node.dataset.sourceId) ?? [];

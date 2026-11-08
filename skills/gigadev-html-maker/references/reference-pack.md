@@ -2,6 +2,8 @@
 
 24 anonymized, reviewed examples (accepted v06). These are editable visual references, not a universal renderer or finished content. Use their composition and type hierarchy; source/reference paint and graphics take precedence. The older 18-pattern renderer is a separate compatibility tool, not a faithful implementation of these examples.
 
+For layouts without a supplied reference, start with the [experimental bundled-demo default](demo-default.md). This catalog is secondary when the demo cannot accommodate the task or volume.
+
 First review each actual source render and choose preserve, adapt or redesign using [composition decisions](composition-decisions.md). A good source composition may need no reference.
 
 ## Retrieve only what matters

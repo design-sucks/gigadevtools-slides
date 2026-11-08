@@ -62,9 +62,13 @@ def block_text(b):
  if b['kind']=='text':return ' '.join(p.get('text','') for p in b.get('paragraphs',[]))
  return ' '.join(p.get('text','') for row in b.get('rows',[]) for cell in row for p in cell)
 
+_roles_spec=importlib.util.spec_from_file_location('gd_presentation_roles',Path(__file__).resolve().parent/'presentation_roles.py')
+_roles=importlib.util.module_from_spec(_roles_spec);_roles_spec.loader.exec_module(_roles)
+
 def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('inventory');p.add_argument('project');p.add_argument('--mode',choices=['editable','viewing'],default='editable');p.add_argument('--transformations');p.add_argument('--source',type=Path);p.add_argument('--off-canvas',type=Path);a=p.parse_args()
  src=json.loads(Path(a.inventory).read_text());dst=json.loads(Path(a.project).read_text())
+ chrome={(e['slide'],e['sourceId']):e for e in _roles.audit(src,dst)}
  if not src.get('source',{}).get('sha256'):p.error('Inventory must be an independent PPTX extraction with source.sha256')
  source_verified=False
  if a.source:
@@ -107,6 +111,8 @@ def main():
   for b in slide.get('blocks',[]):
    if b['kind'] not in ('text','table') or not norm(block_text(b)):continue
    total+=1; sid=b['id']; transform=transformations.get((n,sid)); target_id=transform['targetId'] if transform else sid; values=parser.targets.get(target_id,[])
+   if (n,sid) in chrome:
+    observations.append({'code':'source-chrome-reviewed','slide':n,'sourceId':sid,'role':chrome[(n,sid)]['role'],'originalText':chrome[(n,sid)]['originalText'],'reason':chrome[(n,sid)]['reason']});continue
    disposition=dispositions.get((n,sid))
    if disposition is not None:
     seen_dispositions.add((n,sid))

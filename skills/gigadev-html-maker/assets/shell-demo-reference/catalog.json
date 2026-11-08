@@ -1,0 +1,50 @@
+{
+  "version": "1.0.0",
+  "policyId": "shell-demo-default/v1",
+  "experimental": true,
+  "scope": "Default composition reference only when none is supplied; explicit preserve-design/no-reference requests take precedence.",
+  "sources": {
+    "deck": "assets/example-deck.json",
+    "deckSha256": "49a0f1fe70540ed948314ce535b2ea5bf536d8a02279fe081aaf312a820f6a54",
+    "theme": "assets/example-theme.json",
+    "themeSha256": "67b089d027c7707e6925658667b82c42fa6e1e4d12636fb13d45562d34260ff4"
+  },
+  "slides": [
+    {
+      "id": "cover",
+      "purpose": "Cover and main message",
+      "preview": "cover.png",
+      "sourceSlideId": "cover"
+    },
+    {
+      "id": "view",
+      "purpose": "Three comparable groups",
+      "preview": "view.png",
+      "sourceSlideId": "view"
+    },
+    {
+      "id": "principles",
+      "purpose": "Three principles with open grouping",
+      "preview": "principles.png",
+      "sourceSlideId": "principles"
+    },
+    {
+      "id": "save",
+      "purpose": "Comparison table",
+      "preview": "save.png",
+      "sourceSlideId": "save"
+    },
+    {
+      "id": "source",
+      "purpose": "Ordered steps",
+      "preview": "source.png",
+      "sourceSlideId": "source"
+    },
+    {
+      "id": "formats",
+      "purpose": "Simple process and outputs",
+      "preview": "formats.png",
+      "sourceSlideId": "formats"
+    }
+  ]
+}

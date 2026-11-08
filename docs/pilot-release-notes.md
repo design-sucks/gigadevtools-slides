@@ -1,11 +1,23 @@
-# Corporate pilot v0.6.0-pilot.1
+# Corporate pilot · v0.7.0-pilot.1
 
-Maker 0.22.0-rc17, Export 0.9.1.
+HTML Maker **0.22.0-rc19** and HTML Export **0.9.1**.
 
-- Changed fragments are highlighted in the journal's Before/After comparison; punctuation and changed whitespace are visible. Review actions, exact source text, undo and saved history are retained.
-- Consolidated fixes for source/list preservation, saved-edit reconciliation, font readiness, explicit diagram relationships and static source effects, media controls, shell contrast and section-aware navigation.
-- Existing composition assets retained. No Typograf or new template/chart dependencies.
-- Validation remains bounded: historical three mini PPTX decks/16 slides plus focused RC14–RC17 tests and refreshed public 13-slide demo. Full originals, other browsers and new native PowerPoint/PDF export are deferred. Design still requires visual review.
-- Corporate SB Sans scope remains separately documented; private source materials/configurations are excluded.
+## Что изменилось
 
-See [release detail](release-v0.6.0-pilot.1.md), CHANGELOG and package manifest for exact versions/hashes.
+- Один карандаш в порядке слайдов открывает окно поверх панели: название в списке, раздел и тема в режиме показа. Общие ✓ × ↶, без дублирующего предпросмотра.
+- Все три поля сохраняются в рабочих HTML, сборках и журнале; сохраняются при очистке истории. Перестановка и исключение слайдов не ломают привязку. Номер остаётся автоматическим.
+- Сохранённый рабочий HTML переносится обратно в JSON-проект и пересобирается с теми же значениями. Конфликт правок одного поля не перезаписывает проект.
+- Включены ранее локальные исправления фона на всё окно чтения, перенос исходных колонтитулов в метаданные, защита финальной сборки и актуальная контрольная версия оболочки.
+- Без своего композиционного референса используется встроенное демо с локальными превью. Пользовательский шаблон, сохранение дизайна и явный запрос без референса имеют приоритет.
+
+Подсветка изменений журнала и предыдущие исправления сохранены. Новых библиотек и Typograf нет. HTML Export не менялся.
+
+## Пакеты
+
+`gigadev-html-maker.zip`, `gigadev-html-export.zip`, общий `gigadevtools-slides.zip`, `manifest.json` и `SHA256SUMS`.
+
+## Границы проверки
+
+Проверены короткие сценарии редактора, сохранения/повторного открытия, показа/статического экспорта и переноса правок в проект; штатная оболочка и клавиатура; короткий реальный PPTX. Большой новый прогон всех презентаций, Windows и native PowerPoint в эту итерацию не входили. Автоматические проверки не гарантируют качественный дизайн произвольных слайдов. Прежняя погрешность compact-anchor на Linux остаётся вне этого изменения.
+
+Это корпоративный пилот. SB Sans assets не входят в MIT-лицензию кода; область прав на шрифты не расширяется.

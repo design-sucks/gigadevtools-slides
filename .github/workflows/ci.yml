@@ -16,6 +16,9 @@ jobs:
       - run: python3 scripts/check_release.py
       - run: python3 skills/gigadev-html-maker/scripts/self_test.py
       - run: python3 skills/gigadev-html-maker/scripts/check_core_regression.py
+      - run: python3 skills/gigadev-html-maker/scripts/test_navigation.py
+      - run: python3 skills/gigadev-html-maker/scripts/test_navigation_overrides.py
+      - run: python3 skills/gigadev-html-maker/scripts/test_presentation_roles.py
       - run: python3 skills/gigadev-html-maker/scripts/test_source_style.py
       - run: python3 skills/gigadev-html-maker/scripts/test_compositions.py
       - run: python3 skills/gigadev-html-maker/scripts/test_reference_pack.py

@@ -1,4 +1,12 @@
-# v0.6.0-pilot.1 — Maker 0.22.0-rc17
+# v0.7.0-pilot.1 — 2026-11-08, Maker 0.22.0-rc19
+
+- One-pencil raised navigation popover: list title and per-slide show section/topic, shared icon actions and no repeated preview.
+- Dirty/journal/draft/work/bundle/show/export persistence; guarded field-level project reconciliation, including excluded slides.
+- Includes RC18 full-reading paint and source-chrome guards/current-baseline delivery repair, plus the RC18.1 bundled-demo reference default with local previews.
+- RC17 journal highlighting and earlier repairs retained. No Typograf/new chart/template library. Export remains 0.9.1.
+- Corporate prerelease; native PowerPoint/Windows/full-deck recertification is outside scope. Known Linux compact-anchor discrepancy remains documented.
+
+## v0.6.0-pilot.1 — Maker 0.22.0-rc17
 
 - Preserve the existing composition/reference library and conservative text preparation. No Typograf or new external template/chart engine is added.
 - Journal highlights changed Unicode text, punctuation and whitespace in Before/After with deletion/insertion semantics. Exact source strings, review actions and saved history remain unchanged.

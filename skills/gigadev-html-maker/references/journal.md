@@ -42,3 +42,8 @@ For an already saved work HTML, `scripts/reconcile_edits.mjs BASELINE SAVED PROJ
 ## Inline change highlighting (RC17)
 
 Before/After comparisons highlight only changed grapheme sequences: deletions are struck through, insertions underlined. The legend and semantic del/ins elements distinguish changes without relying on color. Changed whitespace is visible in the comparison: · for a space, ⍽ for a nonbreaking space, ⇥ for a tab and ↵ for a newline. Exact source/history strings remain unchanged. User text is rendered through text nodes, never interpreted as markup. The same renderer is used for preparation, current edits and saved history in both panel views and themes. Very large changed spans use a bounded coarse comparison to avoid blocking the journal; no claim of minimal semantic diff is made. No Typograf or other typography dependency is added.
+
+
+## Navigation edits (RC19)
+
+List-name and show-section/topic changes enter the same dirty snapshot, current journal and saved work/bundle revision history. Common restore returns generated defaults; global reset returns the opened file's values, which may already contain overrides. Clearing history keeps actual navigation values. `reconcile_edits.mjs` carries navigation back to project fields with per-field three-way conflict detection; different fields can merge, a conflicting field prevents output. Work snapshots retain excluded source slides. See [navigation editing](navigation-editor.md).

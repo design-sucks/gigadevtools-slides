@@ -12,19 +12,19 @@ Fix each delivery failure and rerun on the new output. Complete the existing PPT
 
 ## What the delivery check verifies
 
-- Pinned Maker v18.2 runtime and styles, a working stage and matching slide order. An alternate viewer or an edited runtime fails. Motion must be active by default on normal systems. A partial native wheel scroll and ArrowRight must exercise actual blur and opacity. The shell's reduced-motion and motion-off controls remain available. If the user explicitly requested static playback by default, record `deliveryReview.motionOffReason`. The checker will enable motion in its test copy and exercise both transitions.
+- Pinned current-release Maker v18.2 runtime and styles (version-checked `assets/current-baseline.json`), a working stage and matching slide order. An alternate viewer or an edited runtime fails. Motion must be active by default on normal systems. A partial native wheel scroll and ArrowRight must exercise actual blur and opacity. The shell's reduced-motion and motion-off controls remain available. If the user explicitly requested static playback by default, record `deliveryReview.motionOffReason`. The checker will enable motion in its test copy and exercise both transitions.
 - One full 1920×1080 slide frame with the standard content safe area. Background paint covers the canvas. A nested viewer or shell inside slide content fails. Inset slide-sized images and near-full-size framed wrappers are flagged. Use an actual full-canvas background for slide paint. For a non-16:9 PPTX, agree how to adapt its layout and record the decision in `deliveryReview.sourceAspectReason`.
 - Visible source targets for supported text, tables, images and media. Wording and table values are compared after normalizing whitespace. Supported source link destinations must remain present. Applied journal changes are recognized when their before text matches. The checker verifies the presence of video and audio elements; playback and triggers still require their own tests.
 - Image decoding, original SVG retained as vector, and raster size at 1920×1080. The check flags visible bitmap images and full-canvas raster backgrounds enlarged above 1.25×. Correct the asset, crop or layout. Review icons, gradients, masks and illustration edges at 100% even when the resolution passes.
 
 ## Record approved source transformations
 
-When source elements move into navigation metadata, are deliberately replaced or are omitted by agreement, record each affected source object with its reason. Use the existing graphic decision manifest for asset dispositions. The delivery review records only exceptions to target matching. It does not disable the independent image, canvas or motion checks.
+For source navigation/page numbers, use reviewed [sourceChrome](presentation-roles.md), which is independently checked and mapped to canonical metadata. Do not use generic sourceChanges to bypass this check. For other deliberately replaced or agreed omitted objects, record each affected source object with its reason. Use the existing graphic decision manifest for asset dispositions. The delivery review records only exceptions to target matching. It does not disable the independent image, canvas or motion checks.
 
 ```json
 {
   "deliveryReview": {
-    "sourceChanges": [{"slide":"s2","sourceId":"s2-o14","reason":"Original page number is now the Maker counter."}],
+    "sourceChanges": [{"slide":"s2","sourceId":"s2-o14","reason":"User-approved content replacement; independent source review attached."}],
     "frames": [{"slide":"s8","reason":"User approved the border of the slide-sized diagram shown in the sample."}]
   }
 }
@@ -106,3 +106,6 @@ For a deliberately static frame after any transition, a reviewed run may additio
 An explicitly reviewed `shapeReview.kind` of `source-gradient-svg-v1` supports only the source circle-gradient patterns resolved by `scripts/source_gradient_svg.py`. Place the source-derived SVG immediately before the editable text target as its sibling, with `data-source-shape-for` equal to that target's `data-source-id`, absolute source geometry and `pointer-events:none`. The source target itself remains transparent and keeps every run and marker; the SVG has no duplicate `data-source-id`. The DOM check compares source-derived SVG structure, shape bounds and computed paint, and rejects unsupported geometry, checked CSS overrides, timing combinations and ambiguous association. Independent audit is still needed for other CSS and dynamic changes. Native source and exact candidate frames remain manual review evidence; interior-pixel comparisons and this narrow path do not establish arbitrary gradients, animations or whole-slide parity.
 
 For reviewed alpha runs, the DOM/source comparison keeps an ordered stream per paragraph. Each `<br>` corresponds to one source line break; a literal newline is accepted only with a whitespace mode that renders it as a line break (`pre`, `pre-wrap`, `pre-line` or `break-spaces`). Keep whitespace-only runs as exact text nodes; a reviewed whitespace run also needs its own plain marked span. Paragraphs must be explicit sibling `<p>` or `<li>` elements for multi-paragraph targets; a single paragraph may itself be the target. Hidden breaks, hidden or zero-font whitespace, missing/reordered text, ambiguous or duplicate markers, and merged paragraph boundaries remain failures. More complex paragraph nesting and browser-specific layout still require review or a supported representation. Shape, outline, style and effect checks remain mandatory.
+
+
+For source paint/chrome changes also run `node scripts/test_presentation_roles.mjs Presentation.html EMPTY_QA_DIRECTORY` and inspect its wide, tall, narrow, partial-scroll and show frames. `check_delivery` proves full-canvas export bounds; it does not alone prove full **reading viewport** coverage.

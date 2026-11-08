@@ -14,6 +14,9 @@ const modules=process.env.HTML_MAKER_NODE_MODULES || config.nodeModules;
 const require=modules ? createRequire(path.join(modules,'package.json')) : createRequire(import.meta.url);
 const {chromium}=require('playwright');
 const project=JSON.parse(await fs.readFile(projectFile,'utf8'));
+const roleRun=spawnSync('python3',[path.join(here,'presentation_roles.py'),inventory,projectFile],{encoding:'utf8'});
+if(roleRun.status!==0)throw Error('Invalid source chrome: '+roleRun.stdout);
+const chromeProof=JSON.parse(roleRun.stdout).entries;
 const inputHtmlSha=createHash('sha256').update(await fs.readFile(html)).digest('hex');
 const alphaArg=args.indexOf('--source-alpha'),sourceArg=args.indexOf('--source');
 const inventoryArgs=args.filter((_,i)=>alphaArg<0 || (i!==alphaArg && i!==alphaArg+1));
@@ -157,7 +160,7 @@ try {
     }}
     return {id:node.dataset.sourceId,editable:Boolean(node.hasAttribute('data-eid') || node.querySelector('[data-eid]')),bold,italic,shape,visibility:textEvidence(node),markers:markers(node),links:[node,...node.querySelectorAll('a[href]')].filter(n=>n.matches('a[href]')).map(n=>({text:n.textContent,href:n.getAttribute('href')})),rows:node.tagName==='TABLE'?[...node.querySelectorAll('tr')].map(row=>[...row.children].filter(c=>['TD','TH'].includes(c.tagName)).map(c=>cellText(c))):null};
    });
-   return {id,html:slide.querySelector('.gd-content')?.innerHTML ?? '',targets};
+   return {id,html:slide.querySelector('.gd-content')?.innerHTML ?? '',targets,chrome:[...slide.querySelectorAll('.gd-export-meta [data-gd-chrome-source]')].map(n=>({id:n.dataset.gdChromeSource,role:n.dataset.gdChromeRole,text:n.textContent,visible:n.checkVisibility({visibilityProperty:true,opacityProperty:true}),header:slide.dataset.gdHeader,bodyCount:slide.querySelectorAll('.gd-content [data-source-id="'+CSS.escape(n.dataset.gdChromeSource)+'"]').length})),number:SalesKitUI.getState().order.indexOf(id)+1};
   },{id:slideId,shapeIds,gradientSvgs}));
  }
 
@@ -198,6 +201,12 @@ try {
   if(!dom)continue;
   for(const block of slide.blocks ?? []) {
    if(!['text','table'].includes(block.kind))continue;
+   const chrome=chromeProof.find(e=>e.slide===slide.sourceNumber&&e.sourceId===block.id);
+   if(chrome){const matches=dom.chrome.filter(x=>x.id===block.id&&x.role===chrome.role);const value=matches[0];
+    if(matches.length!==1||value.bodyCount||value.header==='none'||(chrome.role==='page-number'&&(!value.visible||value.text!==String(dom.number))))report.issues.push({code:'source-chrome-runtime',slide:slide.sourceNumber,sourceId:block.id});
+    else report.observations.push({code:'source-chrome-reviewed',slide:slide.sourceNumber,sourceId:block.id,role:chrome.role,originalText:chrome.originalText,reason:chrome.reason});
+    continue;
+   }
    const targetId=transforms.find(t=>t.slide===slide.sourceNumber && t.sourceId===block.id)?.targetId ?? block.id;
    const matches=dom.targets.filter(t=>t.id===targetId);
    if(matches.length===1 && !matches[0].editable)report.issues.push({code:'missing-editor-binding',slide:slide.sourceNumber,sourceId:block.id,targetId});
