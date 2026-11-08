@@ -1,6 +1,6 @@
 {
   "name": "gigadev-html-maker",
-  "version": "0.22.0-rc19",
+  "version": "0.22.0-rc19.1",
   "private": true,
   "type": "module",
   "engines": {
