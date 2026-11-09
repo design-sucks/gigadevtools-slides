@@ -1,8 +1,8 @@
 {
-  "release": "v0.7.1-pilot.1",
+  "release": "v0.7.2-pilot.1",
   "channel": "corporate-pilot",
   "skills": {
-    "gigadev-html-maker": "0.22.0-rc19.1",
+    "gigadev-html-maker": "0.22.0-rc19.2",
     "gigadev-html-export": "0.9.1"
   },
   "demo": {
@@ -16,7 +16,7 @@
     "rightsBasis": "user reports company rights; no general third-party font license grant",
     "mitIncludesFonts": false
   },
-  "newCaseStudy": "RC19 maintenance: restore mobile composition fitting and strict compact CI; retain navigation editing, full-window backgrounds and existing composition references",
+  "newCaseStudy": "Guarded readiness, canonical final builds and exact HTML verification; shared pinned runtime check and interactive edit/save/reopen proof",
   "releaseState": "prerelease",
   "runtimeBaseline": "baseline-release-rc19-compact.json",
   "compositionLibrary": "2.0.0",

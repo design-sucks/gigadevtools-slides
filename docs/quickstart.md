@@ -5,11 +5,20 @@
 Provide the source, audience and a style reference. For a close style match, prefer a filled PPTX/HTML example plus actual font files you can use. Image-only references do not define exact font metrics.
 
 ```sh
+python3 skills/gigadev-html-maker/scripts/maker.py ready --report build/readiness-v01.json
 python3 skills/gigadev-html-maker/scripts/extract_pptx.py input.pptx build/project
-python3 skills/gigadev-html-maker/scripts/build.py build/project/deck.json build/Presentation_v01.html --theme examples/shell-demo/project/theme.json
+python3 skills/gigadev-html-maker/scripts/build.py build/project/deck.json build/Draft_v01.html --theme examples/shell-demo/project/theme.json
 ```
 
 Extraction is an inventory and assembly draft. The agent authors slide HTML from source blocks, preserves text/numbers and checks the result. Do not deliver an overflowing assembly draft as a finished design.
+
+After reviewing the authored draft and recording its composition plan, build the delivery file through the guarded command:
+
+```sh
+python3 skills/gigadev-html-maker/scripts/maker.py build build/project/deck.json build/Presentation_v01.html --theme build/project/theme.json --composition-plan build/project/composition-plan.json --report build/final-check-v01.json
+```
+
+Use new output/report paths. A failure or review result requires resolving or reporting its underlying findings. Inspect the exact saved HTML with maker.py verify and a synchronized project. See [delivery checks](../skills/gigadev-html-maker/references/delivery-check.md).
 
 To rebuild the included example:
 

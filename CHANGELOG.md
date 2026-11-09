@@ -1,3 +1,11 @@
+# v0.7.2-pilot.1 — 2026-11-09, Maker 0.22.0-rc19.2
+
+- Add maker.py ready/build/verify. Readiness validates the local package, pinned modules, builder execution and browser startup.
+- Final builds run the canonical builder, runtime identity, delivery and interactive shell checks. Reports bind results to HTML/project hashes and preserve failures and review dispositions.
+- Reuse the pinned shell identity check for HTML-only inspection and full delivery. Reject alternate viewers and changed runtime modules.
+- Document the guarded entry point and ship synthetic regressions for incomplete environments, alternate shells and content/module changes.
+- Keep shell v18.2, the compact hotfix baseline and Export 0.9.1. A client can bypass instructions outside the guarded path. Visual/source/native-export acceptance remains scoped separately.
+
 # v0.7.1-pilot.1 — 2026-11-08, Maker 0.22.0-rc19.1
 
 - Package the reviewed mobile fitting correction: restore 8+8 px margins below 701 px while retaining full-window background paint and desktop/show behavior.
