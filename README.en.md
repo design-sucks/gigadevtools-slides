@@ -31,6 +31,10 @@ Example prompts:
 
 [Installation](docs/installation.md) has the runtime setup and commands. Source files remain unchanged. After browser edits, save a new HTML version and use that file as the current source.
 
+## Update v0.7.2-pilot.1
+
+Maker **0.22.0-rc19.2**, Export **0.9.1**. Use ready → canonical final build → exact HTML verification, including pinned modules and interactive edit/save/reopen. [Changes and qualification](docs/release-v0.7.2-pilot.1.md). Corporate prerelease.
+
 ## Try the example
 
 [Open the live shell demo](https://design-sucks.github.io/gigadevtools-slides/) or download examples/shell-demo/index.html and open it locally. It is one file with embedded fonts/graphics. The demo starts at **v01**; saving proposes **v02**. Slide 03 explains the hotkeys, including **N** for the slide list and **M** for motion. HID clickers emitting PageUp/PageDown or arrows use the navigation path; hardware compatibility is not claimed for every remote.

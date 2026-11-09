@@ -18,3 +18,16 @@ npx playwright install chromium
 ```
 
 Then select the installed browser with HTML_MAKER_CHROME=bundled (shell environment syntax varies by OS). Extraction/build needs only Python 3.10+; use python on systems where python3 is not the executable name. Native PowerPoint and other-LLM behavior require their own verification; they are not established by this portable package.
+
+
+## Guarded workflow
+
+From the complete local skill directory, run:
+
+```sh
+python3 scripts/maker.py ready --report /absolute/readiness-v01.json
+```
+
+This checks Python and Node versions, pinned shell assets and the baseline pointer. It builds a temporary one-slide project through build.py and opens it in the actual browser to exercise the runtime. The temporary smoke files are removed. The JSON report identifies the failed stage when the package, dependencies or browser execution are unavailable. Use the setup steps above to resolve the actual error.
+
+Readiness is needed before authoring in a new session/environment. The guarded final build repeats it. Reading individual GitHub files does not establish that the local package and execution environment are ready.

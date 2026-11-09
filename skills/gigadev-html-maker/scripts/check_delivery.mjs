@@ -1,3 +1,4 @@
+import { checkShellIdentity } from './shell_identity.mjs';
 /* Release checks for the built HTML. Reads the deck and source project, emits JSON. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -70,34 +71,7 @@ function expectedText(block) {
 }
 
 async function checkShell(page) {
-  const ids = Object.keys(baseline.modules).filter(name => name !== 'shell.html');
-  const fragments=Object.fromEntries(await Promise.all(ids.filter(name=>name.endsWith('.css')&&!['ui.css','deck.css'].includes(name)).map(async name=>[name,await fs.readFile(path.join(here,'../assets',name),'utf8')])));
-  const domIds = ids.map(name => {
-    if (name === 'controller.js') return 'sk-controller';
-    if (name === 'deck.css') return 'gd-deck-styles';
-    if (name === 'ui.css') return 'sk-ui-styles';
-    if(name.endsWith('.css'))return 'gd-style-pack';
-    return 'gd-' + name.slice(0, -3);
-  });
-  const parts = await page.evaluate(ids => ({
-    marker: document.documentElement.dataset.gdMaker,
-    version: window.GigaDevDeck?.shellVersion,
-    stages: document.querySelectorAll('#sk-stage > #sk-canvas > #slides').length,
-    contents: ids.map(id => {
-      const matches = document.querySelectorAll(`#${id}`);
-      return matches.length === 1 ? matches[0].textContent : null;
-    }),
-  }), domIds);
-  if (parts.marker !== '1' || parts.version !== 'v18.2' || parts.stages !== 1) {
-    fail('shell', 'Expected a running Maker v18.2 shell and its canonical stage.');
-  }
-  for (const [index, name] of ids.entries()) {
-    let content = parts.contents[index];
-    if(fragments[name])content=content?.includes(fragments[name])?fragments[name]:null;
-    if (content === null || createHash('sha256').update(content).digest('hex') !== baseline.modules[name]) {
-      fail('shell-module', 'Missing or modified shell module.', { module: name });
-    }
-  }
+  issues.push(...await checkShellIdentity(page, baseline, path.join(here, '../assets')));
   if (!issues.length) checks.push('pinned shell modules and running stage');
 }
 

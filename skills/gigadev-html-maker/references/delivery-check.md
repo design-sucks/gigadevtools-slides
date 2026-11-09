@@ -1,6 +1,20 @@
 # Required checks before HTML delivery
 
-Build with `--final` and the approved composition plan. Check the exact HTML that will be handed off, including any newly saved version. Use the authored project that retains the original extracted source blocks and the expected order.
+Use the guarded build with the reviewed composition plan. It runs the canonical builder with `--final` and checks the exact output with runtime identity, check_delivery.mjs and check.mjs before reporting success. Keep the authored project with original extracted source blocks and expected order.
+
+```sh
+python3 scripts/maker.py build /absolute/project/deck.json /absolute/Presentation.html --theme /absolute/project/theme.json --composition-plan /absolute/project/composition-plan.json --report /absolute/build-check-v01.json
+```
+
+For an already built or newly saved HTML, synchronize its browser edits/order to the current project, then verify that file:
+
+```sh
+python3 scripts/maker.py verify /absolute/Presentation.html --project /absolute/project/deck.json --report /absolute/verify-v01.json
+```
+
+Without `--project`, verify performs runtime-only inspection. This is useful for rejecting a foreign viewer when only HTML is available. A runtime-only pass does not establish content completeness. The report records the file hash, scope and underlying results. An error returns a nonzero exit code. A delivery `review` status remains review and also returns nonzero. Failed-build HTML is diagnostic until failures are fixed. Reports use new paths so an earlier PASS cannot stand in for a failed retry.
+
+The guarded command stores interactive shell probes beside its report in a new .shell-qa directory. A small deck may have notRun entries in the shell report; disclose their scope. The commands below are also available individually for diagnosis. Text-layout and independent PPTX/source comparison, plus visual acceptance, remain separate checks.
 
 ```sh
 node scripts/check_delivery.mjs /absolute/Presentation.html /absolute/project/deck.json > /absolute/delivery-report.json
